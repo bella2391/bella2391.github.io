@@ -1,12 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Github:glyzerレポジトリを立ち上げるまで</title>
+    <url>/posts/33934/</url>
+    <content><![CDATA[<h2 id="回顧録"><a href="#回顧録" class="headerlink" title="回顧録"></a>回顧録</h2><p>ある日、CLI環境を構築する際に、新たなTUI（ターミナルインターフェース）アプリが必要だなと感じた。<br>それは、ChatGPTやGeminiに代表されるAI-Chatアプリだ。それらがターミナルから使えればいいなと思ったのが事の始まりである。<br>そこでgemini-cliというものを知り、GeminiAPIKeyが必要になることを知る。そこからGeminiAPIに興味を持ち、手始めにpythonに接続することで、広範囲の分析が可能になることを知った。<br>これより、プロジェクト<a href="https://github.com/bella2391/glyzer">glyzer</a>の始まりである。</p>
+<h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><p><a href="https://github.com/eliben/gemini-cli">eliben&#x2F;gemini-cli</a></p>
+<h2 id="このプロジェクトの理想"><a href="#このプロジェクトの理想" class="headerlink" title="このプロジェクトの理想"></a>このプロジェクトの理想</h2><p>Neovimでの開発中に、特定のキーマップより(<code>&lt;leader&gt;gm</code>など)現在のファイルに対して、geminiと応答を図る。また、入力でディレクトリパスを指定して、その中の指定拡張子よりdbファイルにまとめ、それをソースに、触媒に、栄養にし、応答を図る。<br>2つの環境の類似性より、分析を依頼する。</p>
+<h2 id="gemini-cliに関するコマンド"><a href="#gemini-cliに関するコマンド" class="headerlink" title="gemini-cliに関するコマンド"></a>gemini-cliに関するコマンド</h2><ul>
+<li>ファイル群をdbファイル形式にする<br>これはgeminiが食う。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gemini-cli embed db out.db --files .,*.py</span><br><span class="line"></span><br><span class="line">gemini-cli embed db out.db --files-list question.txt</span><br></pre></td></tr></table></figure>
+<p>PythonはあくまでGeminiAPIを使って、ソースを食わせる役割。別に言語は何でもいいと思う</p>
+<h2 id="現在思考中のもの"><a href="#現在思考中のもの" class="headerlink" title="現在思考中のもの"></a>現在思考中のもの</h2><p>以下、<a href="https://github.com/bella2391/Ai-Analyzer/blob/master/setup.py">glyzer:&#x2F;setup.py</a> の説明<br>gemini-cliコマンドより、検索対象となるコード、それに対する質問となるコード(平文でもコードとみなす)に対して、それらいくつものファイル群を、数値ベクトル・埋め込みベクトルに変換(dbファイルにあたる)したものを、NumPy配列に変換する。単にdbファイルにエクスポートし、数値ベクトルにしても、それらは単なるバイナリデータに過ぎず、特定のデータ型・構造を持たないため、直接的に数値演算が可能になるNumPy配列に変換する必要がある。これにより、データを特定のデータ型(整数、不動小数点など)を持つ多次元配列として解釈できる。これより、コサイン類似性より比較する。コサイン類似度の高いコード片をソートし、出力する。また、その類似性よりわかったコードスニップより、geminiと応答する。</p>
+<p>なぜデータベース(<code>*.db</code>)形式なのか。</p>
+<ul>
+<li>大量の埋め込みベクトルが効率的に保存・管理ができる</li>
+<li>インデックス機能より検索が容易である</li>
+<li>データベースを容易に持ち運び、共有できる</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>Gemini API Docs<br><a href="https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb">https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>python, gemini</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WSLを使わない! Windows開発環境構築</title>
+    <url>/posts/47392/</url>
+    <content><![CDATA[<h1 id="Windows開発環境構築"><a href="#Windows開発環境構築" class="headerlink" title="Windows開発環境構築"></a>Windows開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>こちらの記事は、主に、CLI環境で開発していきたいという方にすごく向いているかと思う。</p>
+<h2 id="ターミナルのアップデート"><a href="#ターミナルのアップデート" class="headerlink" title="ターミナルのアップデート"></a>ターミナルのアップデート</h2><p>まずは、今回の主役、ターミナルpwsh(powershell)をアップデート<br><a href="https://github.com/PowerShell/PowerShell/releases/">https://github.com/PowerShell/PowerShell/releases/</a><br>Latestの安定版をインストール<br>ダウンロードするときに、arm64かx64か、どれをダウンロードすればいいかわからない場合は、アーキテクチャーを調べよう。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msinfo32</span><br></pre></td></tr></table></figure>
+<p>システムの種類が<code>x64ベース PC</code>であれば、<br>x64のmsiのインストーラーをダウンロード &amp; 実行すればよい。</p>
+<h2 id="sudoの有効化"><a href="#sudoの有効化" class="headerlink" title="sudoの有効化"></a>sudoの有効化</h2><p>システム＞開発者向けより、sudoの有効化<br>LinuxなどUNIX系では、<code>sudo</code>を用いるのが習慣だ。</p>
+<h2 id="パッケージマネジャーのインストール"><a href="#パッケージマネジャーのインストール" class="headerlink" title="パッケージマネジャーのインストール"></a>パッケージマネジャーのインストール</h2><p>以下、Ubuntuなら<code>apt</code>, ArchLinuxなら、<code>pacman</code>など、パッケージマネジャーによって、ソフトのダウンロードを高速化するために必要だ。<br>私は、<code>chocolatey</code>を使う。<br><a href="https://chocolatey.org/">https://chocolatey.org/</a></p>
+<p>以下のコマンドでインストールが可能だ。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> Bypass <span class="literal">-Scope</span> <span class="keyword">Process</span> <span class="literal">-Force</span>; [<span class="type">System.Net.ServicePointManager</span>]::SecurityProtocol = [<span class="type">System.Net.ServicePointManager</span>]::SecurityProtocol <span class="operator">-bor</span> <span class="number">3072</span>; <span class="built_in">iex</span> ((<span class="built_in">New-Object</span> System.Net.WebClient).DownloadString(<span class="string">&#x27;https://community.chocolatey.org/install.ps1&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="chocolateyによる各種ソフトインストール"><a href="#chocolateyによる各種ソフトインストール" class="headerlink" title="chocolateyによる各種ソフトインストール"></a>chocolateyによる各種ソフトインストール</h2><p>以下、管理者モードで実行するように<br>ripgrepは、nvimの<a href="https://github.com/nvim-telescope/telescope.nvim">Telescope</a>プラグインの階層文字列検索を使用するときに必要になるので、合わせてダウンロードしておきたい。開発中のGit操作はすべて<a href="https://github.com/jesseduffield/lazygit">lazygit</a>で行う。</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sudo choco install ripgrep lazygit starship vim neovim git wget unzip nvm -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="各種ソフトの設定"><a href="#各種ソフトの設定" class="headerlink" title="各種ソフトの設定"></a>各種ソフトの設定</h2><p>neovimで、LSP機能を使いたい人は、私の場合だと、<a href="https://github.com/williamboman/mason-lspconfig.nvim">mason-lspconfig</a>を使用していて、各言語のLSPサーバーをダウンロードしてくるのに、pythonやnpmを使用することが多い。<br>ゆえに、python, npmをWindowsにインストールしておこう。  </p>
+<h3 id="pythonのダウンロード（任意）"><a href="#pythonのダウンロード（任意）" class="headerlink" title="pythonのダウンロード（任意）"></a>pythonのダウンロード（任意）</h3><p>以下より、最新のpythonを公式よりダウンロード &gt;&gt; EXE実行<br><a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+<h3 id="nvmによるnpm-nodeのインストール"><a href="#nvmによるnpm-nodeのインストール" class="headerlink" title="nvmによるnpm/nodeのインストール"></a>nvmによるnpm/nodeのインストール</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">nvm install <span class="number">22</span>.<span class="number">12</span>.<span class="number">0</span></span><br><span class="line">nvm use <span class="number">22</span>.<span class="number">12</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="starshipをターミナルに適用"><a href="#starshipをターミナルに適用" class="headerlink" title="starshipをターミナルに適用"></a>starshipをターミナルに適用</h3><p>以下、<a href="https://starship.rs/guide/">https://starship.rs/guide/</a> を要約したもの</p>
+<ul>
+<li>pwshに適用する場合</li>
+</ul>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">vim <span class="variable">$PROFILE</span></span><br><span class="line"><span class="comment"># 以下追加</span></span><br><span class="line"><span class="built_in">Invoke-Expression</span> (&amp;starship init powershell)</span><br><span class="line"></span><br><span class="line"><span class="comment"># コマンド一行で行うには</span></span><br><span class="line"><span class="built_in">Invoke-Expression</span> (&amp;starship init powershell <span class="literal">--print-full-init</span> | <span class="built_in">Out-String</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>cmdに適用する場合<br><a href="https://chrisant996.github.io/clink/clink.html">https://chrisant996.github.io/clink/clink.html</a></li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">winget install clink</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#%LocalAppData%\clink\starship.lua</span><br><span class="line"></span><br><span class="line">load(io.popen(&#x27;starship init cmd&#x27;):read(&quot;*a&quot;))()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line">mkdir <span class="literal">-p</span> .config</span><br><span class="line"><span class="built_in">cd</span> .config</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.config/starship.toml</span><br></pre></td></tr></table></figure>
+
+<h3 id="vimの設定"><a href="#vimの設定" class="headerlink" title="vimの設定"></a>vimの設定</h3><ul>
+<li>_vimrcを配置<br>私の場合、<a href="https://github.com/bella2391/dotfiles">dotfiles</a>にドットファイルをまとめているので、以下のコマンドで済む。</li>
+</ul>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.vimrc</span><br><span class="line"><span class="built_in">move</span> .vimrc _vimrc</span><br><span class="line">mkdir <span class="literal">-p</span> ~/.wsl</span><br><span class="line"><span class="built_in">cd</span> ~/.wsl/</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.wsl/.vimrc</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以下、vimでコピー&amp;ペーストを行うために<br>win32yankはコマンドベースの、レジスタに文字列を登録することのできるWindowsで使えるものだ。UNIX系のXディスプレイだと、<code>x-clip</code>やWayLandディスプレイだと、<code>wl-copy</code>などがある。</li>
+</ul>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">mkdir <span class="literal">-p</span> ~/.global/bin</span><br><span class="line"><span class="built_in">cd</span> ~/.global/bin/</span><br><span class="line"><span class="built_in">wget</span> https://github.com/equalsraf/win32yank/releases/download/v0.<span class="number">1.1</span>/win32yank<span class="literal">-x64</span>.zip</span><br><span class="line">unzip .\win32yank<span class="literal">-x64</span>.zip</span><br><span class="line"><span class="built_in">Remove-Item</span> .\LICENSE, .\README.md, .\win32yank<span class="literal">-x64</span>.zip</span><br></pre></td></tr></table></figure>
+<p>別途、<code>C:\Users\&lt;user&gt;\.global\bin</code>をユーザー環境変数にセットしておこう。</p>
+<h3 id="ターミナルフォントを設定"><a href="#ターミナルフォントを設定" class="headerlink" title="ターミナルフォントを設定"></a>ターミナルフォントを設定</h3><p>私は、NerdFontが良いと思う。<br>nvimの<code>nvim-web-devicons</code>プラグインでも使える。<br><a href="https://www.nerdfonts.com/">https://www.nerdfonts.com/</a></p>
+<p>Agave.zipなどをダウンロード<br>エクスプローラーから展開して、フォント群(ttfなど)を選択、インストール<br>ターミナルプロファイルより適用</p>
+<h3 id="ターミナルキーマップを設定"><a href="#ターミナルキーマップを設定" class="headerlink" title="ターミナルキーマップを設定"></a>ターミナルキーマップを設定</h3><p>以下をターミナルプロファイルに追加。<br><code>Next tab</code>: <code>C-Shift-[</code><br><code>Previous tab</code>: <code>C-Shift-]</code><br><code>Split pane</code>: <code>C-Shift-Enter</code></p>
+<h3 id="Neovimの設定"><a href="#Neovimの設定" class="headerlink" title="Neovimの設定"></a>Neovimの設定</h3><p>私の場合、Githubにその設定ファイルがあるので、それをインポートするだけで済む。<br>Neovimの設定ファイルは、<code>C:\Users\&lt;user&gt;\AppData\Local\</code>に配置しなければいけない。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cmdなら</span></span><br><span class="line"><span class="built_in">cd</span> %LOCALAPPDATA%</span><br><span class="line"><span class="comment"># pwshなら</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line"></span><br><span class="line">git clone https://github.com/bella2391/nvim.git</span><br></pre></td></tr></table></figure>
+
+<p>以下、私でないなら読み飛ばして構わない。</p>
+<h2 id="シンボリックリンク作成"><a href="#シンボリックリンク作成" class="headerlink" title="シンボリックリンク作成"></a>シンボリックリンク作成</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span></span><br><span class="line"><span class="built_in">mkdir</span> -p git</span><br></pre></td></tr></table></figure>
+<ul>
+<li>cmd</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mklink /D nvim <span class="variable">%LOCALAPPDATA%</span>/nvim</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pwsh</li>
+</ul>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-ItemType</span> Junction <span class="literal">-Path</span> <span class="string">&quot;nvim&quot;</span> <span class="literal">-Target</span> <span class="string">&quot;<span class="variable">$env:LOCALAPPDATA</span>\nvim&quot;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Neovim, Windows, 開発環境</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ArchLinuxでCLI開発環境を整える</title>
     <url>/posts/54214/</url>
-    <content><![CDATA[<h2 id="CLI環境を作る"><a href="#CLI環境を作る" class="headerlink" title="CLI環境を作る"></a>CLI環境を作る</h2><ul>
-<li>起動時にCLIが立ち上がるための設定</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/default/grub</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h1 id="CLI環境を作る"><a href="#CLI環境を作る" class="headerlink" title="CLI環境を作る"></a>CLI環境を作る</h1><h2 id="起動時にCLIが立ち上がるための設定"><a href="#起動時にCLIが立ち上がるための設定" class="headerlink" title="起動時にCLIが立ち上がるための設定"></a>起動時にCLIが立ち上がるための設定</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/default/grub</span><br></pre></td></tr></table></figure>
 <p><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;&quot;</code>に<code>text</code>を追加。<br>起動時に、スプラッシュスクリーン(通常はディストリビューションのロゴなど)を表示したい人は、<code>splash</code>を追加できる。</p>
 <ul>
 <li><code>/etc/default/grub</code>ファイルの変更をGRUBブートローダーに反映</li>
@@ -25,35 +112,26 @@
 <ul>
 <li>日本語の表示、入力にすぐれたターミナルエミュレータをインストールする<br>以下、fbtermでの実装で失敗した。まず、多くのデスクトップ環境で使われているibusとfbtermを連携させるのに必要なibus-mozcをAURパッケージからyayコマンドでインストールするはずが、ビルドに失敗する。また、kmsconでの日本語表示には、成功しているため、以降、土台をkmsconに置く。</li>
 </ul>
-<p>ということで、以下、kmsconの設定</p>
-<ul>
-<li>インストール</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S kmscon</span><br></pre></td></tr></table></figure>
-<ul>
-<li>日本語フォントをインストール</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S ttf-dejavu otf-ipafont</span><br></pre></td></tr></table></figure>
-<ul>
-<li>confファイルを作成<br><code>/etc/fonts/conf.d/99-kmscon.conf</code></li>
-</ul>
+<h2 id="kmscon"><a href="#kmscon" class="headerlink" title="kmscon"></a>kmscon</h2><p><code>kmscon</code>はUnicode&#x2F;UTF-8 互換で動くので日本語表示ができる。</p>
+<h3 id="kmsconのインストール"><a href="#kmsconのインストール" class="headerlink" title="kmsconのインストール"></a>kmsconのインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S kmscon</span><br></pre></td></tr></table></figure>
+
+<h3 id="日本語フォントをインストール"><a href="#日本語フォントをインストール" class="headerlink" title="日本語フォントをインストール"></a>日本語フォントをインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S ttf-dejavu otf-ipafont</span><br></pre></td></tr></table></figure>
+
+<h3 id="フォントを適用"><a href="#フォントを適用" class="headerlink" title="フォントを適用"></a>フォントを適用</h3><p><code>/etc/fonts/conf.d/99-kmscon.conf</code><br>私は、フォントにNerdFontの<code>Agave</code>を使っているので、以下のようになる。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE fontconfig SYSTEM &quot;fonts.dtd&quot;&gt;</span><br><span class="line">&lt;fontconfig&gt;</span><br><span class="line">&lt;match&gt;</span><br><span class="line">  &lt;test name=&quot;family&quot;&gt;&lt;string&gt;monospace&lt;/string&gt;&lt;/test&gt;</span><br><span class="line">  &lt;edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;strong&quot;&gt;</span><br><span class="line">    &lt;string&gt;Agave Nerd Font Mono&lt;/string&gt;</span><br><span class="line">    &lt;string&gt;DejaVu Sans Mono&lt;/string&gt;</span><br><span class="line">    &lt;string&gt;IPAGothic&lt;/string&gt;</span><br><span class="line">  &lt;/edit&gt;</span><br><span class="line">&lt;/match&gt;</span><br><span class="line">&lt;/fontconfig&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>confを作成2<br><code>/etc/kmscon/kmscon.conf</code></li>
-</ul>
+
+<h3 id="キーボードレイアウトを設定"><a href="#キーボードレイアウトを設定" class="headerlink" title="キーボードレイアウトを設定"></a>キーボードレイアウトを設定</h3><p><code>/etc/kmscon/kmscon.conf</code></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xkb-layout=jp</span><br></pre></td></tr></table></figure>
-<p>あとで、<code>kmsconvt@tty3.service</code>を作るため、スキップ</p>
-<ul>
-<li>tty2以降をkmsconに設定</li>
-</ul>
+
+<h3 id="tty2以降をkmsconに設定"><a href="#tty2以降をkmsconに設定" class="headerlink" title="tty2以降をkmsconに設定"></a>tty2以降をkmsconに設定</h3><p>あとで、<code>kmsconvt@tty3.service</code>を作るため、スキップしてもよい。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /usr/lib/systemd/system/kmsconvt\@.service /etc/systemd/system/autovt\@.service</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>kmsconvt@.service</code>を有効化<br><code>autovt@tty3.service</code> は <code>kmsconvt@.service</code> へのシンボリックリンクなため、元のサービスを有効化することで、<code>autovt@tty3.service</code> も間接的に有効になる。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
 
-<h2 id="kmsconをtty3にセットする"><a href="#kmsconをtty3にセットする" class="headerlink" title="kmsconをtty3にセットする"></a>kmsconをtty3にセットする</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># テンプレートサービスを別名でコピー</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /usr/lib/systemd/system/kmsconvt@.service /etc/systemd/system/kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
-<h2 id="kmscon（tty）上で日本語入力を可能にする"><a href="#kmscon（tty）上で日本語入力を可能にする" class="headerlink" title="kmscon（tty）上で日本語入力を可能にする"></a>kmscon（tty）上で日本語入力を可能にする</h2><p>以下、uimでmozcを使用する設定</p>
+<h3 id="kmsconをtty3にセットする"><a href="#kmsconをtty3にセットする" class="headerlink" title="kmsconをtty3にセットする"></a>kmsconをtty3にセットする</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># テンプレートサービスを別名でコピー</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /usr/lib/systemd/system/kmsconvt@.service /etc/systemd/system/kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
+<h3 id="kmscon（tty）上で日本語入力を可能にする"><a href="#kmscon（tty）上で日本語入力を可能にする" class="headerlink" title="kmscon（tty）上で日本語入力を可能にする"></a>kmscon（tty）上で日本語入力を可能にする</h3><p>以下、uimでmozcを使用する設定</p>
 <ul>
 <li>インストール</li>
 </ul>
@@ -65,9 +143,12 @@
 <p>これにより、Ctrl+Spaceキーで日本語入力の切り替えが可能になる。</p>
 <ul>
 <li>参考<br>kmscon<br><a href="https://www.kaias1jp.com/entry/2021/01/11/173542">https://www.kaias1jp.com/entry/2021/01/11/173542</a><br><a href="https://qiita.com/Pseudonym/items/9ff0e9028dfd6bad5958">https://qiita.com/Pseudonym/items/9ff0e9028dfd6bad5958</a><br><del>fbterm<br><a href="https://qiita.com/Pseudonym/items/12e447557a5234bb265b">https://qiita.com/Pseudonym/items/12e447557a5234bb265b</a></del></li>
-<li>CLI環境で使えるツール一覧<br><a href="https://github.com/greycodee/gemini-terminal">https://github.com/greycodee/gemini-terminal</a><br><a href="https://github.com/eliben/gemini-cli">https://github.com/eliben/gemini-cli</a><br><a href="https://github.com/ayn2op/discordo">https://github.com/ayn2op/discordo</a></li>
 </ul>
-<h2 id="discordoをCLI環境で使えるようにする"><a href="#discordoをCLI環境で使えるようにする" class="headerlink" title="discordoをCLI環境で使えるようにする"></a>discordoをCLI環境で使えるようにする</h2><p>できない。<br><del>まず、discordトークンは、機密情報なので、libsecretかgnome-keyringかkwalletを使用したい。<br>GUIではアンロックは容易だが、CLIでのキーリングのアンロックがサポートされていないシークレットサービスも少なくない。<br>ということで、まずは、CLI上でキーリングをアンロックし、discordoでログインできるかどうかを確認する必要がある。<code>opensc</code>パッケージに同封されている<code>pkcs11-tool</code>よりCLIでのアンロックを試したが、あれは、<code>gnome-keyring</code>で使えるようなものだった。CLIでは<code>gnome-keyring-daemon</code>が起動できないため、失敗に終わった。</del></p>
+<h2 id="CLI環境で使えるツール一覧"><a href="#CLI環境で使えるツール一覧" class="headerlink" title="CLI環境で使えるツール一覧"></a>CLI環境で使えるツール一覧</h2><ul>
+<li>コマンドラインでGeminiと話せるツール<br><a href="https://github.com/greycodee/gemini-terminal">https://github.com/greycodee/gemini-terminal</a><br><a href="https://github.com/eliben/gemini-cli">https://github.com/eliben/gemini-cli</a></li>
+<li>コマンドラインでDiscordが使えるツール<br><a href="https://github.com/ayn2op/discordo">https://github.com/ayn2op/discordo</a></li>
+</ul>
+<h2 id="discordoをCLI環境で使えるようにする"><a href="#discordoをCLI環境で使えるようにする" class="headerlink" title="discordoをCLI環境で使えるようにする"></a>discordoをCLI環境で使えるようにする</h2><p>何度か試行したが、できなかった。<br><del>まず、discordトークンは、機密情報なので、libsecretかgnome-keyringかkwalletを使用したい。<br>GUIではアンロックは容易だが、CLIでのキーリングのアンロックがサポートされていないシークレットサービスも少なくない。<br>ということで、まずは、CLI上でキーリングをアンロックし、discordoでログインできるかどうかを確認する必要がある。<code>opensc</code>パッケージに同封されている<code>pkcs11-tool</code>よりCLIでのアンロックを試したが、あれは、<code>gnome-keyring</code>で使えるようなものだった。CLIでは<code>gnome-keyring-daemon</code>が起動できないため、失敗に終わった。</del></p>
 ]]></content>
       <tags>
         <tag>ArchLinux, CLI, 開発環境</tag>
