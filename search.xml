@@ -16,7 +16,7 @@
 <li>現状、システム起動のデフォルトターゲットに何が指定されているのかを知る</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl get-default</span><br></pre></td></tr></table></figure>
-<p>通常、GUI環境を使用している場合は、<code>graphical.target</code>と表示され、そしてそれは、<code>multi-user.target</code>を包含している。しかし、CLI環境オンリーで十分だという人にとっては、システム起動時間の短縮やリソース効率の工場の観点から、デフォルトターゲットを<code>multi-user.target</code>に切り替えることをおすすめできる。</p>
+<p>通常、GUI環境を使用している場合は、<code>graphical.target</code>と表示され、そしてそれは、<code>multi-user.target</code>を包含している。しかし、CLI環境オンリーで十分だという人にとっては、システム起動時間の短縮やリソース効率の向上の観点から、デフォルトターゲットを<code>multi-user.target</code>に切り替えることをおすすめできる。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl set-default multi-user.target</span><br></pre></td></tr></table></figure>
 <ul>
 <li>GUI環境に戻したいときは</li>
