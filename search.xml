@@ -23,10 +23,13 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl set-default graphical.target</span><br></pre></td></tr></table></figure>
 <ul>
-<li>日本語の表示、入力にすぐれたターミナルエミュレータをインストールする<br>以下、fbtermでの実装で失敗した。まず、多くのデスクトップ環境で使われているibusとfbtermを連携させるのに必要なibus-mozcをAURパッケージからyayコマンドでインストールするはずが、ビルドに失敗する。また、kmsconでの日本語表示には、成功しているため、以降、土台をkmsconに置く。<br>~~&#96;&#96;&#96;bash</li>
+<li>日本語の表示、入力にすぐれたターミナルエミュレータをインストールする<br>以下、fbtermでの実装で失敗した。まず、多くのデスクトップ環境で使われているibusとfbtermを連携させるのに必要なibus-mozcをAURパッケージからyayコマンドでインストールするはずが、ビルドに失敗する。また、kmsconでの日本語表示には、成功しているため、以降、土台をkmsconに置く。</li>
 </ul>
-<h1 id="未インストールであれば"><a href="#未インストールであれば" class="headerlink" title="未インストールであれば"></a>未インストールであれば</h1><p>sudo pacman -Q ibus<br>yay -S fbterm<br>sudo pacman -S ibus-anthy<br>yay -S ibus-mozc</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">ということで、以下、kmsconの設定</span><br><span class="line">- インストール</span><br><span class="line">```bash</span><br><span class="line">yay -S kmscon</span><br></pre></td></tr></table></figure>
+<p>ということで、以下、kmsconの設定</p>
+<ul>
+<li>インストール</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S kmscon</span><br></pre></td></tr></table></figure>
 <ul>
 <li>日本語フォントをインストール</li>
 </ul>
@@ -64,9 +67,7 @@
 <li>参考<br>kmscon<br><a href="https://www.kaias1jp.com/entry/2021/01/11/173542">https://www.kaias1jp.com/entry/2021/01/11/173542</a><br><a href="https://qiita.com/Pseudonym/items/9ff0e9028dfd6bad5958">https://qiita.com/Pseudonym/items/9ff0e9028dfd6bad5958</a><br><del>fbterm<br><a href="https://qiita.com/Pseudonym/items/12e447557a5234bb265b">https://qiita.com/Pseudonym/items/12e447557a5234bb265b</a></del></li>
 <li>CLI環境で使えるツール一覧<br><a href="https://github.com/greycodee/gemini-terminal">https://github.com/greycodee/gemini-terminal</a><br><a href="https://github.com/eliben/gemini-cli">https://github.com/eliben/gemini-cli</a><br><a href="https://github.com/ayn2op/discordo">https://github.com/ayn2op/discordo</a></li>
 </ul>
-<h2 id="discordoをCLI環境で使えるようにする"><a href="#discordoをCLI環境で使えるようにする" class="headerlink" title="discordoをCLI環境で使えるようにする"></a>discordoをCLI環境で使えるようにする</h2><p>できない。<br>~~まず、discordトークンは、機密情報なので、libsecretかgnome-keyringかkwalletを使用したい。<br>GUIではアンロックは容易だが、CLIでのキーリングのアンロックがサポートされていないシークレットサービスも少なくない。<br>ということで、まずは、CLI上でキーリングをアンロックし、discordoでログインできるかどうかを確認する必要がある。</p>
-<pre><code class="language-bash">sudo pacman -S opensc
-</code></pre>
+<h2 id="discordoをCLI環境で使えるようにする"><a href="#discordoをCLI環境で使えるようにする" class="headerlink" title="discordoをCLI環境で使えるようにする"></a>discordoをCLI環境で使えるようにする</h2><p>できない。<br><del>まず、discordトークンは、機密情報なので、libsecretかgnome-keyringかkwalletを使用したい。<br>GUIではアンロックは容易だが、CLIでのキーリングのアンロックがサポートされていないシークレットサービスも少なくない。<br>ということで、まずは、CLI上でキーリングをアンロックし、discordoでログインできるかどうかを確認する必要がある。<code>opensc</code>パッケージに同封されている<code>pkcs11-tool</code>よりCLIでのアンロックを試したが、あれは、<code>gnome-keyring</code>で使えるようなものだった。CLIでは<code>gnome-keyring-daemon</code>が起動できないため、失敗に終わった。</del></p>
 ]]></content>
       <tags>
         <tag>ArchLinux, CLI, 開発環境</tag>
