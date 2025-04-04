@@ -7,7 +7,7 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://cdn.discordapp.com/avatars/829173846069608451/c60d959c284060a41912d2cb769d49da.png">
 <meta property="article:published_time" content="2025-04-03T17:30:12.000Z">
-<meta property="article:modified_time" content="2025-04-04T13:38:00.129Z">
+<meta property="article:modified_time" content="2025-04-04T13:41:02.732Z">
 <meta property="article:author" content="Bella">
 <meta property="article:tag" content="ArchLinux, CLI, 開発環境">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "url": "https://bella2391.github.io/posts/54214/",
   "image": "https://cdn.discordapp.com/avatars/829173846069608451/c60d959c284060a41912d2cb769d49da.png",
   "datePublished": "2025-04-03T17:30:12.000Z",
-  "dateModified": "2025-04-04T13:38:00.129Z",
+  "dateModified": "2025-04-04T13:41:02.732Z",
   "author": [
     {
       "@type": "Person",
@@ -160,7 +160,7 @@
   isToc: true,
   pageType: 'post'
 }</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="FMC Blog" type="application/atom+xml">
-</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="../../index.html"><span class="site-name">FMC Blog</span></a><a class="nav-page-title" href="../../index.html"><span class="site-name">ArchLinuxでCLI開発環境を整える</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">ArchLinuxでCLI開発環境を整える</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">作成日</span><time class="post-meta-date-created" datetime="2025-04-03T17:30:12.000Z" title="作成日 2025-04-04 02:30:12">2025-04-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新日</span><time class="post-meta-date-updated" datetime="2025-04-04T13:38:00.129Z" title="更新日 2025-04-04 22:38:00">2025-04-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閲覧数:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="CLI環境を作る"><a href="#CLI環境を作る" class="headerlink" title="CLI環境を作る"></a>CLI環境を作る</h2><ul>
+</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="../../index.html"><span class="site-name">FMC Blog</span></a><a class="nav-page-title" href="../../index.html"><span class="site-name">ArchLinuxでCLI開発環境を整える</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">ArchLinuxでCLI開発環境を整える</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">作成日</span><time class="post-meta-date-created" datetime="2025-04-03T17:30:12.000Z" title="作成日 2025-04-04 02:30:12">2025-04-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新日</span><time class="post-meta-date-updated" datetime="2025-04-04T13:41:02.732Z" title="更新日 2025-04-04 22:41:02">2025-04-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閲覧数:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="CLI環境を作る"><a href="#CLI環境を作る" class="headerlink" title="CLI環境を作る"></a>CLI環境を作る</h2><ul>
 <li>起動時にCLIが立ち上がるための設定</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/default/grub</span><br></pre></td></tr></table></figure>
@@ -199,7 +199,7 @@
 <li>confを作成2<br><code>/etc/kmscon/kmscon.conf</code></li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xkb-layout=jp</span><br></pre></td></tr></table></figure>
-<p>あとで、<code>kmsconvt@tty3.service</code>を作るため、コメント<br>~~</p>
+<p>あとで、<code>kmsconvt@tty3.service</code>を作るため、スキップ</p>
 <ul>
 <li>tty2以降をkmsconに設定</li>
 </ul>
@@ -208,7 +208,7 @@
 <li><code>kmsconvt@.service</code>を有効化<br><code>autovt@tty3.service</code> は <code>kmsconvt@.service</code> へのシンボリックリンクなため、元のサービスを有効化することで、<code>autovt@tty3.service</code> も間接的に有効になる。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
-<p>~~</p>
+
 <h2 id="kmsconをtty3にセットする"><a href="#kmsconをtty3にセットする" class="headerlink" title="kmsconをtty3にセットする"></a>kmsconをtty3にセットする</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># テンプレートサービスを別名でコピー</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /usr/lib/systemd/system/kmsconvt@.service /etc/systemd/system/kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
 <h2 id="kmscon（tty）上で日本語入力を可能にする"><a href="#kmscon（tty）上で日本語入力を可能にする" class="headerlink" title="kmscon（tty）上で日本語入力を可能にする"></a>kmscon（tty）上で日本語入力を可能にする</h2><p>以下、uimでmozcを使用する設定</p>
 <ul>

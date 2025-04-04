@@ -42,7 +42,7 @@
 <li>confを作成2<br><code>/etc/kmscon/kmscon.conf</code></li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xkb-layout=jp</span><br></pre></td></tr></table></figure>
-<p>あとで、<code>kmsconvt@tty3.service</code>を作るため、コメント<br>~~</p>
+<p>あとで、<code>kmsconvt@tty3.service</code>を作るため、スキップ</p>
 <ul>
 <li>tty2以降をkmsconに設定</li>
 </ul>
@@ -51,7 +51,7 @@
 <li><code>kmsconvt@.service</code>を有効化<br><code>autovt@tty3.service</code> は <code>kmsconvt@.service</code> へのシンボリックリンクなため、元のサービスを有効化することで、<code>autovt@tty3.service</code> も間接的に有効になる。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
-<p>~~</p>
+
 <h2 id="kmsconをtty3にセットする"><a href="#kmsconをtty3にセットする" class="headerlink" title="kmsconをtty3にセットする"></a>kmsconをtty3にセットする</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># テンプレートサービスを別名でコピー</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /usr/lib/systemd/system/kmsconvt@.service /etc/systemd/system/kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
 <h2 id="kmscon（tty）上で日本語入力を可能にする"><a href="#kmscon（tty）上で日本語入力を可能にする" class="headerlink" title="kmscon（tty）上で日本語入力を可能にする"></a>kmscon（tty）上で日本語入力を可能にする</h2><p>以下、uimでmozcを使用する設定</p>
 <ul>
