@@ -140,6 +140,71 @@
       </tags>
   </entry>
   <entry>
+    <title>WSLを使わない! Windows開発環境構築</title>
+    <url>/posts/47392/</url>
+    <content><![CDATA[<h1 id="WSLないないのWindows開発環境構築"><a href="#WSLないないのWindows開発環境構築" class="headerlink" title="WSLないないのWindows開発環境構築"></a>WSLないないのWindows開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>こちらの記事は、主に、CLI環境で開発していきたいという方にすごく向いているかと思う。</p>
+<h2 id="ターミナルのアップデート"><a href="#ターミナルのアップデート" class="headerlink" title="ターミナルのアップデート"></a>ターミナルのアップデート</h2><p>まずは、今回の主役、ターミナルpwsh(powershell)をアップデート<br><a href="https://github.com/PowerShell/PowerShell/releases/">https://github.com/PowerShell/PowerShell/releases/</a><br>Latestの安定版をインストール<br>ダウンロードするときに、arm64かx64か、どれをダウンロードすればいいかわからない場合は、アーキテクチャーを調べよう。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msinfo32</span><br></pre></td></tr></table></figure>
+<p>システムの種類が<code>x64ベース PC</code>であれば、<br>x64のmsiのインストーラーをダウンロード &amp; 実行すればよい。</p>
+<h2 id="sudoの有効化"><a href="#sudoの有効化" class="headerlink" title="sudoの有効化"></a>sudoの有効化</h2><p>システム＞開発者向けより、sudoの有効化<br>LinuxなどUNIX系では、<code>sudo</code>を用いるのが習慣だ。</p>
+<h2 id="パッケージマネジャーのインストール"><a href="#パッケージマネジャーのインストール" class="headerlink" title="パッケージマネジャーのインストール"></a>パッケージマネジャーのインストール</h2><p>以下、Ubuntuなら<code>apt</code>, ArchLinuxなら、<code>pacman</code>など、パッケージマネジャーによって、ソフトのダウンロードを高速化するために必要だ。<br>私は、<code>chocolatey</code>を使う。<br><a href="https://chocolatey.org/">https://chocolatey.org/</a></p>
+<p>以下のコマンドでインストールが可能だ。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> Bypass <span class="literal">-Scope</span> <span class="keyword">Process</span> <span class="literal">-Force</span>; [<span class="type">System.Net.ServicePointManager</span>]::SecurityProtocol = [<span class="type">System.Net.ServicePointManager</span>]::SecurityProtocol <span class="operator">-bor</span> <span class="number">3072</span>; <span class="built_in">iex</span> ((<span class="built_in">New-Object</span> System.Net.WebClient).DownloadString(<span class="string">&#x27;https://community.chocolatey.org/install.ps1&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="chocolateyによる各種ソフトインストール"><a href="#chocolateyによる各種ソフトインストール" class="headerlink" title="chocolateyによる各種ソフトインストール"></a>chocolateyによる各種ソフトインストール</h2><p>以下、管理者モードで実行するように<br>ripgrepは、nvimの<a href="https://github.com/nvim-telescope/telescope.nvim">Telescope</a>プラグインの階層文字列検索を使用するときに必要になるので、合わせてダウンロードしておきたい。開発中のGit操作はすべて<a href="https://github.com/jesseduffield/lazygit">lazygit</a>で行う。</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sudo choco install ripgrep lazygit starship vim neovim git wget unzip nvm -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="各種ソフトの設定"><a href="#各種ソフトの設定" class="headerlink" title="各種ソフトの設定"></a>各種ソフトの設定</h2><p>neovimで、LSP機能を使いたい人は、私の場合だと、<a href="https://github.com/williamboman/mason-lspconfig.nvim">mason-lspconfig</a>を使用していて、各言語のLSPサーバーをダウンロードしてくるのに、pythonやnpmを使用することが多い。<br>ゆえに、python, npmをWindowsにインストールしておこう。  </p>
+<h3 id="pythonのダウンロード（任意）"><a href="#pythonのダウンロード（任意）" class="headerlink" title="pythonのダウンロード（任意）"></a>pythonのダウンロード（任意）</h3><p>以下より、最新のpythonを公式よりダウンロード &gt;&gt; EXE実行<br><a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+<h3 id="nvmによるnpm-nodeのインストール"><a href="#nvmによるnpm-nodeのインストール" class="headerlink" title="nvmによるnpm/nodeのインストール"></a>nvmによるnpm/nodeのインストール</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">nvm install <span class="number">22</span>.<span class="number">12</span>.<span class="number">0</span></span><br><span class="line">nvm use <span class="number">22</span>.<span class="number">12</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="starshipをターミナルに適用"><a href="#starshipをターミナルに適用" class="headerlink" title="starshipをターミナルに適用"></a>starshipをターミナルに適用</h3><p>以下、<a href="https://starship.rs/guide/">https://starship.rs/guide/</a> を要約したもの</p>
+<ul>
+<li>pwshに適用する場合</li>
+</ul>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">vim <span class="variable">$PROFILE</span></span><br><span class="line"><span class="comment"># 以下追加</span></span><br><span class="line"><span class="built_in">Invoke-Expression</span> (&amp;starship init powershell)</span><br><span class="line"></span><br><span class="line"><span class="comment"># コマンド一行で行うには</span></span><br><span class="line"><span class="built_in">Invoke-Expression</span> (&amp;starship init powershell <span class="literal">--print-full-init</span> | <span class="built_in">Out-String</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>cmdに適用する場合<br><a href="https://chrisant996.github.io/clink/clink.html">https://chrisant996.github.io/clink/clink.html</a></li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">winget install clink</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#%LocalAppData%\clink\starship.lua</span><br><span class="line"></span><br><span class="line">load(io.popen(&#x27;starship init cmd&#x27;):read(&quot;*a&quot;))()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line">mkdir <span class="literal">-p</span> .config</span><br><span class="line"><span class="built_in">cd</span> .config</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.config/starship.toml</span><br></pre></td></tr></table></figure>
+
+<h3 id="vimの設定"><a href="#vimの設定" class="headerlink" title="vimの設定"></a>vimの設定</h3><ul>
+<li>_vimrcを配置<br>私の場合、<a href="https://github.com/bella2391/dotfiles">dotfiles</a>にドットファイルをまとめているので、以下のコマンドで済む。</li>
+</ul>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.vimrc</span><br><span class="line"><span class="built_in">move</span> .vimrc _vimrc</span><br><span class="line">mkdir <span class="literal">-p</span> ~/.wsl</span><br><span class="line"><span class="built_in">cd</span> ~/.wsl/</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.wsl/.vimrc</span><br></pre></td></tr></table></figure>
+
+<h4 id="win32yank"><a href="#win32yank" class="headerlink" title="win32yank"></a>win32yank</h4><p><a href="https://github.com/equalsraf/win32yank">https://github.com/equalsraf/win32yank</a></p>
+<ul>
+<li>以下、vimでコピー&amp;ペーストを行うために<br>win32yankはコマンドベースの、レジスタに文字列を登録することのできるWindowsで使えるものだ。UNIX系のXディスプレイだと、<code>x-clip</code>やWayLandディスプレイだと、<code>wl-copy</code>などがある。</li>
+</ul>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">mkdir <span class="literal">-p</span> ~/.global/bin</span><br><span class="line"><span class="built_in">cd</span> ~/.global/bin/</span><br><span class="line"><span class="built_in">wget</span> https://github.com/equalsraf/win32yank/releases/download/v0.<span class="number">1.1</span>/win32yank<span class="literal">-x64</span>.zip</span><br><span class="line">unzip .\win32yank<span class="literal">-x64</span>.zip</span><br><span class="line"><span class="built_in">Remove-Item</span> .\LICENSE, .\README.md, .\win32yank<span class="literal">-x64</span>.zip</span><br></pre></td></tr></table></figure>
+<p>別途、<code>C:\Users\&lt;user&gt;\.global\bin</code>をユーザー環境変数にセットしておこう。なお、今回は、WSLないないだが、WSLありきの環境で使う場合は、<code>.exe</code>実行ファイルの入ったフォルダを環境変数のパスに通す必要がある。</p>
+<h3 id="ターミナルフォントを設定"><a href="#ターミナルフォントを設定" class="headerlink" title="ターミナルフォントを設定"></a>ターミナルフォントを設定</h3><p>私は、NerdFontが良いと思う。<br>nvimの<code>nvim-web-devicons</code>プラグインでも使える。<br><a href="https://www.nerdfonts.com/">https://www.nerdfonts.com/</a></p>
+<p>Agave.zipなどをダウンロード<br>エクスプローラーから展開して、フォント群(ttfなど)を選択、インストール<br>ターミナルプロファイルより適用</p>
+<h3 id="ターミナルキーマップを設定"><a href="#ターミナルキーマップを設定" class="headerlink" title="ターミナルキーマップを設定"></a>ターミナルキーマップを設定</h3><p>以下をターミナルプロファイルに追加。<br><code>Next tab</code>: <code>C-Shift-[</code><br><code>Previous tab</code>: <code>C-Shift-]</code><br><code>Split pane</code>: <code>C-Shift-Enter</code></p>
+<h3 id="Neovimの設定"><a href="#Neovimの設定" class="headerlink" title="Neovimの設定"></a>Neovimの設定</h3><p>私の場合、Githubにその設定ファイルがあるので、それをインポートするだけで済む。<br>Neovimの設定ファイルは、<code>C:\Users\&lt;user&gt;\AppData\Local\</code>に配置しなければいけない。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cmdなら</span></span><br><span class="line"><span class="built_in">cd</span> %LOCALAPPDATA%</span><br><span class="line"><span class="comment"># pwshなら</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line"></span><br><span class="line">git clone https://github.com/bella2391/nvim.git</span><br></pre></td></tr></table></figure>
+
+<p>以下、私でないなら読み飛ばして構わない。</p>
+<h2 id="シンボリックリンク作成"><a href="#シンボリックリンク作成" class="headerlink" title="シンボリックリンク作成"></a>シンボリックリンク作成</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span></span><br><span class="line"><span class="built_in">mkdir</span> -p git</span><br></pre></td></tr></table></figure>
+<ul>
+<li>cmd</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mklink /D nvim <span class="variable">%LOCALAPPDATA%</span>/nvim</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pwsh</li>
+</ul>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-ItemType</span> Junction <span class="literal">-Path</span> <span class="string">&quot;nvim&quot;</span> <span class="literal">-Target</span> <span class="string">&quot;<span class="variable">$env:LOCALAPPDATA</span>\nvim&quot;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Neovim, Windows, 開発環境</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Website Terms and Policies</title>
     <url>/posts/41809/</url>
     <content><![CDATA[<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>This post contains privacy policy and terms of service using at <a href="https://github.com/bella2391/fmc-web">fmc-web</a>.</p>
@@ -248,70 +313,5 @@
 https://zenn.dev/ytjvdcm/articles/0efb9112468de3
 </code></pre>
 ]]></content>
-  </entry>
-  <entry>
-    <title>WSLを使わない! Windows開発環境構築</title>
-    <url>/posts/47392/</url>
-    <content><![CDATA[<h1 id="WSLないないのWindows開発環境構築"><a href="#WSLないないのWindows開発環境構築" class="headerlink" title="WSLないないのWindows開発環境構築"></a>WSLないないのWindows開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>こちらの記事は、主に、CLI環境で開発していきたいという方にすごく向いているかと思う。</p>
-<h2 id="ターミナルのアップデート"><a href="#ターミナルのアップデート" class="headerlink" title="ターミナルのアップデート"></a>ターミナルのアップデート</h2><p>まずは、今回の主役、ターミナルpwsh(powershell)をアップデート<br><a href="https://github.com/PowerShell/PowerShell/releases/">https://github.com/PowerShell/PowerShell/releases/</a><br>Latestの安定版をインストール<br>ダウンロードするときに、arm64かx64か、どれをダウンロードすればいいかわからない場合は、アーキテクチャーを調べよう。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msinfo32</span><br></pre></td></tr></table></figure>
-<p>システムの種類が<code>x64ベース PC</code>であれば、<br>x64のmsiのインストーラーをダウンロード &amp; 実行すればよい。</p>
-<h2 id="sudoの有効化"><a href="#sudoの有効化" class="headerlink" title="sudoの有効化"></a>sudoの有効化</h2><p>システム＞開発者向けより、sudoの有効化<br>LinuxなどUNIX系では、<code>sudo</code>を用いるのが習慣だ。</p>
-<h2 id="パッケージマネジャーのインストール"><a href="#パッケージマネジャーのインストール" class="headerlink" title="パッケージマネジャーのインストール"></a>パッケージマネジャーのインストール</h2><p>以下、Ubuntuなら<code>apt</code>, ArchLinuxなら、<code>pacman</code>など、パッケージマネジャーによって、ソフトのダウンロードを高速化するために必要だ。<br>私は、<code>chocolatey</code>を使う。<br><a href="https://chocolatey.org/">https://chocolatey.org/</a></p>
-<p>以下のコマンドでインストールが可能だ。</p>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> Bypass <span class="literal">-Scope</span> <span class="keyword">Process</span> <span class="literal">-Force</span>; [<span class="type">System.Net.ServicePointManager</span>]::SecurityProtocol = [<span class="type">System.Net.ServicePointManager</span>]::SecurityProtocol <span class="operator">-bor</span> <span class="number">3072</span>; <span class="built_in">iex</span> ((<span class="built_in">New-Object</span> System.Net.WebClient).DownloadString(<span class="string">&#x27;https://community.chocolatey.org/install.ps1&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-<h2 id="chocolateyによる各種ソフトインストール"><a href="#chocolateyによる各種ソフトインストール" class="headerlink" title="chocolateyによる各種ソフトインストール"></a>chocolateyによる各種ソフトインストール</h2><p>以下、管理者モードで実行するように<br>ripgrepは、nvimの<a href="https://github.com/nvim-telescope/telescope.nvim">Telescope</a>プラグインの階層文字列検索を使用するときに必要になるので、合わせてダウンロードしておきたい。開発中のGit操作はすべて<a href="https://github.com/jesseduffield/lazygit">lazygit</a>で行う。</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sudo choco install ripgrep lazygit starship vim neovim git wget unzip nvm -y</span><br></pre></td></tr></table></figure>
-
-<h2 id="各種ソフトの設定"><a href="#各種ソフトの設定" class="headerlink" title="各種ソフトの設定"></a>各種ソフトの設定</h2><p>neovimで、LSP機能を使いたい人は、私の場合だと、<a href="https://github.com/williamboman/mason-lspconfig.nvim">mason-lspconfig</a>を使用していて、各言語のLSPサーバーをダウンロードしてくるのに、pythonやnpmを使用することが多い。<br>ゆえに、python, npmをWindowsにインストールしておこう。  </p>
-<h3 id="pythonのダウンロード（任意）"><a href="#pythonのダウンロード（任意）" class="headerlink" title="pythonのダウンロード（任意）"></a>pythonのダウンロード（任意）</h3><p>以下より、最新のpythonを公式よりダウンロード &gt;&gt; EXE実行<br><a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
-<h3 id="nvmによるnpm-nodeのインストール"><a href="#nvmによるnpm-nodeのインストール" class="headerlink" title="nvmによるnpm/nodeのインストール"></a>nvmによるnpm/nodeのインストール</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">nvm install <span class="number">22</span>.<span class="number">12</span>.<span class="number">0</span></span><br><span class="line">nvm use <span class="number">22</span>.<span class="number">12</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="starshipをターミナルに適用"><a href="#starshipをターミナルに適用" class="headerlink" title="starshipをターミナルに適用"></a>starshipをターミナルに適用</h3><p>以下、<a href="https://starship.rs/guide/">https://starship.rs/guide/</a> を要約したもの</p>
-<ul>
-<li>pwshに適用する場合</li>
-</ul>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">vim <span class="variable">$PROFILE</span></span><br><span class="line"><span class="comment"># 以下追加</span></span><br><span class="line"><span class="built_in">Invoke-Expression</span> (&amp;starship init powershell)</span><br><span class="line"></span><br><span class="line"><span class="comment"># コマンド一行で行うには</span></span><br><span class="line"><span class="built_in">Invoke-Expression</span> (&amp;starship init powershell <span class="literal">--print-full-init</span> | <span class="built_in">Out-String</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>cmdに適用する場合<br><a href="https://chrisant996.github.io/clink/clink.html">https://chrisant996.github.io/clink/clink.html</a></li>
-</ul>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">winget install clink</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#%LocalAppData%\clink\starship.lua</span><br><span class="line"></span><br><span class="line">load(io.popen(&#x27;starship init cmd&#x27;):read(&quot;*a&quot;))()</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line">mkdir <span class="literal">-p</span> .config</span><br><span class="line"><span class="built_in">cd</span> .config</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.config/starship.toml</span><br></pre></td></tr></table></figure>
-
-<h3 id="vimの設定"><a href="#vimの設定" class="headerlink" title="vimの設定"></a>vimの設定</h3><ul>
-<li>_vimrcを配置<br>私の場合、<a href="https://github.com/bella2391/dotfiles">dotfiles</a>にドットファイルをまとめているので、以下のコマンドで済む。</li>
-</ul>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.vimrc</span><br><span class="line"><span class="built_in">move</span> .vimrc _vimrc</span><br><span class="line">mkdir <span class="literal">-p</span> ~/.wsl</span><br><span class="line"><span class="built_in">cd</span> ~/.wsl/</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.wsl/.vimrc</span><br></pre></td></tr></table></figure>
-
-<h4 id="win32yank"><a href="#win32yank" class="headerlink" title="win32yank"></a>win32yank</h4><p><a href="https://github.com/equalsraf/win32yank">https://github.com/equalsraf/win32yank</a></p>
-<ul>
-<li>以下、vimでコピー&amp;ペーストを行うために<br>win32yankはコマンドベースの、レジスタに文字列を登録することのできるWindowsで使えるものだ。UNIX系のXディスプレイだと、<code>x-clip</code>やWayLandディスプレイだと、<code>wl-copy</code>などがある。</li>
-</ul>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">mkdir <span class="literal">-p</span> ~/.global/bin</span><br><span class="line"><span class="built_in">cd</span> ~/.global/bin/</span><br><span class="line"><span class="built_in">wget</span> https://github.com/equalsraf/win32yank/releases/download/v0.<span class="number">1.1</span>/win32yank<span class="literal">-x64</span>.zip</span><br><span class="line">unzip .\win32yank<span class="literal">-x64</span>.zip</span><br><span class="line"><span class="built_in">Remove-Item</span> .\LICENSE, .\README.md, .\win32yank<span class="literal">-x64</span>.zip</span><br></pre></td></tr></table></figure>
-<p>別途、<code>C:\Users\&lt;user&gt;\.global\bin</code>をユーザー環境変数にセットしておこう。なお、今回は、WSLないないだが、WSLありきの環境で使う場合は、<code>.exe</code>実行ファイルの入ったフォルダを環境変数のパスに通す必要がある。</p>
-<h3 id="ターミナルフォントを設定"><a href="#ターミナルフォントを設定" class="headerlink" title="ターミナルフォントを設定"></a>ターミナルフォントを設定</h3><p>私は、NerdFontが良いと思う。<br>nvimの<code>nvim-web-devicons</code>プラグインでも使える。<br><a href="https://www.nerdfonts.com/">https://www.nerdfonts.com/</a></p>
-<p>Agave.zipなどをダウンロード<br>エクスプローラーから展開して、フォント群(ttfなど)を選択、インストール<br>ターミナルプロファイルより適用</p>
-<h3 id="ターミナルキーマップを設定"><a href="#ターミナルキーマップを設定" class="headerlink" title="ターミナルキーマップを設定"></a>ターミナルキーマップを設定</h3><p>以下をターミナルプロファイルに追加。<br><code>Next tab</code>: <code>C-Shift-[</code><br><code>Previous tab</code>: <code>C-Shift-]</code><br><code>Split pane</code>: <code>C-Shift-Enter</code></p>
-<h3 id="Neovimの設定"><a href="#Neovimの設定" class="headerlink" title="Neovimの設定"></a>Neovimの設定</h3><p>私の場合、Githubにその設定ファイルがあるので、それをインポートするだけで済む。<br>Neovimの設定ファイルは、<code>C:\Users\&lt;user&gt;\AppData\Local\</code>に配置しなければいけない。</p>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cmdなら</span></span><br><span class="line"><span class="built_in">cd</span> %LOCALAPPDATA%</span><br><span class="line"><span class="comment"># pwshなら</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line"></span><br><span class="line">git clone https://github.com/bella2391/nvim.git</span><br></pre></td></tr></table></figure>
-
-<p>以下、私でないなら読み飛ばして構わない。</p>
-<h2 id="シンボリックリンク作成"><a href="#シンボリックリンク作成" class="headerlink" title="シンボリックリンク作成"></a>シンボリックリンク作成</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span></span><br><span class="line"><span class="built_in">mkdir</span> -p git</span><br></pre></td></tr></table></figure>
-<ul>
-<li>cmd</li>
-</ul>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mklink /D nvim <span class="variable">%LOCALAPPDATA%</span>/nvim</span><br></pre></td></tr></table></figure>
-<ul>
-<li>pwsh</li>
-</ul>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-ItemType</span> Junction <span class="literal">-Path</span> <span class="string">&quot;nvim&quot;</span> <span class="literal">-Target</span> <span class="string">&quot;<span class="variable">$env:LOCALAPPDATA</span>\nvim&quot;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Neovim, Windows, 開発環境</tag>
-      </tags>
   </entry>
 </search>
