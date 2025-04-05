@@ -303,15 +303,11 @@
 
 <h3 id="dotfilesのインポート"><a href="#dotfilesのインポート" class="headerlink" title="dotfilesのインポート"></a>dotfilesのインポート</h3><p>私の環境では、設定ファイルはすべてGithubのレポジトリ: <a href="https://github.com/bella2391/dotfiles">bella2391&#x2F;dotfiles</a>にまとめているので、各ソフトウェアのドットファイルを移植するだけで済む。</p>
 <h3 id="GUI環境の構築（任意）"><a href="#GUI環境の構築（任意）" class="headerlink" title="GUI環境の構築（任意）"></a>GUI環境の構築（任意）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S acpid xorg sddm plasma konsole</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> sddm</span><br></pre></td></tr></table></figure>
-<p>私は、KDE PlasmaしかArchLinuxでは試したことないが、使いやすいと感じている。同時にダウンロードしておいたほうがいいものを紹介しよう。&#96;&#96;&#96;bash<br>sudo pacman -S power-profiles-daemon</p>
-<pre><code>これにより、GUI操作で電源モードをパフォーマンス・バランス・省電力に変更できる。
-
-## 最後に
-書いてて思った、面倒だ！！！
-
-## 参考
-https://zenn.dev/ytjvdcm/articles/0efb9112468de3
-</code></pre>
+<p>私は、KDE PlasmaしかArchLinuxでは試したことないが、使いやすいと感じている。同時にダウンロードしておいたほうがいいものを紹介しよう。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S power-profiles-daemon</span><br></pre></td></tr></table></figure>
+<p>これにより、GUI操作で電源モードをパフォーマンス・バランス・省電力に変更できる。</p>
+<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>書いてて思った、面倒だ！！！</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zenn.dev/ytjvdcm/articles/0efb9112468de3">https://zenn.dev/ytjvdcm/articles/0efb9112468de3</a></p>
 ]]></content>
   </entry>
 </search>
