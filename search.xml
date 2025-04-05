@@ -1,70 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ArchLinuxでCLI開発環境を整える</title>
-    <url>/posts/54214/</url>
-    <content><![CDATA[<h1 id="CLI環境を作る"><a href="#CLI環境を作る" class="headerlink" title="CLI環境を作る"></a>CLI環境を作る</h1><h2 id="起動時にCLIが立ち上がるための設定"><a href="#起動時にCLIが立ち上がるための設定" class="headerlink" title="起動時にCLIが立ち上がるための設定"></a>起動時にCLIが立ち上がるための設定</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/default/grub</span><br></pre></td></tr></table></figure>
-<p><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;&quot;</code>に<code>text</code>を追加。<br>起動時に、スプラッシュスクリーン(通常はディストリビューションのロゴなど)を表示したい人は、<code>splash</code>を追加できる。</p>
-<ul>
-<li><code>/etc/default/grub</code>ファイルの変更をGRUBブートローダーに反映</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-<ul>
-<li>現状、システム起動のデフォルトターゲットに何が指定されているのかを知る</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl get-default</span><br></pre></td></tr></table></figure>
-<p>通常、GUI環境を使用している場合は、<code>graphical.target</code>と表示され、そしてそれは、<code>multi-user.target</code>を包含している。しかし、CLI環境オンリーで十分だという人にとっては、システム起動時間の短縮やリソース効率の向上の観点から、デフォルトターゲットを<code>multi-user.target</code>に切り替えることをおすすめできる。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl set-default multi-user.target</span><br></pre></td></tr></table></figure>
-<ul>
-<li>GUI環境に戻したいときは</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl set-default graphical.target</span><br></pre></td></tr></table></figure>
-<ul>
-<li>日本語の表示、入力にすぐれたターミナルエミュレータをインストールする<br>以下、fbtermでの実装で失敗した。まず、多くのデスクトップ環境で使われているibusとfbtermを連携させるのに必要なibus-mozcをAURパッケージからyayコマンドでインストールするはずが、ビルドに失敗する。また、kmsconでの日本語表示には、成功しているため、以降、土台をkmsconに置く。</li>
-</ul>
-<h2 id="kmscon"><a href="#kmscon" class="headerlink" title="kmscon"></a>kmscon</h2><p><code>kmscon</code>はUnicode&#x2F;UTF-8 互換で動くので日本語表示ができる。</p>
-<h3 id="kmsconのインストール"><a href="#kmsconのインストール" class="headerlink" title="kmsconのインストール"></a>kmsconのインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S kmscon</span><br></pre></td></tr></table></figure>
-
-<h3 id="日本語フォントをインストール"><a href="#日本語フォントをインストール" class="headerlink" title="日本語フォントをインストール"></a>日本語フォントをインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S ttf-dejavu otf-ipafont</span><br></pre></td></tr></table></figure>
-
-<h3 id="フォントを適用"><a href="#フォントを適用" class="headerlink" title="フォントを適用"></a>フォントを適用</h3><p><code>/etc/fonts/conf.d/99-kmscon.conf</code><br>私は、フォントにNerdFontの<code>Agave</code>を使っているので、以下のようになる。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE fontconfig SYSTEM &quot;fonts.dtd&quot;&gt;</span><br><span class="line">&lt;fontconfig&gt;</span><br><span class="line">&lt;match&gt;</span><br><span class="line">  &lt;test name=&quot;family&quot;&gt;&lt;string&gt;monospace&lt;/string&gt;&lt;/test&gt;</span><br><span class="line">  &lt;edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;strong&quot;&gt;</span><br><span class="line">    &lt;string&gt;Agave Nerd Font Mono&lt;/string&gt;</span><br><span class="line">    &lt;string&gt;DejaVu Sans Mono&lt;/string&gt;</span><br><span class="line">    &lt;string&gt;IPAGothic&lt;/string&gt;</span><br><span class="line">  &lt;/edit&gt;</span><br><span class="line">&lt;/match&gt;</span><br><span class="line">&lt;/fontconfig&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="キーボードレイアウトを設定"><a href="#キーボードレイアウトを設定" class="headerlink" title="キーボードレイアウトを設定"></a>キーボードレイアウトを設定</h3><p><code>/etc/kmscon/kmscon.conf</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xkb-layout=jp</span><br></pre></td></tr></table></figure>
-
-<h3 id="tty2以降をkmsconに設定"><a href="#tty2以降をkmsconに設定" class="headerlink" title="tty2以降をkmsconに設定"></a>tty2以降をkmsconに設定</h3><p>あとで、<code>kmsconvt@tty3.service</code>を作るため、スキップしてもよい。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /usr/lib/systemd/system/kmsconvt\@.service /etc/systemd/system/autovt\@.service</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>kmsconvt@.service</code>を有効化<br><code>autovt@tty3.service</code> は <code>kmsconvt@.service</code> へのシンボリックリンクなため、元のサービスを有効化することで、<code>autovt@tty3.service</code> も間接的に有効になる。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
-
-<h3 id="kmsconをtty3にセットする"><a href="#kmsconをtty3にセットする" class="headerlink" title="kmsconをtty3にセットする"></a>kmsconをtty3にセットする</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># テンプレートサービスを別名でコピー</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /usr/lib/systemd/system/kmsconvt@.service /etc/systemd/system/kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
-<h3 id="kmscon（tty）上で日本語入力を可能にする"><a href="#kmscon（tty）上で日本語入力を可能にする" class="headerlink" title="kmscon（tty）上で日本語入力を可能にする"></a>kmscon（tty）上で日本語入力を可能にする</h3><p>以下、uimでmozcを使用する設定</p>
-<ul>
-<li>インストール</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S uim</span><br></pre></td></tr></table></figure>
-<p><code>~/.uim</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(define default-im-name &#x27;mozc)</span><br><span class="line">(define-key generic-on-key? &#x27;(&quot;&lt;Control&gt; &quot;))</span><br><span class="line">(define-key generic-off-key? &#x27;(&quot;&lt;Control&gt; &quot;))</span><br></pre></td></tr></table></figure>
-<p>あとは、以下を<code>~/.bashrc</code>などに書けばOK</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uim-fep</span><br></pre></td></tr></table></figure>
-<p>これにより、Ctrl+Spaceキーで日本語入力の切り替えが可能になる。</p>
-<ul>
-<li>参考<br>kmscon<br><a href="https://www.kaias1jp.com/entry/2021/01/11/173542">https://www.kaias1jp.com/entry/2021/01/11/173542</a><br><a href="https://qiita.com/Pseudonym/items/9ff0e9028dfd6bad5958">https://qiita.com/Pseudonym/items/9ff0e9028dfd6bad5958</a><br><del>fbterm<br><a href="https://qiita.com/Pseudonym/items/12e447557a5234bb265b">https://qiita.com/Pseudonym/items/12e447557a5234bb265b</a></del></li>
-</ul>
-<h2 id="CLI環境で使えるツール一覧"><a href="#CLI環境で使えるツール一覧" class="headerlink" title="CLI環境で使えるツール一覧"></a>CLI環境で使えるツール一覧</h2><ul>
-<li>コマンドラインでGeminiと話せるツール<br><a href="https://github.com/greycodee/gemini-terminal">https://github.com/greycodee/gemini-terminal</a><br><a href="https://github.com/eliben/gemini-cli">https://github.com/eliben/gemini-cli</a></li>
-<li>コマンドラインでDiscordが使えるツール<br><a href="https://github.com/ayn2op/discordo">https://github.com/ayn2op/discordo</a></li>
-</ul>
-<h2 id="discordoをCLI環境で使えるようにする"><a href="#discordoをCLI環境で使えるようにする" class="headerlink" title="discordoをCLI環境で使えるようにする"></a>discordoをCLI環境で使えるようにする</h2><p>何度か試行したが、できなかった。<br><del>まず、discordトークンは、機密情報なので、libsecretかgnome-keyringかkwalletを使用したい。<br>GUIではアンロックは容易だが、CLIでのキーリングのアンロックがサポートされていないシークレットサービスも少なくない。<br>ということで、まずは、CLI上でキーリングをアンロックし、discordoでログインできるかどうかを確認する必要がある。<code>opensc</code>パッケージに同封されている<code>pkcs11-tool</code>よりCLIでのアンロックを試したが、あれは、<code>gnome-keyring</code>で使えるようなものだった。CLIでは<code>gnome-keyring-daemon</code>が起動できないため、失敗に終わった。</del></p>
-]]></content>
-      <tags>
-        <tag>ArchLinux, CLI, 開発環境</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Github:glyzerレポジトリを立ち上げるまで</title>
     <url>/posts/33934/</url>
     <content><![CDATA[<h2 id="回顧録"><a href="#回顧録" class="headerlink" title="回顧録"></a>回顧録</h2><p>ある日、CLI環境を構築する際に、新たなTUI（ターミナルインターフェース）アプリが必要だなと感じた。<br>それは、ChatGPTやGeminiに代表されるAI-Chatアプリだ。それらがターミナルから使えればいいなと思ったのが事の始まりである。<br>そこでgemini-cliというものを知り、GeminiAPIKeyが必要になることを知る。そこからGeminiAPIに興味を持ち、手始めにpythonに接続することで、広範囲の分析が可能になることを知った。<br>これより、プロジェクト<a href="https://github.com/bella2391/glyzer">glyzer</a>の始まりである。</p>
@@ -202,6 +138,70 @@
 ]]></content>
       <tags>
         <tag>Neovim, Windows, 開発環境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ArchLinuxでCLI開発環境を整える</title>
+    <url>/posts/54214/</url>
+    <content><![CDATA[<h1 id="CLI環境を作る"><a href="#CLI環境を作る" class="headerlink" title="CLI環境を作る"></a>CLI環境を作る</h1><h2 id="起動時にCLIが立ち上がるための設定"><a href="#起動時にCLIが立ち上がるための設定" class="headerlink" title="起動時にCLIが立ち上がるための設定"></a>起動時にCLIが立ち上がるための設定</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/default/grub</span><br></pre></td></tr></table></figure>
+<p><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;&quot;</code>に<code>text</code>を追加。<br>起動時に、スプラッシュスクリーン(通常はディストリビューションのロゴなど)を表示したい人は、<code>splash</code>を追加できる。</p>
+<ul>
+<li><code>/etc/default/grub</code>ファイルの変更をGRUBブートローダーに反映</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<ul>
+<li>現状、システム起動のデフォルトターゲットに何が指定されているのかを知る</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl get-default</span><br></pre></td></tr></table></figure>
+<p>通常、GUI環境を使用している場合は、<code>graphical.target</code>と表示され、そしてそれは、<code>multi-user.target</code>を包含している。しかし、CLI環境オンリーで十分だという人にとっては、システム起動時間の短縮やリソース効率の向上の観点から、デフォルトターゲットを<code>multi-user.target</code>に切り替えることをおすすめできる。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl set-default multi-user.target</span><br></pre></td></tr></table></figure>
+<ul>
+<li>GUI環境に戻したいときは</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl set-default graphical.target</span><br></pre></td></tr></table></figure>
+<ul>
+<li>日本語の表示、入力にすぐれたターミナルエミュレータをインストールする<br>以下、fbtermでの実装で失敗した。まず、多くのデスクトップ環境で使われているibusとfbtermを連携させるのに必要なibus-mozcをAURパッケージからyayコマンドでインストールするはずが、ビルドに失敗する。また、kmsconでの日本語表示には、成功しているため、以降、土台をkmsconに置く。</li>
+</ul>
+<h2 id="kmscon"><a href="#kmscon" class="headerlink" title="kmscon"></a>kmscon</h2><p><code>kmscon</code>はUnicode&#x2F;UTF-8 互換で動くので日本語表示ができる。</p>
+<h3 id="kmsconのインストール"><a href="#kmsconのインストール" class="headerlink" title="kmsconのインストール"></a>kmsconのインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S kmscon</span><br></pre></td></tr></table></figure>
+
+<h3 id="日本語フォントをインストール"><a href="#日本語フォントをインストール" class="headerlink" title="日本語フォントをインストール"></a>日本語フォントをインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S ttf-dejavu otf-ipafont</span><br></pre></td></tr></table></figure>
+
+<h3 id="フォントを適用"><a href="#フォントを適用" class="headerlink" title="フォントを適用"></a>フォントを適用</h3><p><code>/etc/fonts/conf.d/99-kmscon.conf</code><br>私は、フォントにNerdFontの<code>Agave</code>を使っているので、以下のようになる。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE fontconfig SYSTEM &quot;fonts.dtd&quot;&gt;</span><br><span class="line">&lt;fontconfig&gt;</span><br><span class="line">&lt;match&gt;</span><br><span class="line">  &lt;test name=&quot;family&quot;&gt;&lt;string&gt;monospace&lt;/string&gt;&lt;/test&gt;</span><br><span class="line">  &lt;edit name=&quot;family&quot; mode=&quot;prepend&quot; binding=&quot;strong&quot;&gt;</span><br><span class="line">    &lt;string&gt;Agave Nerd Font Mono&lt;/string&gt;</span><br><span class="line">    &lt;string&gt;DejaVu Sans Mono&lt;/string&gt;</span><br><span class="line">    &lt;string&gt;IPAGothic&lt;/string&gt;</span><br><span class="line">  &lt;/edit&gt;</span><br><span class="line">&lt;/match&gt;</span><br><span class="line">&lt;/fontconfig&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="キーボードレイアウトを設定"><a href="#キーボードレイアウトを設定" class="headerlink" title="キーボードレイアウトを設定"></a>キーボードレイアウトを設定</h3><p><code>/etc/kmscon/kmscon.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xkb-layout=jp</span><br></pre></td></tr></table></figure>
+
+<h3 id="tty2以降をkmsconに設定"><a href="#tty2以降をkmsconに設定" class="headerlink" title="tty2以降をkmsconに設定"></a>tty2以降をkmsconに設定</h3><p>あとで、<code>kmsconvt@tty3.service</code>を作るため、スキップしてもよい。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /usr/lib/systemd/system/kmsconvt\@.service /etc/systemd/system/autovt\@.service</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>kmsconvt@.service</code>を有効化<br><code>autovt@tty3.service</code> は <code>kmsconvt@.service</code> へのシンボリックリンクなため、元のサービスを有効化することで、<code>autovt@tty3.service</code> も間接的に有効になる。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="kmsconをtty3にセットする"><a href="#kmsconをtty3にセットする" class="headerlink" title="kmsconをtty3にセットする"></a>kmsconをtty3にセットする</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># テンプレートサービスを別名でコピー</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /usr/lib/systemd/system/kmsconvt@.service /etc/systemd/system/kmsconvt@tty3.service</span><br></pre></td></tr></table></figure>
+<h3 id="kmscon（tty）上で日本語入力を可能にする"><a href="#kmscon（tty）上で日本語入力を可能にする" class="headerlink" title="kmscon（tty）上で日本語入力を可能にする"></a>kmscon（tty）上で日本語入力を可能にする</h3><p>以下、uimでmozcを使用する設定</p>
+<ul>
+<li>インストール</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -S uim</span><br></pre></td></tr></table></figure>
+<p><code>~/.uim</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(define default-im-name &#x27;mozc)</span><br><span class="line">(define-key generic-on-key? &#x27;(&quot;&lt;Control&gt; &quot;))</span><br><span class="line">(define-key generic-off-key? &#x27;(&quot;&lt;Control&gt; &quot;))</span><br></pre></td></tr></table></figure>
+<p>あとは、以下を<code>~/.bashrc</code>などに書けばOK</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uim-fep</span><br></pre></td></tr></table></figure>
+<p>これにより、Ctrl+Spaceキーで日本語入力の切り替えが可能になる。</p>
+<ul>
+<li>参考<br>kmscon<br><a href="https://www.kaias1jp.com/entry/2021/01/11/173542">https://www.kaias1jp.com/entry/2021/01/11/173542</a><br><a href="https://qiita.com/Pseudonym/items/9ff0e9028dfd6bad5958">https://qiita.com/Pseudonym/items/9ff0e9028dfd6bad5958</a><br><del>fbterm<br><a href="https://qiita.com/Pseudonym/items/12e447557a5234bb265b">https://qiita.com/Pseudonym/items/12e447557a5234bb265b</a></del></li>
+</ul>
+<h2 id="CLI環境で使えるツール一覧"><a href="#CLI環境で使えるツール一覧" class="headerlink" title="CLI環境で使えるツール一覧"></a>CLI環境で使えるツール一覧</h2><ul>
+<li>コマンドラインでGeminiと話せるツール<br><a href="https://github.com/greycodee/gemini-terminal">https://github.com/greycodee/gemini-terminal</a><br><a href="https://github.com/eliben/gemini-cli">https://github.com/eliben/gemini-cli</a></li>
+<li>コマンドラインでDiscordが使えるツール<br><a href="https://github.com/ayn2op/discordo">https://github.com/ayn2op/discordo</a></li>
+</ul>
+<h2 id="discordoをCLI環境で使えるようにする"><a href="#discordoをCLI環境で使えるようにする" class="headerlink" title="discordoをCLI環境で使えるようにする"></a>discordoをCLI環境で使えるようにする</h2><p>何度か試行したが、できなかった。<br><del>まず、discordトークンは、機密情報なので、libsecretかgnome-keyringかkwalletを使用したい。<br>GUIではアンロックは容易だが、CLIでのキーリングのアンロックがサポートされていないシークレットサービスも少なくない。<br>ということで、まずは、CLI上でキーリングをアンロックし、discordoでログインできるかどうかを確認する必要がある。<code>opensc</code>パッケージに同封されている<code>pkcs11-tool</code>よりCLIでのアンロックを試したが、あれは、<code>gnome-keyring</code>で使えるようなものだった。CLIでは<code>gnome-keyring-daemon</code>が起動できないため、失敗に終わった。</del></p>
+]]></content>
+      <tags>
+        <tag>ArchLinux, CLI, 開発環境</tag>
       </tags>
   </entry>
   <entry>

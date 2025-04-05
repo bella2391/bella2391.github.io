@@ -1652,7 +1652,7 @@ figure.highlight pre .javascript .function {
 }
 .container pre,
 .container code {
-  font-size: var(--global-font-size);
+  font-size: font-family;
   font-family: consolas, Menlo, monospace, 'PingFang SC', 'Microsoft JhengHei', sans-serif !important;
   border-radius: 6px;
 }
@@ -1682,7 +1682,7 @@ figure.highlight pre .javascript .function {
 .container figure.highlight figcaption,
 .container figure.highlight .caption {
   padding: 6px 0 2px 14px;
-  font-size: var(--global-font-size);
+  font-size: font-family;
   line-height: 1em;
 }
 .container figure.highlight figcaption a,
@@ -1727,7 +1727,7 @@ figure.highlight pre .javascript .function {
   height: 2.15em;
   background: var(--hltools-bg);
   color: var(--hltools-color);
-  font-size: var(--global-font-size);
+  font-size: font-family;
   overflow: hidden;
 }
 .container .highlight-tools > * {
@@ -2068,6 +2068,16 @@ figure.highlight pre .javascript .function {
 @media screen and (max-width: 900px) {
   .layout > div:first-child {
     width: 100% !important;
+  }
+}
+@media screen and (min-width: 900px) {
+  .layout > div:first-child {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -o-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
   }
 }
 .layout.hide-aside {
@@ -2515,7 +2525,7 @@ figure.highlight pre .javascript .function {
 }
 @media screen and (min-width: 900px) {
   #aside-content {
-    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 @media screen and (max-width: 900px) {
