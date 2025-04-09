@@ -3,7 +3,14 @@
   <entry>
     <title>ArchLinuxでCLI開発環境を整える</title>
     <url>/posts/54214/</url>
-    <content><![CDATA[<h1 id="CLI環境を作る"><a href="#CLI環境を作る" class="headerlink" title="CLI環境を作る"></a>CLI環境を作る</h1><h2 id="起動時にCLIが立ち上がるための設定"><a href="#起動時にCLIが立ち上がるための設定" class="headerlink" title="起動時にCLIが立ち上がるための設定"></a>起動時にCLIが立ち上がるための設定</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/default/grub</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="CLI環境を作る"><a href="#CLI環境を作る" class="headerlink" title="CLI環境を作る"></a>CLI環境を作る</h1><h2 id="起動時にCLIが立ち上がるための設定"><a href="#起動時にCLIが立ち上がるための設定" class="headerlink" title="起動時にCLIが立ち上がるための設定"></a>起動時にCLIが立ち上がるための設定</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/default/grub</span><br></pre></td></tr></table></figure>
 <p><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;&quot;</code>に<code>text</code>を追加。<br>起動時に、スプラッシュスクリーン(通常はディストリビューションのロゴなど)を表示したい人は、<code>splash</code>を追加できる。</p>
 <ul>
 <li><code>/etc/default/grub</code>ファイルの変更をGRUBブートローダーに反映</li>
@@ -67,7 +74,14 @@
   <entry>
     <title>Github:glyzerレポジトリを立ち上げるまで</title>
     <url>/posts/33934/</url>
-    <content><![CDATA[<h2 id="回顧録"><a href="#回顧録" class="headerlink" title="回顧録"></a>回顧録</h2><p>ある日、CLI環境を構築する際に、新たなTUI（ターミナルインターフェース）アプリが必要だなと感じた。<br>それは、ChatGPTやGeminiに代表されるAI-Chatアプリだ。それらがターミナルから使えればいいなと思ったのが事の始まりである。<br>そこでgemini-cliというものを知り、GeminiAPIKeyが必要になることを知る。そこからGeminiAPIに興味を持ち、手始めにpythonに接続することで、広範囲の分析が可能になることを知った。<br>これより、プロジェクト<a href="https://github.com/bella2391/glyzer">glyzer</a>の始まりである。</p>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h2 id="回顧録"><a href="#回顧録" class="headerlink" title="回顧録"></a>回顧録</h2><p>ある日、CLI環境を構築する際に、新たなTUI（ターミナルインターフェース）アプリが必要だなと感じた。<br>それは、ChatGPTやGeminiに代表されるAI-Chatアプリだ。それらがターミナルから使えればいいなと思ったのが事の始まりである。<br>そこでgemini-cliというものを知り、GeminiAPIKeyが必要になることを知る。そこからGeminiAPIに興味を持ち、手始めにpythonに接続することで、広範囲の分析が可能になることを知った。<br>これより、プロジェクト<a href="https://github.com/verazza/glyzer">glyzer</a>の始まりである。</p>
 <h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><p><a href="https://github.com/eliben/gemini-cli">eliben&#x2F;gemini-cli</a></p>
 <h2 id="このプロジェクトの理想"><a href="#このプロジェクトの理想" class="headerlink" title="このプロジェクトの理想"></a>このプロジェクトの理想</h2><p>Neovimでの開発中に、特定のキーマップより(<code>&lt;leader&gt;gm</code>など)現在のファイルに対して、geminiと応答を図る。また、入力でディレクトリパスを指定して、その中の指定拡張子よりdbファイルにまとめ、それをソースに、触媒に、栄養にし、応答を図る。<br>2つの環境の類似性より、分析を依頼する。</p>
 <h2 id="gemini-cliに関するコマンド"><a href="#gemini-cliに関するコマンド" class="headerlink" title="gemini-cliに関するコマンド"></a>gemini-cliに関するコマンド</h2><ul>
@@ -75,7 +89,7 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gemini-cli embed db out.db --files .,*.py</span><br><span class="line"></span><br><span class="line">gemini-cli embed db out.db --files-list question.txt</span><br></pre></td></tr></table></figure>
 <p>PythonはあくまでGeminiAPIを使って、ソースを食わせる役割。別に言語は何でもいいと思う</p>
-<h2 id="現在思考中のもの"><a href="#現在思考中のもの" class="headerlink" title="現在思考中のもの"></a>現在思考中のもの</h2><p>以下、<a href="https://github.com/bella2391/Ai-Analyzer/blob/master/setup.py">glyzer:&#x2F;setup.py</a> の説明<br>gemini-cliコマンドより、検索対象となるコード、それに対する質問となるコード(平文でもコードとみなす)に対して、それらいくつものファイル群を、数値ベクトル・埋め込みベクトルに変換(dbファイルにあたる)したものを、NumPy配列に変換する。単にdbファイルにエクスポートし、数値ベクトルにしても、それらは単なるバイナリデータに過ぎず、特定のデータ型・構造を持たないため、直接的に数値演算が可能になるNumPy配列に変換する必要がある。これにより、データを特定のデータ型(整数、不動小数点など)を持つ多次元配列として解釈できる。これより、コサイン類似性より比較する。コサイン類似度の高いコード片をソートし、出力する。また、その類似性よりわかったコードスニップより、geminiと応答する。</p>
+<h2 id="現在思考中のもの"><a href="#現在思考中のもの" class="headerlink" title="現在思考中のもの"></a>現在思考中のもの</h2><p>以下、<a href="https://github.com/verazza/Ai-Analyzer/blob/master/setup.py">glyzer:&#x2F;setup.py</a> の説明<br>gemini-cliコマンドより、検索対象となるコード、それに対する質問となるコード(平文でもコードとみなす)に対して、それらいくつものファイル群を、数値ベクトル・埋め込みベクトルに変換(dbファイルにあたる)したものを、NumPy配列に変換する。単にdbファイルにエクスポートし、数値ベクトルにしても、それらは単なるバイナリデータに過ぎず、特定のデータ型・構造を持たないため、直接的に数値演算が可能になるNumPy配列に変換する必要がある。これにより、データを特定のデータ型(整数、不動小数点など)を持つ多次元配列として解釈できる。これより、コサイン類似性より比較する。コサイン類似度の高いコード片をソートし、出力する。また、その類似性よりわかったコードスニップより、geminiと応答する。</p>
 <p>なぜデータベース(<code>*.db</code>)形式なのか。</p>
 <ul>
 <li>大量の埋め込みベクトルが効率的に保存・管理ができる</li>
@@ -93,7 +107,14 @@
   <entry>
     <title>WSLを使う！ Windows開発環境構築</title>
     <url>/posts/17845/</url>
-    <content><![CDATA[<h1 id="WSLありきのWindows開発環境構築"><a href="#WSLありきのWindows開発環境構築" class="headerlink" title="WSLありきのWindows開発環境構築"></a>WSLありきのWindows開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>この記事は、WSL導入とWSL-Archを使うまでのロードマップを知ることができる。また、WSLにArch導入後の開発環境構築には、通常のネイティブにブートすることを想定した<a href="http://localhost:4000/posts/14653/">私的ArchLinux開発環境構築</a>の内容を含む。</p>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="WSLありきのWindows開発環境構築"><a href="#WSLありきのWindows開発環境構築" class="headerlink" title="WSLありきのWindows開発環境構築"></a>WSLありきのWindows開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>この記事は、WSL導入とWSL-Archを使うまでのロードマップを知ることができる。また、WSLにArch導入後の開発環境構築には、通常のネイティブにブートすることを想定した<a href="https://verazza.github.io/posts/14653/">私的ArchLinux開発環境構築</a>の内容を含む。</p>
 <p>ということで、まずは、WSLを使えるようにしていく。</p>
 <h2 id="WSLの導入"><a href="#WSLの導入" class="headerlink" title="WSLの導入"></a>WSLの導入</h2><p>コントロールパネル＞プログラム＞プログラムと機能＞Windowsの機能の有効化または無効化より、Linux用Windowsサブシステム/仮想マシンプラットフォームにチェックを入れ、Windowsを再起動しよう。<br>再起動後には、コマンドラインでwslコマンドが使えるようになっているはずだ。</p>
 <h2 id="WSLのディストロ選び"><a href="#WSLのディストロ選び" class="headerlink" title="WSLのディストロ選び"></a>WSLのディストロ選び</h2><p>今回は、私の普段開発で、またはサーバー機として、愛用しているArchLinuxをWSLで使うものとしよう。他のディストロを探したい場合は、以下を実行すると、WSLで使えるディストロを知ることができる。</p>
@@ -125,12 +146,12 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wsl -l -v</span><br><span class="line"><span class="comment"># VERSIONが2になっていなかったら</span></span><br><span class="line"><span class="comment"># アップデート前にすべて停止させておく</span></span><br><span class="line">wsl --shutdown</span><br><span class="line">wsl --update</span><br><span class="line">wsl --set-default-version 2</span><br><span class="line"><span class="comment"># これらを実行し、再度</span></span><br><span class="line">wsl -l -v</span><br><span class="line"><span class="comment"># 2になっているはず。</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="wsl-confの作成"><a href="#wsl-confの作成" class="headerlink" title="wsl.confの作成"></a><code>wsl.conf</code>の作成</h2><p><code>/etc/wsl.conf</code>に配置しよう。<br>設定方法は様々だが、例として以下を紹介する。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[user]</span><br><span class="line">default=bella</span><br><span class="line"></span><br><span class="line">[boot]</span><br><span class="line">systemd = true</span><br><span class="line">initTimeout = 1000</span><br><span class="line"></span><br><span class="line">[automount]</span><br><span class="line">enable = true</span><br><span class="line">options = &quot;metadata&quot;</span><br><span class="line">mountFsTab = true</span><br><span class="line"></span><br><span class="line">[wsl2]</span><br><span class="line">localhostForwarding = true</span><br><span class="line">memory = 11GB</span><br><span class="line"></span><br><span class="line">[interop]</span><br><span class="line">appendWindowsPath = false</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[user]</span><br><span class="line">default=verazza</span><br><span class="line"></span><br><span class="line">[boot]</span><br><span class="line">systemd = true</span><br><span class="line">initTimeout = 1000</span><br><span class="line"></span><br><span class="line">[automount]</span><br><span class="line">enable = true</span><br><span class="line">options = &quot;metadata&quot;</span><br><span class="line">mountFsTab = true</span><br><span class="line"></span><br><span class="line">[wsl2]</span><br><span class="line">localhostForwarding = true</span><br><span class="line">memory = 11GB</span><br><span class="line"></span><br><span class="line">[interop]</span><br><span class="line">appendWindowsPath = false</span><br></pre></td></tr></table></figure>
 <p>おそらく一番重要なのは、<code>boot.systemd</code>と<code>interop.appendWindowsPath</code>のキーだと思う。<code>appendWindowsPath</code>は、Windowsの環境変数をWSLのディストロでも引き継ぐかどうか決められる。これを<code>true</code>にすると、起動が遅かったりするので、私は<code>false</code>にしてる。また、<code>boot.initTimeout</code>は起動を早めるが少々注意が必要。詳しくは、以下を参照。<br><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconf">https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconf</a></p>
 <h2 id="wslconfigの作成"><a href="#wslconfigの作成" class="headerlink" title=".wslconfigの作成"></a><code>.wslconfig</code>の作成</h2><p>これは、<code>C:\Users\&lt;user&gt;\.wslconfig</code>に配置しよう。<br>以下、例として</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[wsl2]</span><br><span class="line">guiApplications = true</span><br><span class="line">kernelCommandLine = cgroup_no_v1=all</span><br></pre></td></tr></table></figure>
 <p>主に、ディストロ内で実行されたGUIアプリケーションをWindows側のディスプレイで見るための設定だ。詳しくは、以下を参照。<br><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconfig">https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconfig</a></p>
-<h2 id="WSLにArchインポート後"><a href="#WSLにArchインポート後" class="headerlink" title="WSLにArchインポート後"></a>WSLにArchインポート後</h2><p>ここからは、WSL-Archでの開発環境構築を行う。<br>ほとんどネイティブにArchをブートしているときに実行するものと大差ない。ということで、それは別記事に書こうと思う。<a href="http://localhost:4000/posts/14653/">私的ArchLinux開発環境構築</a>を見てほしい。また、各種WSLディストロのソフトウェアを利用中に、クリップボードにコピーしたければ、<a href="http://localhost:4000/posts/47392/#win32yank">win32yankについて</a>を参照してほしい。</p>
+<h2 id="WSLにArchインポート後"><a href="#WSLにArchインポート後" class="headerlink" title="WSLにArchインポート後"></a>WSLにArchインポート後</h2><p>ここからは、WSL-Archでの開発環境構築を行う。<br>ほとんどネイティブにArchをブートしているときに実行するものと大差ない。ということで、それは別記事に書こうと思う。<a href="https://verazza.github.io/posts/14653/">私的ArchLinux開発環境構築</a>を見てほしい。また、各種WSLディストロのソフトウェアを利用中に、クリップボードにコピーしたければ、<a href="https://verazza.github.io/posts/47392/#win32yank">win32yankについて</a>を参照してほしい。</p>
 <h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>WSLはとてもいいと思います。第一に、メインOSが荒れないし、第二に、エクスポート・インポートも容易にできる。正直、実機で色々なOSを試してきた身としては、WSLの凄みにもう少し早く気づきたかったですね。</p>
 <h2 id="WSLの高みに近づくために"><a href="#WSLの高みに近づくために" class="headerlink" title="WSLの高みに近づくために"></a>WSLの高みに近づくために</h2><p>例えば、完全なデスクトップ環境をWSLのディストロでも作れるんじゃないかと考える人もいると思う。私もその一人だ。実際に以下を試してみたが、WSL-Ubuntuで、ほんとうにGnomeデスクトップが立ち上がった。<br><a href="https://gist.github.com/tdcosta100/7def60bccc8ae32cf9cacb41064b1c0f">https://gist.github.com/tdcosta100/7def60bccc8ae32cf9cacb41064b1c0f</a></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zenn.dev/kyoh86/articles/4bf6513aabe517">https://zenn.dev/kyoh86/articles/4bf6513aabe517</a><br><a href="https://blog.yukirii.dev/wsl2-arch-linux/">https://blog.yukirii.dev/wsl2-arch-linux/</a><br><a href="https://zenn.dev/artemit/articles/63e073d53179ae">https://zenn.dev/artemit/articles/63e073d53179ae</a></p>
@@ -142,7 +163,14 @@
   <entry>
     <title>WSLを使わない! Windows開発環境構築</title>
     <url>/posts/47392/</url>
-    <content><![CDATA[<h1 id="WSLないないのWindows開発環境構築"><a href="#WSLないないのWindows開発環境構築" class="headerlink" title="WSLないないのWindows開発環境構築"></a>WSLないないのWindows開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>こちらの記事は、主に、CLI環境で開発していきたいという方にすごく向いているかと思う。</p>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="WSLないないのWindows開発環境構築"><a href="#WSLないないのWindows開発環境構築" class="headerlink" title="WSLないないのWindows開発環境構築"></a>WSLないないのWindows開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>こちらの記事は、主に、CLI環境で開発していきたいという方にすごく向いているかと思う。</p>
 <h2 id="ターミナルのアップデート"><a href="#ターミナルのアップデート" class="headerlink" title="ターミナルのアップデート"></a>ターミナルのアップデート</h2><p>まずは、今回の主役、ターミナルpwsh(powershell)をアップデート<br><a href="https://github.com/PowerShell/PowerShell/releases/">https://github.com/PowerShell/PowerShell/releases/</a><br>Latestの安定版をインストール<br>ダウンロードするときに、arm64かx64か、どれをダウンロードすればいいかわからない場合は、アーキテクチャーを調べよう。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msinfo32</span><br></pre></td></tr></table></figure>
 <p>システムの種類が<code>x64ベース PC</code>であれば、<br>x64のmsiのインストーラーをダウンロード &amp; 実行すればよい。</p>
@@ -170,25 +198,28 @@
 <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">winget install clink</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#%LocalAppData%\clink\starship.lua</span><br><span class="line"></span><br><span class="line">load(io.popen(&#x27;starship init cmd&#x27;):read(&quot;*a&quot;))()</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line">mkdir <span class="literal">-p</span> .config</span><br><span class="line"><span class="built_in">cd</span> .config</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.config/starship.toml</span><br></pre></td></tr></table></figure>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line">mkdir <span class="literal">-p</span> .config</span><br><span class="line"><span class="built_in">cd</span> .config</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/verazza/dotfiles/master/.config/starship.toml</span><br></pre></td></tr></table></figure>
 
 <h3 id="vimの設定"><a href="#vimの設定" class="headerlink" title="vimの設定"></a>vimの設定</h3><ul>
-<li>_vimrcを配置<br>私の場合、<a href="https://github.com/bella2391/dotfiles">dotfiles</a>にドットファイルをまとめているので、以下のコマンドで済む。</li>
+<li>_vimrcを配置<br>私の場合、<a href="https://github.com/verazza/dotfiles">dotfiles</a>にドットファイルをまとめているので、以下のコマンドで済む。</li>
 </ul>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.vimrc</span><br><span class="line"><span class="built_in">move</span> .vimrc _vimrc</span><br><span class="line">mkdir <span class="literal">-p</span> ~/.wsl</span><br><span class="line"><span class="built_in">cd</span> ~/.wsl/</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/bella2391/dotfiles/master/.wsl/.vimrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/verazza/dotfiles/master/.vimrc</span><br><span class="line"><span class="built_in">move</span> .vimrc _vimrc</span><br><span class="line">mkdir <span class="literal">-p</span> ~/.wsl</span><br><span class="line"><span class="built_in">cd</span> ~/.wsl/</span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/verazza/dotfiles/master/.wsl/.vimrc</span><br></pre></td></tr></table></figure>
 
 <h4 id="win32yank"><a href="#win32yank" class="headerlink" title="win32yank"></a>win32yank</h4><p><a href="https://github.com/equalsraf/win32yank">https://github.com/equalsraf/win32yank</a></p>
 <ul>
 <li>以下、vimでコピー&amp;ペーストを行うために<br>win32yankはコマンドベースの、レジスタに文字列を登録することのできるWindowsで使えるものだ。UNIX系のXディスプレイだと、<code>x-clip</code>やWayLandディスプレイだと、<code>wl-copy</code>などがある。</li>
 </ul>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">mkdir <span class="literal">-p</span> ~/.global/bin</span><br><span class="line"><span class="built_in">cd</span> ~/.global/bin/</span><br><span class="line"><span class="built_in">wget</span> https://github.com/equalsraf/win32yank/releases/download/v0.<span class="number">1.1</span>/win32yank<span class="literal">-x64</span>.zip</span><br><span class="line">unzip .\win32yank<span class="literal">-x64</span>.zip</span><br><span class="line"><span class="built_in">Remove-Item</span> .\LICENSE, .\README.md, .\win32yank<span class="literal">-x64</span>.zip</span><br></pre></td></tr></table></figure>
-<p>別途、<code>C:\Users\&lt;user&gt;\.global\bin</code>をユーザー環境変数にセットしておこう。なお、今回は、WSLないないだが、WSLありきの環境で使う場合は、<code>.exe</code>実行ファイルの入ったフォルダを環境変数のパスに通す必要がある。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/git/dotfiles/.global/bin/ <span class="comment"># 配置場所は任意</span></span><br><span class="line"><span class="built_in">wget</span> https://github.com/equalsraf/win32yank/releases/download/v0.<span class="number">1.1</span>/win32yank<span class="literal">-x64</span>.zip</span><br><span class="line">unzip .\win32yank<span class="literal">-x64</span>.zip</span><br><span class="line"><span class="built_in">Remove-Item</span> .\LICENSE, .\README.md, .\win32yank<span class="literal">-x64</span>.zip</span><br></pre></td></tr></table></figure>
+<p>別途、<code>exe</code>ファイルの入ったフォルダをユーザー環境変数にセットしておこう。なお、今回は、WSLないないだが、WSLありきの環境で使う場合は、<code>.exe</code>実行ファイルの入ったフォルダをWSLのディストロ内で環境変数のパスに通す必要がある。</p>
 <h3 id="ターミナルフォントを設定"><a href="#ターミナルフォントを設定" class="headerlink" title="ターミナルフォントを設定"></a>ターミナルフォントを設定</h3><p>私は、NerdFontが良いと思う。<br>nvimの<code>nvim-web-devicons</code>プラグインでも使える。<br><a href="https://www.nerdfonts.com/">https://www.nerdfonts.com/</a></p>
 <p>Agave.zipなどをダウンロード<br>エクスプローラーから展開して、フォント群(ttfなど)を選択、インストール<br>ターミナルプロファイルより適用</p>
 <h3 id="ターミナルキーマップを設定"><a href="#ターミナルキーマップを設定" class="headerlink" title="ターミナルキーマップを設定"></a>ターミナルキーマップを設定</h3><p>以下をターミナルプロファイルに追加。<br><code>Next tab</code>: <code>C-Shift-[</code><br><code>Previous tab</code>: <code>C-Shift-]</code><br><code>Split pane</code>: <code>C-Shift-Enter</code></p>
 <h3 id="Neovimの設定"><a href="#Neovimの設定" class="headerlink" title="Neovimの設定"></a>Neovimの設定</h3><p>私の場合、Githubにその設定ファイルがあるので、それをインポートするだけで済む。<br>Neovimの設定ファイルは、<code>C:\Users\&lt;user&gt;\AppData\Local\</code>に配置しなければいけない。</p>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cmdなら</span></span><br><span class="line"><span class="built_in">cd</span> %LOCALAPPDATA%</span><br><span class="line"><span class="comment"># pwshなら</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line"></span><br><span class="line">git clone https://github.com/bella2391/nvim.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cmdなら</span></span><br><span class="line"><span class="built_in">cd</span> %LOCALAPPDATA%</span><br><span class="line"><span class="comment"># pwshなら</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line"></span><br><span class="line">git clone https://github.com/verazza/nvim.git</span><br></pre></td></tr></table></figure>
 
+<h3 id="Scala環境構築"><a href="#Scala環境構築" class="headerlink" title="Scala環境構築"></a>Scala環境構築</h3><p>まずは、<code>coursier</code>が使えるように、以下の記事に沿って、コマンドラインでインストールしていく。<br><a href="https://get-coursier.io/docs/cli-installation">https://get-coursier.io/docs/cli-installation</a></p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># PowerShell</span></span><br><span class="line"><span class="built_in">Invoke-WebRequest</span> <span class="literal">-Uri</span> <span class="string">&quot;https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-win32.zip&quot;</span> <span class="literal">-OutFile</span> <span class="string">&quot;cs-x86_64-pc-win32.zip&quot;</span></span><br><span class="line"><span class="built_in">Expand-Archive</span> <span class="literal">-Path</span> <span class="string">&quot;cs-x86_64-pc-win32.zip&quot;</span> <span class="literal">-DestinationPath</span> .</span><br><span class="line"><span class="built_in">Rename-Item</span> <span class="literal">-Path</span> <span class="string">&quot;cs-x86_64-pc-win32.exe&quot;</span> <span class="literal">-NewName</span> <span class="string">&quot;cs.exe&quot;</span></span><br><span class="line"><span class="built_in">Remove-Item</span> <span class="literal">-Path</span> <span class="string">&quot;cs-x86_64-pc-win32.zip&quot;</span></span><br><span class="line">.\cs setup</span><br></pre></td></tr></table></figure>
+<p>これで、<code>coursier</code>コマンドが使えると思いきや…<br>なぜか使えない。シェルを再起動しても使えなかった。<br>これの解決方法は、<code>.bat</code>をユーザー環境変数に通せばいい。</p>
 <p>以下、私でないなら読み飛ばして構わない。</p>
 <h2 id="シンボリックリンク作成"><a href="#シンボリックリンク作成" class="headerlink" title="シンボリックリンク作成"></a>シンボリックリンク作成</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span></span><br><span class="line"><span class="built_in">mkdir</span> -p git</span><br></pre></td></tr></table></figure>
 <ul>
@@ -207,7 +238,14 @@
   <entry>
     <title>Website Terms and Policies</title>
     <url>/posts/41809/</url>
-    <content><![CDATA[<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>This post contains privacy policy and terms of service using at <a href="https://github.com/bella2391/fmc-web">fmc-web</a>.</p>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>This post contains privacy policy and terms of service using at <a href="https://github.com/verazza/fmc-web">fmc-web</a>.</p>
 <h2 id="Privacy-Policy"><a href="#Privacy-Policy" class="headerlink" title="Privacy Policy"></a>Privacy Policy</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">This Privacy Policy describes how we collect, use, and protect your personal information when you use our application (&quot;the App&quot;). By using the App, you agree to the practices described in this policy.</span><br><span class="line"></span><br><span class="line">1. Information We Collect</span><br><span class="line">We may collect the following information:</span><br><span class="line"></span><br><span class="line">Your X or Google username and profile information.</span><br><span class="line">Your email address (if you grant permission).</span><br><span class="line">2. How We Use Your Information</span><br><span class="line">The information we collect is used to:</span><br><span class="line"></span><br><span class="line">Authenticate your login to the App.</span><br><span class="line">Provide personalized services within the App.</span><br><span class="line">Contact you regarding important updates or changes to the App.</span><br><span class="line">3. Data Protection</span><br><span class="line">We are committed to protecting your personal information and use appropriate security measures to safeguard it.</span><br><span class="line"></span><br><span class="line">4. Third-Party Sharing</span><br><span class="line">We do not share your information with third parties except as required by law or necessary for the operation of the App.</span><br><span class="line"></span><br><span class="line">5. Contact Us</span><br><span class="line">If you have any questions about this Privacy Policy, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
 
 <h2 id="Terms-Of-Service"><a href="#Terms-Of-Service" class="headerlink" title="Terms Of Service"></a>Terms Of Service</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">These Terms of Service (&quot;Terms&quot;) govern your use of our application (&quot;the App&quot;). By accessing or using the App, you agree to comply with these Terms.</span><br><span class="line"></span><br><span class="line">1. Acceptable Use</span><br><span class="line">You must use the App in compliance with all applicable laws and regulations.</span><br><span class="line">You are responsible for any content you create or upload to the App.</span><br><span class="line">2. Prohibited Actions</span><br><span class="line">You may not:</span><br><span class="line"></span><br><span class="line">Use the App for any unlawful activities.</span><br><span class="line">Attempt to reverse-engineer or interfere with the App&#x27;s functionality.</span><br><span class="line">3. Limitation of Liability</span><br><span class="line">We are not responsible for any damages or losses resulting from your use of the App.</span><br><span class="line"></span><br><span class="line">4. Termination</span><br><span class="line">We reserve the right to suspend or terminate your access to the App for violations of these Terms.</span><br><span class="line"></span><br><span class="line">5. Changes to the Terms</span><br><span class="line">We may update these Terms from time to time. Continued use of the App constitutes acceptance of the updated Terms.</span><br><span class="line"></span><br><span class="line">6. Contact Us</span><br><span class="line">If you have any questions about these Terms, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
@@ -219,7 +257,14 @@
   <entry>
     <title>私的ArchLinux開発環境構築</title>
     <url>/posts/14653/</url>
-    <content><![CDATA[<h1 id="ArchLinux開発環境構築"><a href="#ArchLinux開発環境構築" class="headerlink" title="ArchLinux開発環境構築"></a>ArchLinux開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>以下の記事はとても長い。<br>なので、Dockerを使った、<a href="https://github.com/bella2391/devkit">devkit</a> によるコマンド一発で、私と同じ環境が作れるものを開発した。なお、ディストロ全体の容量は10GBほど。以下は、ほぼほぼdevkitの <a href="https://github.com/bella2391/devkit/blob/master/Dockerfile">Dockerfile</a> に記述している内容と同じである。</p>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="ArchLinux開発環境構築"><a href="#ArchLinux開発環境構築" class="headerlink" title="ArchLinux開発環境構築"></a>ArchLinux開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>以下の記事はとても長い。<br>なので、Dockerを使った、<a href="https://github.com/verazza/devkit">devkit</a> によるコマンド一発で、私と同じ環境が作れるものを開発した。なお、ディストロ全体の容量は10GBほど。以下は、ほぼほぼdevkitの <a href="https://github.com/verazza/devkit/blob/master/Dockerfile">Dockerfile</a> に記述している内容と同じである。</p>
 <h2 id="開発環境構築"><a href="#開発環境構築" class="headerlink" title="開発環境構築"></a>開発環境構築</h2><h3 id="ネット確認"><a href="#ネット確認" class="headerlink" title="ネット確認"></a>ネット確認</h3><p>応答があれば、ネットにつながっている。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ping google.com</span><br></pre></td></tr></table></figure>
 
@@ -279,7 +324,7 @@
 <p>詳しくは、以下を参照。<br><a href="https://www.rust-lang.org/ja/tools/install">https://www.rust-lang.org/ja/tools/install</a></p>
 <h3 id="dockerのインストール"><a href="#dockerのインストール" class="headerlink" title="dockerのインストール"></a>dockerのインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S docker docker-compose</span><br></pre></td></tr></table></figure>
 
-<h3 id="githubシークレットサービス"><a href="#githubシークレットサービス" class="headerlink" title="githubシークレットサービス"></a>githubシークレットサービス</h3><p><code>git-credential-manager</code>を使用すると、Gitでのリモートへのプッシュ時に、ブラウザによるログイン認証が行われる。<br>私は以下に書いてある内容を環境毎に入力するのが面倒だったので、専用のbashファイルを作って、実行するようにしてます。<br>興味のある方は、<a href="https://github.com/bella2391/dotfiles/blob/master/.global/bin/gauth">bella2391&#x2F;dotfiles:&#x2F;.global&#x2F;bin&#x2F;gauth</a> を見てみてください。</p>
+<h3 id="githubシークレットサービス"><a href="#githubシークレットサービス" class="headerlink" title="githubシークレットサービス"></a>githubシークレットサービス</h3><p><code>git-credential-manager</code>を使用すると、Gitでのリモートへのプッシュ時に、ブラウザによるログイン認証が行われる。<br>私は以下に書いてある内容を環境毎に入力するのが面倒だったので、専用のbashファイルを作って、実行するようにしてます。<br>興味のある方は、<a href="https://github.com/verazza/dotfiles/blob/master/.global/bin/gauth">verazza&#x2F;dotfiles:&#x2F;.global&#x2F;bin&#x2F;gauth</a> を見てみてください。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yay -Syu git-credential-manager-core-extras</span><br><span class="line">git config --global credential.helper <span class="string">&#x27;manager&#x27;</span></span><br><span class="line">git config --global credential.credentialStore secretservice</span><br></pre></td></tr></table></figure>
 <p>名前とメールアドレスを登録してなかったら以下</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;you@example.com&quot;</span></span><br><span class="line">git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br></pre></td></tr></table></figure>
@@ -293,7 +338,7 @@
 <p>次に、javaの後継と言われているあの言語、scala環境を作る。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -s <span class="string">&quot;https://get.sdkman.io&quot;</span> | bash</span><br><span class="line"><span class="built_in">source</span> ~/.sdkman/bin/sdkman-init.sh</span><br><span class="line">sdk install sbt</span><br><span class="line">yay -S coursier</span><br><span class="line">coursier setup -y</span><br><span class="line">coursier install metals</span><br></pre></td></tr></table></figure>
 <p><code>coursier</code>と<code>metals</code>は、Neovimの<a href="https://github.com/scalameta/nvim-metals">scalameta&#x2F;nvim-metals</a>プラグインで使う。</p>
-<h3 id="Neovimの設定"><a href="#Neovimの設定" class="headerlink" title="Neovimの設定"></a>Neovimの設定</h3><p>以下の私のNeovimの設定レポジトリを紹介する。ぜひ見てほしい。<br><a href="https://github.com/bella2391/nvim">https://github.com/bella2391/nvim</a></p>
+<h3 id="Neovimの設定"><a href="#Neovimの設定" class="headerlink" title="Neovimの設定"></a>Neovimの設定</h3><p>以下の私のNeovimの設定レポジトリを紹介する。ぜひ見てほしい。<br><a href="https://github.com/verazza/nvim">https://github.com/verazza/nvim</a></p>
 <h3 id="kittyの設定"><a href="#kittyの設定" class="headerlink" title="kittyの設定"></a>kittyの設定</h3><h4 id="w3mでブラウジング中に画像を表示するための設定"><a href="#w3mでブラウジング中に画像を表示するための設定" class="headerlink" title="w3mでブラウジング中に画像を表示するための設定"></a>w3mでブラウジング中に画像を表示するための設定</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S imagemagick</span><br></pre></td></tr></table></figure>
 <p>あとは、w3mの設定ファイルを変更する。<br><code>~/.w3m/config</code></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">inline_image_protocol 4</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
@@ -301,7 +346,7 @@
 <h3 id="nvmによるnpm-node環境構築"><a href="#nvmによるnpm-node環境構築" class="headerlink" title="nvmによるnpm/node環境構築"></a>nvmによるnpm/node環境構築</h3><p>例として、nvmバージョン<code>v0.40.2</code>で、nodeバージョン<code>22.12.0</code>をインストールする。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash</span><br><span class="line">nvm install 22.12.0</span><br><span class="line">nvm use 22.12.0</span><br></pre></td></tr></table></figure>
 
-<h3 id="dotfilesのインポート"><a href="#dotfilesのインポート" class="headerlink" title="dotfilesのインポート"></a>dotfilesのインポート</h3><p>私の環境では、設定ファイルはすべてGithubのレポジトリ: <a href="https://github.com/bella2391/dotfiles">bella2391&#x2F;dotfiles</a>にまとめているので、各ソフトウェアのドットファイルを移植するだけで済む。</p>
+<h3 id="dotfilesのインポート"><a href="#dotfilesのインポート" class="headerlink" title="dotfilesのインポート"></a>dotfilesのインポート</h3><p>私の環境では、設定ファイルはすべてGithubのレポジトリ: <a href="https://github.com/verazza/dotfiles">verazza&#x2F;dotfiles</a>にまとめているので、各ソフトウェアのドットファイルを移植するだけで済む。</p>
 <h3 id="GUI環境の構築（任意）"><a href="#GUI環境の構築（任意）" class="headerlink" title="GUI環境の構築（任意）"></a>GUI環境の構築（任意）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S acpid xorg sddm plasma konsole</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> sddm</span><br></pre></td></tr></table></figure>
 <p>私は、KDE PlasmaしかArchLinuxでは試したことないが、使いやすいと感じている。同時にダウンロードしておいたほうがいいものを紹介しよう。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S power-profiles-daemon</span><br></pre></td></tr></table></figure>
