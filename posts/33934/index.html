@@ -7,7 +7,7 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://cdn.discordapp.com/avatars/829173846069608451/c60d959c284060a41912d2cb769d49da.png">
 <meta property="article:published_time" content="2025-03-28T14:59:00.000Z">
-<meta property="article:modified_time" content="2025-04-09T11:06:57.785Z">
+<meta property="article:modified_time" content="2025-04-16T21:43:36.597Z">
 <meta property="article:author" content="verazza">
 <meta property="article:tag" content="python, gemini">
 <meta name="twitter:card" content="summary">
@@ -18,7 +18,7 @@
   "url": "https://verazza.f5.si/posts/33934/",
   "image": "https://cdn.discordapp.com/avatars/829173846069608451/c60d959c284060a41912d2cb769d49da.png",
   "datePublished": "2025-03-28T14:59:00.000Z",
-  "dateModified": "2025-04-09T11:06:57.785Z",
+  "dateModified": "2025-04-16T21:43:36.597Z",
   "author": [
     {
       "@type": "Person",
@@ -160,7 +160,7 @@
   isToc: true,
   pageType: 'post'
 }</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="verazza blog" type="application/atom+xml">
-</head><body><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="../../index.html"><span class="site-name">verazza blog</span></a><a class="nav-page-title" href="../../index.html"><span class="site-name">Github:glyzerレポジトリを立ち上げるまで</span></a></span><div id="menus"></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Github:glyzerレポジトリを立ち上げるまで</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">作成日</span><time class="post-meta-date-created" datetime="2025-03-28T14:59:00.000Z" title="作成日 2025-03-28 23:59:00">2025-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新日</span><time class="post-meta-date-updated" datetime="2025-04-09T11:06:57.785Z" title="更新日 2025-04-09 20:06:57">2025-04-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閲覧数:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><!--
+</head><body><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="../../index.html"><span class="site-name">verazza blog</span></a><a class="nav-page-title" href="../../index.html"><span class="site-name">Github:glyzerレポジトリを立ち上げるまで</span></a></span><div id="menus"></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Github:glyzerレポジトリを立ち上げるまで</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">作成日</span><time class="post-meta-date-created" datetime="2025-03-28T14:59:00.000Z" title="作成日 2025-03-28 23:59:00">2025-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新日</span><time class="post-meta-date-updated" datetime="2025-04-16T21:43:36.597Z" title="更新日 2025-04-17 06:43:36">2025-04-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閲覧数:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><!--
 Copyright (c) 2025 verazza
 This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
 See the LICENSE file in the source directory for details.
@@ -175,7 +175,7 @@ See the LICENSE file in the source directory for details.
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gemini-cli embed db out.db --files .,*.py</span><br><span class="line"></span><br><span class="line">gemini-cli embed db out.db --files-list question.txt</span><br></pre></td></tr></table></figure>
 <p>PythonはあくまでGeminiAPIを使って、ソースを食わせる役割。別に言語は何でもいいと思う</p>
-<h2 id="現在思考中のもの"><a href="#現在思考中のもの" class="headerlink" title="現在思考中のもの"></a>現在思考中のもの</h2><p>以下、<a target="_blank" rel="noopener" href="https://github.com/verazza/Ai-Analyzer/blob/master/setup.py">glyzer:&#x2F;setup.py</a> の説明<br>gemini-cliコマンドより、検索対象となるコード、それに対する質問となるコード(平文でもコードとみなす)に対して、それらいくつものファイル群を、数値ベクトル・埋め込みベクトルに変換(dbファイルにあたる)したものを、NumPy配列に変換する。単にdbファイルにエクスポートし、数値ベクトルにしても、それらは単なるバイナリデータに過ぎず、特定のデータ型・構造を持たないため、直接的に数値演算が可能になるNumPy配列に変換する必要がある。これにより、データを特定のデータ型(整数、不動小数点など)を持つ多次元配列として解釈できる。これより、コサイン類似性より比較する。コサイン類似度の高いコード片をソートし、出力する。また、その類似性よりわかったコードスニップより、geminiと応答する。</p>
+<h2 id="現在思考中のもの"><a href="#現在思考中のもの" class="headerlink" title="現在思考中のもの"></a>現在思考中のもの</h2><p>以下、<a target="_blank" rel="noopener" href="https://github.com/verazza/glyzer/blob/master/setup.py">glyzer:&#x2F;setup.py</a> の説明<br>gemini-cliコマンドより、検索対象となるコード、それに対する質問となるコード(平文でもコードとみなす)に対して、それらいくつものファイル群を、数値ベクトル・埋め込みベクトルに変換(dbファイルにあたる)したものを、NumPy配列に変換する。単にdbファイルにエクスポートし、数値ベクトルにしても、それらは単なるバイナリデータに過ぎず、特定のデータ型・構造を持たないため、直接的に数値演算が可能になるNumPy配列に変換する必要がある。これにより、データを特定のデータ型(整数、不動小数点など)を持つ多次元配列として解釈できる。これより、コサイン類似性より比較する。コサイン類似度の高いコード片をソートし、出力する。また、その類似性よりわかったコードスニップより、geminiと応答する。</p>
 <p>なぜデータベース(<code>*.db</code>)形式なのか。</p>
 <ul>
 <li>大量の埋め込みベクトルが効率的に保存・管理ができる</li>
