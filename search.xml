@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Github:glyzerレポジトリを立ち上げるまで</title>
+    <url>/posts/33934/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h2 id="回顧録"><a href="#回顧録" class="headerlink" title="回顧録"></a>回顧録</h2><p>ある日、CLI環境を構築する際に、新たなTUI（ターミナルインターフェース）アプリが必要だなと感じた。<br>それは、ChatGPTやGeminiに代表されるAI-Chatアプリだ。それらがターミナルから使えればいいなと思ったのが事の始まりである。<br>そこでgemini-cliというものを知り、GeminiAPIKeyが必要になることを知る。そこからGeminiAPIに興味を持ち、手始めにpythonに接続することで、広範囲の分析が可能になることを知った。<br>これより、プロジェクト<a href="https://github.com/verazza/glyzer">glyzer</a>の始まりである。</p>
+<h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><p><a href="https://github.com/eliben/gemini-cli">eliben&#x2F;gemini-cli</a></p>
+<h2 id="このプロジェクトの理想"><a href="#このプロジェクトの理想" class="headerlink" title="このプロジェクトの理想"></a>このプロジェクトの理想</h2><p>Neovimでの開発中に、特定のキーマップより(<code>&lt;leader&gt;gm</code>など)現在のファイルに対して、geminiと応答を図る。また、入力でディレクトリパスを指定して、その中の指定拡張子よりdbファイルにまとめ、それをソースに、触媒に、栄養にし、応答を図る。<br>2つの環境の類似性より、分析を依頼する。</p>
+<h2 id="gemini-cliに関するコマンド"><a href="#gemini-cliに関するコマンド" class="headerlink" title="gemini-cliに関するコマンド"></a>gemini-cliに関するコマンド</h2><ul>
+<li>ファイル群をdbファイル形式にする<br>これはgeminiが食う。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gemini-cli embed db out.db --files .,*.py</span><br><span class="line"></span><br><span class="line">gemini-cli embed db out.db --files-list question.txt</span><br></pre></td></tr></table></figure>
+<p>PythonはあくまでGeminiAPIを使って、ソースを食わせる役割。別に言語は何でもいいと思う</p>
+<h2 id="現在思考中のもの"><a href="#現在思考中のもの" class="headerlink" title="現在思考中のもの"></a>現在思考中のもの</h2><p>以下、<a href="https://github.com/verazza/glyzer/blob/master/setup.py">glyzer:&#x2F;setup.py</a> の説明<br>gemini-cliコマンドより、検索対象となるコード、それに対する質問となるコード(平文でもコードとみなす)に対して、それらいくつものファイル群を、数値ベクトル・埋め込みベクトルに変換(dbファイルにあたる)したものを、NumPy配列に変換する。単にdbファイルにエクスポートし、数値ベクトルにしても、それらは単なるバイナリデータに過ぎず、特定のデータ型・構造を持たないため、直接的に数値演算が可能になるNumPy配列に変換する必要がある。これにより、データを特定のデータ型(整数、不動小数点など)を持つ多次元配列として解釈できる。これより、コサイン類似性より比較する。コサイン類似度の高いコード片をソートし、出力する。また、その類似性よりわかったコードスニップより、geminiと応答する。</p>
+<p>なぜデータベース(<code>*.db</code>)形式なのか。</p>
+<ul>
+<li>大量の埋め込みベクトルが効率的に保存・管理ができる</li>
+<li>インデックス機能より検索が容易である</li>
+<li>データベースを容易に持ち運び、共有できる</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>Gemini API Docs<br><a href="https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb">https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>python, gemini</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</title>
+    <url>/posts/34194/</url>
+    <content><![CDATA[<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Windows, DualBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NginxにModSecurityを適用</title>
+    <url>/posts/39499/</url>
+    <content><![CDATA[<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure>
+
+<h3 id="ModSecurityのダウンロードとビルド"><a href="#ModSecurityのダウンロードとビルド" class="headerlink" title="ModSecurityのダウンロードとビルド"></a>ModSecurityのダウンロードとビルド</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 -b v3.0.13 https://github.com/SpiderLabs/ModSecurity</span><br><span class="line"><span class="built_in">cd</span> ModSecurity</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">./build.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="nginxのソースコードのダウンロードとビルド"><a href="#nginxのソースコードのダウンロードとビルド" class="headerlink" title="nginxのソースコードのダウンロードとビルド"></a>nginxのソースコードのダウンロードとビルド</h3><p><a href="http://nginx.org/download/">http://nginx.org/download/</a><br>ここより、最新のバージョンのnginxをダウンロードする<br>ここでもいいかも<br><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-[latest nginx version].tar.gz</span><br><span class="line">tar zxvf nginx-[latest nginx version].tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-[latest nginx version]</span><br><span class="line"></span><br><span class="line">./configure --with-compat --add-dynamic-module=../ModSecurity-nginx</span><br><span class="line">make modules</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> objs/ngx_http_modsecurity_module.so /etc/nginx/modules</span><br></pre></td></tr></table></figure>
+
+<h3 id="RuleSetをダウンロードと配置"><a href="#RuleSetをダウンロードと配置" class="headerlink" title="RuleSetをダウンロードと配置"></a>RuleSetをダウンロードと配置</h3><p><a href="https://github.com/coreruleset/coreruleset">https://github.com/coreruleset/coreruleset</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v[latest version].tar.gz</span><br><span class="line">tar -xzvf v[latest version].tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/modsec/coreruleset</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/crs-setup.conf.example /etc/nginx/modsec/coreruleset/crs-setup.conf</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/rules /etc/nginx/modsec/coreruleset/</span><br></pre></td></tr></table></figure>
+
+<h3 id="必要なファイルのダウンロード"><a href="#必要なファイルのダウンロード" class="headerlink" title="必要なファイルのダウンロード"></a>必要なファイルのダウンロード</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended -O /etc/nginx/modsec/modsecurity.conf</span><br><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/unicode.mapping -O /etc/nginx/modsec/unicode.mapping</span><br></pre></td></tr></table></figure>
+
+<h3 id="Nginx設定ファイルを編集"><a href="#Nginx設定ファイルを編集" class="headerlink" title="Nginx設定ファイルを編集"></a>Nginx設定ファイルを編集</h3><p><code>/etc/nginx/nginx.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Nginx, ModSecurity</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ArchLinuxでCLI開発環境を整える</title>
     <url>/posts/54214/</url>
     <content><![CDATA[<!--
@@ -72,36 +139,28 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>Github:glyzerレポジトリを立ち上げるまで</title>
-    <url>/posts/33934/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
+    <title>NginxにSSLを導入</title>
+    <url>/posts/21623/</url>
+    <content><![CDATA[<h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure>
 
-<h2 id="回顧録"><a href="#回顧録" class="headerlink" title="回顧録"></a>回顧録</h2><p>ある日、CLI環境を構築する際に、新たなTUI（ターミナルインターフェース）アプリが必要だなと感じた。<br>それは、ChatGPTやGeminiに代表されるAI-Chatアプリだ。それらがターミナルから使えればいいなと思ったのが事の始まりである。<br>そこでgemini-cliというものを知り、GeminiAPIKeyが必要になることを知る。そこからGeminiAPIに興味を持ち、手始めにpythonに接続することで、広範囲の分析が可能になることを知った。<br>これより、プロジェクト<a href="https://github.com/verazza/glyzer">glyzer</a>の始まりである。</p>
-<h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><p><a href="https://github.com/eliben/gemini-cli">eliben&#x2F;gemini-cli</a></p>
-<h2 id="このプロジェクトの理想"><a href="#このプロジェクトの理想" class="headerlink" title="このプロジェクトの理想"></a>このプロジェクトの理想</h2><p>Neovimでの開発中に、特定のキーマップより(<code>&lt;leader&gt;gm</code>など)現在のファイルに対して、geminiと応答を図る。また、入力でディレクトリパスを指定して、その中の指定拡張子よりdbファイルにまとめ、それをソースに、触媒に、栄養にし、応答を図る。<br>2つの環境の類似性より、分析を依頼する。</p>
-<h2 id="gemini-cliに関するコマンド"><a href="#gemini-cliに関するコマンド" class="headerlink" title="gemini-cliに関するコマンド"></a>gemini-cliに関するコマンド</h2><ul>
-<li>ファイル群をdbファイル形式にする<br>これはgeminiが食う。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gemini-cli embed db out.db --files .,*.py</span><br><span class="line"></span><br><span class="line">gemini-cli embed db out.db --files-list question.txt</span><br></pre></td></tr></table></figure>
-<p>PythonはあくまでGeminiAPIを使って、ソースを食わせる役割。別に言語は何でもいいと思う</p>
-<h2 id="現在思考中のもの"><a href="#現在思考中のもの" class="headerlink" title="現在思考中のもの"></a>現在思考中のもの</h2><p>以下、<a href="https://github.com/verazza/glyzer/blob/master/setup.py">glyzer:&#x2F;setup.py</a> の説明<br>gemini-cliコマンドより、検索対象となるコード、それに対する質問となるコード(平文でもコードとみなす)に対して、それらいくつものファイル群を、数値ベクトル・埋め込みベクトルに変換(dbファイルにあたる)したものを、NumPy配列に変換する。単にdbファイルにエクスポートし、数値ベクトルにしても、それらは単なるバイナリデータに過ぎず、特定のデータ型・構造を持たないため、直接的に数値演算が可能になるNumPy配列に変換する必要がある。これにより、データを特定のデータ型(整数、不動小数点など)を持つ多次元配列として解釈できる。これより、コサイン類似性より比較する。コサイン類似度の高いコード片をソートし、出力する。また、その類似性よりわかったコードスニップより、geminiと応答する。</p>
-<p>なぜデータベース(<code>*.db</code>)形式なのか。</p>
-<ul>
-<li>大量の埋め込みベクトルが効率的に保存・管理ができる</li>
-<li>インデックス機能より検索が容易である</li>
-<li>データベースを容易に持ち運び、共有できる</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>Gemini API Docs<br><a href="https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb">https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb</a></li>
-</ul>
+<h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure>
+<p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo certbot --nginx -d keyp.f5.si,kishax.f5.si</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>python, gemini</tag>
+        <tag>Nginx, SSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OBSやVBCableを使わずに音声を内部ルーティング</title>
+    <url>/posts/54038/</url>
+    <content><![CDATA[<h1 id="OBSから脱却"><a href="#OBSから脱却" class="headerlink" title="OBSから脱却"></a>OBSから脱却</h1><p>jackパッケージでサウンドの内部ルーティングが容易に。</p>
+<h1 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pipewire pipewire-pulse pipewire-jack qjackctl</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl --user restart pipewire</span><br><span class="line">systemctl --user restart pipewire-pulse</span><br><span class="line">systemctl --user restart pipewire-media-session</span><br></pre></td></tr></table></figure>
+<p>jack, setupのinterfaceに持ってるオーディオインターフェースを選択<br>あとは、グラフよりルーティング<br><img src="/images/jack_graph.png" alt="jack_graph"></p>
+]]></content>
+      <tags>
+        <tag>OBS, VBCable, jack, ArchLinux</tag>
       </tags>
   </entry>
   <entry>
@@ -118,20 +177,8 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>OBSやVBCableを使わずに音声を内部ルーティング</title>
-    <url>/posts/54038/</url>
-    <content><![CDATA[<h1 id="OBSから脱却"><a href="#OBSから脱却" class="headerlink" title="OBSから脱却"></a>OBSから脱却</h1><p>jackパッケージでサウンドの内部ルーティングが容易に。</p>
-<h1 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pipewire pipewire-pulse pipewire-jack qjackctl</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl --user restart pipewire</span><br><span class="line">systemctl --user restart pipewire-pulse</span><br><span class="line">systemctl --user restart pipewire-media-session</span><br></pre></td></tr></table></figure>
-<p>jack, setupのinterfaceに持ってるオーディオインターフェースを選択<br>あとは、グラフよりルーティング<br><img src="/images/jack_graph.png" alt="jack_graph"></p>
-]]></content>
-      <tags>
-        <tag>OBS, VBCable, jack, ArchLinux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WSLを使う！ Windows開発環境構築</title>
-    <url>/posts/17845/</url>
+    <title>Website Terms and Policies</title>
+    <url>/posts/41809/</url>
     <content><![CDATA[<!--
 Copyright (c) 2025 verazza
 This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
@@ -139,50 +186,13 @@ See the LICENSE file in the source directory for details.
 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
 -->
 
-<h1 id="WSLありきのWindows開発環境構築"><a href="#WSLありきのWindows開発環境構築" class="headerlink" title="WSLありきのWindows開発環境構築"></a>WSLありきのWindows開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>この記事は、WSL導入とWSL-Archを使うまでのロードマップを知ることができる。また、WSLにArch導入後の開発環境構築には、通常のネイティブにブートすることを想定した<a href="https://verazza.github.io/posts/14653/">私的ArchLinux開発環境構築</a>の内容を含む。</p>
-<p>ということで、まずは、WSLを使えるようにしていく。</p>
-<h2 id="WSLの導入"><a href="#WSLの導入" class="headerlink" title="WSLの導入"></a>WSLの導入</h2><p>コントロールパネル＞プログラム＞プログラムと機能＞Windowsの機能の有効化または無効化より、Linux用Windowsサブシステム/仮想マシンプラットフォームにチェックを入れ、Windowsを再起動しよう。<br>再起動後には、コマンドラインでwslコマンドが使えるようになっているはずだ。</p>
-<h2 id="WSLのディストロ選び"><a href="#WSLのディストロ選び" class="headerlink" title="WSLのディストロ選び"></a>WSLのディストロ選び</h2><p>今回は、私の普段開発で、またはサーバー機として、愛用しているArchLinuxをWSLで使うものとしよう。他のディストロを探したい場合は、以下を実行すると、WSLで使えるディストロを知ることができる。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wsl --list --online</span><br></pre></td></tr></table></figure>
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>This post contains privacy policy and terms of service using at <a href="https://github.com/verazza/kishax-web">kishax-web</a>.</p>
+<h2 id="Privacy-Policy"><a href="#Privacy-Policy" class="headerlink" title="Privacy Policy"></a>Privacy Policy</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">This Privacy Policy describes how we collect, use, and protect your personal information when you use our application (&quot;the App&quot;). By using the App, you agree to the practices described in this policy.</span><br><span class="line"></span><br><span class="line">1. Information We Collect</span><br><span class="line">We may collect the following information:</span><br><span class="line"></span><br><span class="line">Your X or Google username and profile information.</span><br><span class="line">Your email address (if you grant permission).</span><br><span class="line">2. How We Use Your Information</span><br><span class="line">The information we collect is used to:</span><br><span class="line"></span><br><span class="line">Authenticate your login to the App.</span><br><span class="line">Provide personalized services within the App.</span><br><span class="line">Contact you regarding important updates or changes to the App.</span><br><span class="line">3. Data Protection</span><br><span class="line">We are committed to protecting your personal information and use appropriate security measures to safeguard it.</span><br><span class="line"></span><br><span class="line">4. Third-Party Sharing</span><br><span class="line">We do not share your information with third parties except as required by law or necessary for the operation of the App.</span><br><span class="line"></span><br><span class="line">5. Contact Us</span><br><span class="line">If you have any questions about this Privacy Policy, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
 
-
-<h2 id="WSLでArchを使うまで"><a href="#WSLでArchを使うまで" class="headerlink" title="WSLでArchを使うまで"></a>WSLでArchを使うまで</h2><h3 id="インポートする方法3選"><a href="#インポートする方法3選" class="headerlink" title="インポートする方法3選"></a>インポートする方法3選</h3><p>先に、TARBALLの説明をしておく。<br>TARBALLとは、&#x2F;etc, &#x2F;homeなどLinuxの設定ファイルを含む、Linuxディストリビューションを構成する様々なファイルやディレクトリをまとめた圧縮ファイルのことだ。なお、カーネルは含まない。<br>（1）TARBALLをインストールして、任意に、必要ファイルを編集し、再圧縮をかけることで、WSLにインポートする方法<br>（2）ArchLinux公式が提供しているもので、すでに、インポート形式に特化した.wslファイルを落としてきて、それをインポートする方法。これはファイルを編集する手間がないので早い<br><a href="https://wiki.archlinux.org/title/Install_Arch_Linux_on_WSL">https://wiki.archlinux.org/title/Install_Arch_Linux_on_WSL</a><br>（3）ArchWSLという名前のGitプロジェクトで、これはArch.exeを管理者権限で実行するだけで、インポートが完了する方法。これは、サードパーティ製のツールにあたる。<br><a href="https://github.com/yuk7/ArchWSL">https://github.com/yuk7/ArchWSL</a></p>
-<p>今回は、ArchLinuxを使うために、(1)を紹介するが、私は、(1)をした結果、やっぱり、(2)の方が簡単だと思った。だから、(2)の方が好みだし、推奨する。</p>
-<h3 id="手順（2）"><a href="#手順（2）" class="headerlink" title="手順（2）"></a>手順（2）</h3><h4 id="Ubuntuのインストール"><a href="#Ubuntuのインストール" class="headerlink" title="Ubuntuのインストール"></a>Ubuntuのインストール</h4><p>まずは、Ubuntuをインストールしよう。<br>あれ、Archじゃないのと思った人はいるかとは思うが、次の手順のTARBALLを解凍したり、圧縮したりするのは、やっぱりLinuxでやったほうがいいと思うのだ…。（Windowsでやる方法を知らない勢）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wsl --install -d Ubuntu</span><br></pre></td></tr></table></figure>
-<h4 id="Ubuntuターミナルに入る"><a href="#Ubuntuターミナルに入る" class="headerlink" title="Ubuntuターミナルに入る"></a>Ubuntuターミナルに入る</h4><p>インストールが完了したら、以下のコマンドでUbuntuターミナルに入ろう。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wsl -d Ubuntu</span><br></pre></td></tr></table></figure>
-
-<h4 id="TARBALLのインストール"><a href="#TARBALLのインストール" class="headerlink" title="TARBALLのインストール"></a>TARBALLのインストール</h4><p>ArchLinuxのTARBALLを配信しているミラーサーバーは色々あるが、今回は以下を使用する。<br><a href="http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/iso/">http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/iso/</a></p>
-<p>ここで、注意なのが、WSLは、<code>/mnt/c</code>よりCドライブをマウントするのがデフォだが、間違っても、以下の作業を、</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /mnt/c/path/to/work</span><br><span class="line">tar ....</span><br></pre></td></tr></table></figure>
-<p>などと、Ubuntuターミナルの中で、Cドライブにアクセスすることは避けよう。私も最初は、そうしたが、そうでないときと比べて、TARBALLの解凍および圧縮がとてつもなく遅かったのだ。</p>
-<p>それを吟味して、以下、<code>wget</code>コマンドを使用して、最新のTARBALLを落としてこよう。<code>archlinux-bootstrap-2025.03.01-x86_64.tar.zst</code>の部分は、各自、最新のものを上のミラーサーバーからリンクをコピーして読み替えてほしい。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/iso/2025.03.01/archlinux-bootstrap-2025.03.01-x86_64.tar.zst</span><br></pre></td></tr></table></figure>
-
-<h4 id="TARBALLの解凍-圧縮-再圧縮"><a href="#TARBALLの解凍-圧縮-再圧縮" class="headerlink" title="TARBALLの解凍&#x2F;圧縮&#x2F;再圧縮"></a>TARBALLの解凍&#x2F;圧縮&#x2F;再圧縮</h4><p>次に、<code>.tar.zst</code>ファイルを解凍するため、<code>zstd</code>パッケージをインストールする。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install zstd</span><br></pre></td></tr></table></figure>
-<p>そして、TARBALLの解凍、必要ファイル編集、再圧縮を行う。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unzstd archlinux-bootstrap-2025.03.01-x86_64.tar.zst</span><br><span class="line"></span><br><span class="line">tar -xvf archlinux-bootstrap-2025.03.01-x86_64.tar</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> root.x86_64/</span><br><span class="line"><span class="comment"># Japan以下をコメントアウト</span></span><br><span class="line">nano etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line"><span class="comment"># TARBALLの再圧縮 </span></span><br><span class="line">tar -czvf root.tar.gz *</span><br><span class="line"></span><br><span class="line"><span class="comment"># wslにマウントされているWindowsのCドライブにarchフォルダを作成。</span></span><br><span class="line"><span class="comment"># 別に、エクスプローラーからC:\wsl\archを作っても構わない。</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/c/wsl/arch</span><br><span class="line"><span class="built_in">cp</span> root.tar.gz /mnt/c/wsl/arch</span><br></pre></td></tr></table></figure>
-
-<h4 id="WSLにインポート"><a href="#WSLにインポート" class="headerlink" title="WSLにインポート"></a>WSLにインポート</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wsl --import ArchLinux C:\wsl\arch C:\wsl\arch\root.tar.gz</span><br><span class="line"># 確認</span><br><span class="line">wsl -l -v</span><br></pre></td></tr></table></figure>
-
-<h2 id="WSL2にアップデート"><a href="#WSL2にアップデート" class="headerlink" title="WSL2にアップデート"></a>WSL2にアップデート</h2><p>もしかしたら、インストールしてきたディストロがWSL2で実行されていないかもしれない。特に、GUIアプリケーションをディストロ内で実行し、それをWindows側でディスプレイとして閲覧したい場合は、WSL2にアップデートするのがおすすめだ。ちなみに、その機能を<code>WSLg</code>という。<br>以下のコマンドで、WSL2になっているかが確認できる。各ディストロの<code>VERSION</code>の箇所が<code>2</code>になっていれば、OKだ。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wsl -l -v</span><br><span class="line"><span class="comment"># VERSIONが2になっていなかったら</span></span><br><span class="line"><span class="comment"># アップデート前にすべて停止させておく</span></span><br><span class="line">wsl --shutdown</span><br><span class="line">wsl --update</span><br><span class="line">wsl --set-default-version 2</span><br><span class="line"><span class="comment"># これらを実行し、再度</span></span><br><span class="line">wsl -l -v</span><br><span class="line"><span class="comment"># 2になっているはず。</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="wsl-confの作成"><a href="#wsl-confの作成" class="headerlink" title="wsl.confの作成"></a><code>wsl.conf</code>の作成</h2><p><code>/etc/wsl.conf</code>に配置しよう。<br>設定方法は様々だが、例として以下を紹介する。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[user]</span><br><span class="line">default=verazza</span><br><span class="line"></span><br><span class="line">[boot]</span><br><span class="line">systemd = true</span><br><span class="line">initTimeout = 1000</span><br><span class="line"></span><br><span class="line">[automount]</span><br><span class="line">enable = true</span><br><span class="line">options = &quot;metadata&quot;</span><br><span class="line">mountFsTab = true</span><br><span class="line"></span><br><span class="line">[wsl2]</span><br><span class="line">localhostForwarding = true</span><br><span class="line">memory = 11GB</span><br><span class="line"></span><br><span class="line">[interop]</span><br><span class="line">appendWindowsPath = false</span><br></pre></td></tr></table></figure>
-<p>おそらく一番重要なのは、<code>boot.systemd</code>と<code>interop.appendWindowsPath</code>のキーだと思う。<code>appendWindowsPath</code>は、Windowsの環境変数をWSLのディストロでも引き継ぐかどうか決められる。これを<code>true</code>にすると、起動が遅かったりするので、私は<code>false</code>にしてる。また、<code>boot.initTimeout</code>は起動を早めるが少々注意が必要。詳しくは、以下を参照。<br><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconf">https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconf</a></p>
-<h2 id="wslconfigの作成"><a href="#wslconfigの作成" class="headerlink" title=".wslconfigの作成"></a><code>.wslconfig</code>の作成</h2><p>これは、<code>C:\Users\&lt;user&gt;\.wslconfig</code>に配置しよう。<br>以下、例として</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[wsl2]</span><br><span class="line">guiApplications = true</span><br><span class="line">kernelCommandLine = cgroup_no_v1=all</span><br></pre></td></tr></table></figure>
-<p>主に、ディストロ内で実行されたGUIアプリケーションをWindows側のディスプレイで見るための設定だ。詳しくは、以下を参照。<br><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconfig">https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconfig</a></p>
-<h2 id="WSLにArchインポート後"><a href="#WSLにArchインポート後" class="headerlink" title="WSLにArchインポート後"></a>WSLにArchインポート後</h2><p>ここからは、WSL-Archでの開発環境構築を行う。<br>ほとんどネイティブにArchをブートしているときに実行するものと大差ない。ということで、それは別記事に書こうと思う。<a href="https://verazza.github.io/posts/14653/">私的ArchLinux開発環境構築</a>を見てほしい。また、各種WSLディストロのソフトウェアを利用中に、クリップボードにコピーしたければ、<a href="https://verazza.github.io/posts/47392/#win32yank">win32yankについて</a>を参照してほしい。</p>
-<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>WSLはとてもいいと思います。第一に、メインOSが荒れないし、第二に、エクスポート・インポートも容易にできる。正直、実機で色々なOSを試してきた身としては、WSLの凄みにもう少し早く気づきたかったですね。</p>
-<h2 id="WSLの高みに近づくために"><a href="#WSLの高みに近づくために" class="headerlink" title="WSLの高みに近づくために"></a>WSLの高みに近づくために</h2><p>例えば、完全なデスクトップ環境をWSLのディストロでも作れるんじゃないかと考える人もいると思う。私もその一人だ。実際に以下を試してみたが、WSL-Ubuntuで、ほんとうにGnomeデスクトップが立ち上がった。<br><a href="https://gist.github.com/tdcosta100/7def60bccc8ae32cf9cacb41064b1c0f">https://gist.github.com/tdcosta100/7def60bccc8ae32cf9cacb41064b1c0f</a></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zenn.dev/kyoh86/articles/4bf6513aabe517">https://zenn.dev/kyoh86/articles/4bf6513aabe517</a><br><a href="https://blog.yukirii.dev/wsl2-arch-linux/">https://blog.yukirii.dev/wsl2-arch-linux/</a><br><a href="https://zenn.dev/artemit/articles/63e073d53179ae">https://zenn.dev/artemit/articles/63e073d53179ae</a></p>
+<h2 id="Terms-Of-Service"><a href="#Terms-Of-Service" class="headerlink" title="Terms Of Service"></a>Terms Of Service</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">These Terms of Service (&quot;Terms&quot;) govern your use of our application (&quot;the App&quot;). By accessing or using the App, you agree to comply with these Terms.</span><br><span class="line"></span><br><span class="line">1. Acceptable Use</span><br><span class="line">You must use the App in compliance with all applicable laws and regulations.</span><br><span class="line">You are responsible for any content you create or upload to the App.</span><br><span class="line">2. Prohibited Actions</span><br><span class="line">You may not:</span><br><span class="line"></span><br><span class="line">Use the App for any unlawful activities.</span><br><span class="line">Attempt to reverse-engineer or interfere with the App&#x27;s functionality.</span><br><span class="line">3. Limitation of Liability</span><br><span class="line">We are not responsible for any damages or losses resulting from your use of the App.</span><br><span class="line"></span><br><span class="line">4. Termination</span><br><span class="line">We reserve the right to suspend or terminate your access to the App for violations of these Terms.</span><br><span class="line"></span><br><span class="line">5. Changes to the Terms</span><br><span class="line">We may update these Terms from time to time. Continued use of the App constitutes acceptance of the updated Terms.</span><br><span class="line"></span><br><span class="line">6. Contact Us</span><br><span class="line">If you have any questions about these Terms, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>Neovim, Windows, WSL, 開発環境</tag>
+        <tag>google,x</tag>
       </tags>
   </entry>
   <entry>
@@ -242,7 +252,8 @@ See the LICENSE file in the source directory for details.
 <h3 id="Neovimの設定"><a href="#Neovimの設定" class="headerlink" title="Neovimの設定"></a>Neovimの設定</h3><p>私の場合、Githubにその設定ファイルがあるので、それをインポートするだけで済む。<br>Neovimの設定ファイルは、<code>C:\Users\&lt;user&gt;\AppData\Local\</code>に配置しなければいけない。</p>
 <figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cmdなら</span></span><br><span class="line"><span class="built_in">cd</span> %LOCALAPPDATA%</span><br><span class="line"><span class="comment"># pwshなら</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$env:LOCALAPPDATA</span></span><br><span class="line"></span><br><span class="line">git clone https://github.com/verazza/nvim.git</span><br></pre></td></tr></table></figure>
 
-<h3 id="Scala環境構築"><a href="#Scala環境構築" class="headerlink" title="Scala環境構築"></a>Scala環境構築</h3><p>まずは、<code>coursier</code>が使えるように、以下の記事に沿って、コマンドラインでインストールしていく。<br><a href="https://get-coursier.io/docs/cli-installation">https://get-coursier.io/docs/cli-installation</a></p>
+<h3 id="Java-Scala環境構築"><a href="#Java-Scala環境構築" class="headerlink" title="Java&#x2F;Scala環境構築"></a>Java&#x2F;Scala環境構築</h3><h4 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">choco install oracle17jdk</span><br></pre></td></tr></table></figure>
+<h4 id="Scala"><a href="#Scala" class="headerlink" title="Scala"></a>Scala</h4><p>まずは、<code>coursier</code>が使えるように、以下の記事に沿って、コマンドラインでインストールしていく。<br><a href="https://get-coursier.io/docs/cli-installation">https://get-coursier.io/docs/cli-installation</a></p>
 <figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># PowerShell</span></span><br><span class="line"><span class="built_in">Invoke-WebRequest</span> <span class="literal">-Uri</span> <span class="string">&quot;https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-win32.zip&quot;</span> <span class="literal">-OutFile</span> <span class="string">&quot;cs-x86_64-pc-win32.zip&quot;</span></span><br><span class="line"><span class="built_in">Expand-Archive</span> <span class="literal">-Path</span> <span class="string">&quot;cs-x86_64-pc-win32.zip&quot;</span> <span class="literal">-DestinationPath</span> .</span><br><span class="line"><span class="built_in">Rename-Item</span> <span class="literal">-Path</span> <span class="string">&quot;cs-x86_64-pc-win32.exe&quot;</span> <span class="literal">-NewName</span> <span class="string">&quot;cs.exe&quot;</span></span><br><span class="line"><span class="built_in">Remove-Item</span> <span class="literal">-Path</span> <span class="string">&quot;cs-x86_64-pc-win32.zip&quot;</span></span><br><span class="line">.\cs setup</span><br></pre></td></tr></table></figure>
 <p>これで、<code>coursier</code>コマンドが使えると思いきや…<br>なぜか使えない。シェルを再起動しても使えなかった。<br>これの解決方法は、<code>.bat</code>をユーザー環境変数に通せばいい。</p>
 <p>以下、私でないなら読み飛ばして構わない。</p>
@@ -261,8 +272,34 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>Website Terms and Policies</title>
-    <url>/posts/41809/</url>
+    <title>私的MySQLチートシート</title>
+    <url>/posts/49418/</url>
+    <content><![CDATA[<h1 id="MySQLチートシート"><a href="#MySQLチートシート" class="headerlink" title="MySQLチートシート"></a>MySQLチートシート</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S mysql mysql-workbench</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/lib/mysql/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R mysql:mysql /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R 750 /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now mysqld</span><br></pre></td></tr></table></figure>
+
+<h2 id="もし、dbeaverなどでrootにログインできなかったら、"><a href="#もし、dbeaverなどでrootにログインできなかったら、" class="headerlink" title="もし、dbeaverなどでrootにログインできなかったら、"></a>もし、<code>dbeaver</code>などでrootにログインできなかったら、</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> mysql.user <span class="keyword">SET</span> authentication_string<span class="operator">=</span>PASSWORD(<span class="string">&#x27;新しいパスワード&#x27;</span>), plugin<span class="operator">=</span><span class="string">&#x27;mysql_native_password&#x27;</span> <span class="keyword">WHERE</span> <span class="keyword">User</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
+
+<h2 id="データインポートするのが遅かったら"><a href="#データインポートするのが遅かったら" class="headerlink" title="データインポートするのが遅かったら"></a>データインポートするのが遅かったら</h2><p>一番早いのは、ログインしてから</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">use [database];</span><br><span class="line">source <span class="operator">~</span><span class="operator">/</span>file.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysql-import-export中の進捗をログで表示"><a href="#mysql-import-export中の進捗をログで表示" class="headerlink" title="mysql import, export中の進捗をログで表示"></a>mysql import, export中の進捗をログで表示</h2><h3 id="インストール-1"><a href="#インストール-1" class="headerlink" title="インストール"></a>インストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pv</span><br></pre></td></tr></table></figure>
+
+<h3 id="実際に使ってみる"><a href="#実際に使ってみる" class="headerlink" title="実際に使ってみる"></a>実際に使ってみる</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># import</span></span><br><span class="line">pv ~/downloads/forum.sql | <span class="built_in">sudo</span> mariadb --max_allowed_packet=64M web</span><br><span class="line"></span><br><span class="line"><span class="comment"># export</span></span><br><span class="line">mysqldump --max_allowed_packet=64M -u root -p web | pv &gt; ~/downloads/forum.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="exportで失敗しないために"><a href="#exportで失敗しないために" class="headerlink" title="exportで失敗しないために"></a>exportで失敗しないために</h2><p><code>mysqldump</code>コマンドの引数で、<code>max_allowed_packet</code>を指定する</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysqldump --max_allowed_packet=64M -u root -p web &gt; ~/path/to/sample.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="auth-socketプラグインを使っているかどうか検証"><a href="#auth-socketプラグインを使っているかどうか検証" class="headerlink" title="auth_socketプラグインを使っているかどうか検証"></a><code>auth_socket</code>プラグインを使っているかどうか検証</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">user</span>, host, plugin <span class="keyword">FROM</span> mysql.user <span class="keyword">WHERE</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;mc&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="INSERTでSELECT参照"><a href="#INSERTでSELECT参照" class="headerlink" title="INSERTでSELECT参照"></a>INSERTでSELECT参照</h2><p>例として、<code>members</code>テーブルのものを<code>users</code>テーブルに移植する。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> users (name, password, email)</span><br><span class="line"><span class="keyword">SELECT</span> name, password, email</span><br><span class="line"><span class="keyword">FROM</span> members;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>CheatSheet, MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WSLを使う！ Windows開発環境構築</title>
+    <url>/posts/17845/</url>
     <content><![CDATA[<!--
 Copyright (c) 2025 verazza
 This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
@@ -270,13 +307,116 @@ See the LICENSE file in the source directory for details.
 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
 -->
 
-<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>This post contains privacy policy and terms of service using at <a href="https://github.com/verazza/kishax-web">kishax-web</a>.</p>
-<h2 id="Privacy-Policy"><a href="#Privacy-Policy" class="headerlink" title="Privacy Policy"></a>Privacy Policy</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">This Privacy Policy describes how we collect, use, and protect your personal information when you use our application (&quot;the App&quot;). By using the App, you agree to the practices described in this policy.</span><br><span class="line"></span><br><span class="line">1. Information We Collect</span><br><span class="line">We may collect the following information:</span><br><span class="line"></span><br><span class="line">Your X or Google username and profile information.</span><br><span class="line">Your email address (if you grant permission).</span><br><span class="line">2. How We Use Your Information</span><br><span class="line">The information we collect is used to:</span><br><span class="line"></span><br><span class="line">Authenticate your login to the App.</span><br><span class="line">Provide personalized services within the App.</span><br><span class="line">Contact you regarding important updates or changes to the App.</span><br><span class="line">3. Data Protection</span><br><span class="line">We are committed to protecting your personal information and use appropriate security measures to safeguard it.</span><br><span class="line"></span><br><span class="line">4. Third-Party Sharing</span><br><span class="line">We do not share your information with third parties except as required by law or necessary for the operation of the App.</span><br><span class="line"></span><br><span class="line">5. Contact Us</span><br><span class="line">If you have any questions about this Privacy Policy, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
+<h1 id="WSLありきのWindows開発環境構築"><a href="#WSLありきのWindows開発環境構築" class="headerlink" title="WSLありきのWindows開発環境構築"></a>WSLありきのWindows開発環境構築</h1><h2 id="コメント"><a href="#コメント" class="headerlink" title="コメント"></a>コメント</h2><p>この記事は、WSL導入とWSL-Archを使うまでのロードマップを知ることができる。また、WSLにArch導入後の開発環境構築には、通常のネイティブにブートすることを想定した<a href="https://verazza.github.io/posts/14653/">私的ArchLinux開発環境構築</a>の内容を含む。</p>
+<p>ということで、まずは、WSLを使えるようにしていく。</p>
+<h2 id="WSLの導入"><a href="#WSLの導入" class="headerlink" title="WSLの導入"></a>WSLの導入</h2><p>コントロールパネル＞プログラム＞プログラムと機能＞Windowsの機能の有効化または無効化より、Linux用Windowsサブシステム/仮想マシンプラットフォームにチェックを入れ、Windowsを再起動しよう。<br>再起動後には、コマンドラインでwslコマンドが使えるようになっているはずだ。</p>
+<h2 id="WSLのディストロ選び"><a href="#WSLのディストロ選び" class="headerlink" title="WSLのディストロ選び"></a>WSLのディストロ選び</h2><p>今回は、私の普段開発で、またはサーバー機として、愛用しているArchLinuxをWSLで使うものとしよう。他のディストロを探したい場合は、以下を実行すると、WSLで使えるディストロを知ることができる。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wsl --list --online</span><br></pre></td></tr></table></figure>
 
-<h2 id="Terms-Of-Service"><a href="#Terms-Of-Service" class="headerlink" title="Terms Of Service"></a>Terms Of Service</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">These Terms of Service (&quot;Terms&quot;) govern your use of our application (&quot;the App&quot;). By accessing or using the App, you agree to comply with these Terms.</span><br><span class="line"></span><br><span class="line">1. Acceptable Use</span><br><span class="line">You must use the App in compliance with all applicable laws and regulations.</span><br><span class="line">You are responsible for any content you create or upload to the App.</span><br><span class="line">2. Prohibited Actions</span><br><span class="line">You may not:</span><br><span class="line"></span><br><span class="line">Use the App for any unlawful activities.</span><br><span class="line">Attempt to reverse-engineer or interfere with the App&#x27;s functionality.</span><br><span class="line">3. Limitation of Liability</span><br><span class="line">We are not responsible for any damages or losses resulting from your use of the App.</span><br><span class="line"></span><br><span class="line">4. Termination</span><br><span class="line">We reserve the right to suspend or terminate your access to the App for violations of these Terms.</span><br><span class="line"></span><br><span class="line">5. Changes to the Terms</span><br><span class="line">We may update these Terms from time to time. Continued use of the App constitutes acceptance of the updated Terms.</span><br><span class="line"></span><br><span class="line">6. Contact Us</span><br><span class="line">If you have any questions about these Terms, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
+
+<h2 id="WSLでArchを使うまで"><a href="#WSLでArchを使うまで" class="headerlink" title="WSLでArchを使うまで"></a>WSLでArchを使うまで</h2><h3 id="インポートする方法3選"><a href="#インポートする方法3選" class="headerlink" title="インポートする方法3選"></a>インポートする方法3選</h3><p>先に、TARBALLの説明をしておく。<br>TARBALLとは、&#x2F;etc, &#x2F;homeなどLinuxの設定ファイルを含む、Linuxディストリビューションを構成する様々なファイルやディレクトリをまとめた圧縮ファイルのことだ。なお、カーネルは含まない。<br>（1）TARBALLをインストールして、任意に、必要ファイルを編集し、再圧縮をかけることで、WSLにインポートする方法<br>（2）ArchLinux公式が提供しているもので、すでに、インポート形式に特化した.wslファイルを落としてきて、それをインポートする方法。これはファイルを編集する手間がないので早い<br><a href="https://wiki.archlinux.org/title/Install_Arch_Linux_on_WSL">https://wiki.archlinux.org/title/Install_Arch_Linux_on_WSL</a><br>（3）ArchWSLという名前のGitプロジェクトで、これはArch.exeを管理者権限で実行するだけで、インポートが完了する方法。これは、サードパーティ製のツールにあたる。<br><a href="https://github.com/yuk7/ArchWSL">https://github.com/yuk7/ArchWSL</a></p>
+<p>今回は、ArchLinuxを使うために、(1)を紹介するが、私は、(1)をした結果、やっぱり、(2)の方が簡単だと思った。だから、(2)の方が好みだし、推奨する。</p>
+<h3 id="手順（2）"><a href="#手順（2）" class="headerlink" title="手順（2）"></a>手順（2）</h3><h4 id="Ubuntuのインストール"><a href="#Ubuntuのインストール" class="headerlink" title="Ubuntuのインストール"></a>Ubuntuのインストール</h4><p>まずは、Ubuntuをインストールしよう。<br>あれ、Archじゃないのと思った人はいるかとは思うが、次の手順のTARBALLを解凍したり、圧縮したりするのは、やっぱりLinuxでやったほうがいいと思うのだ…。（Windowsでやる方法を知らない勢）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wsl --install -d Ubuntu</span><br></pre></td></tr></table></figure>
+<h4 id="Ubuntuターミナルに入る"><a href="#Ubuntuターミナルに入る" class="headerlink" title="Ubuntuターミナルに入る"></a>Ubuntuターミナルに入る</h4><p>インストールが完了したら、以下のコマンドでUbuntuターミナルに入ろう。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wsl -d Ubuntu</span><br></pre></td></tr></table></figure>
+
+<h4 id="TARBALLのインストール"><a href="#TARBALLのインストール" class="headerlink" title="TARBALLのインストール"></a>TARBALLのインストール</h4><p>ArchLinuxのTARBALLを配信しているミラーサーバーは色々あるが、今回は以下を使用する。<br><a href="http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/iso/">http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/iso/</a></p>
+<p>ここで、注意なのが、WSLは、<code>/mnt/c</code>よりCドライブをマウントするのがデフォだが、間違っても、以下の作業を、</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /mnt/c/path/to/work</span><br><span class="line">tar ....</span><br></pre></td></tr></table></figure>
+<p>などと、Ubuntuターミナルの中で、Cドライブにアクセスすることは避けよう。私も最初は、そうしたが、そうでないときと比べて、TARBALLの解凍および圧縮がとてつもなく遅かったのだ。</p>
+<p>それを吟味して、以下、<code>wget</code>コマンドを使用して、最新のTARBALLを落としてこよう。<code>archlinux-bootstrap-2025.03.01-x86_64.tar.zst</code>の部分は、各自、最新のものを上のミラーサーバーからリンクをコピーして読み替えてほしい。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/iso/2025.03.01/archlinux-bootstrap-2025.03.01-x86_64.tar.zst</span><br></pre></td></tr></table></figure>
+
+<h4 id="TARBALLの解凍-圧縮-再圧縮"><a href="#TARBALLの解凍-圧縮-再圧縮" class="headerlink" title="TARBALLの解凍&#x2F;圧縮&#x2F;再圧縮"></a>TARBALLの解凍&#x2F;圧縮&#x2F;再圧縮</h4><p>次に、<code>.tar.zst</code>ファイルを解凍するため、<code>zstd</code>パッケージをインストールする。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install zstd</span><br></pre></td></tr></table></figure>
+<p>そして、TARBALLの解凍、必要ファイル編集、再圧縮を行う。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unzstd archlinux-bootstrap-2025.03.01-x86_64.tar.zst</span><br><span class="line"></span><br><span class="line">tar -xvf archlinux-bootstrap-2025.03.01-x86_64.tar</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> root.x86_64/</span><br><span class="line"><span class="comment"># Japan以下をコメントアウト</span></span><br><span class="line">nano etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line"><span class="comment"># TARBALLの再圧縮 </span></span><br><span class="line">tar -czvf root.tar.gz *</span><br><span class="line"></span><br><span class="line"><span class="comment"># wslにマウントされているWindowsのCドライブにarchフォルダを作成。</span></span><br><span class="line"><span class="comment"># 別に、エクスプローラーからC:\wsl\archを作っても構わない。</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/c/wsl/arch</span><br><span class="line"><span class="built_in">cp</span> root.tar.gz /mnt/c/wsl/arch</span><br></pre></td></tr></table></figure>
+
+<h4 id="WSLにインポート"><a href="#WSLにインポート" class="headerlink" title="WSLにインポート"></a>WSLにインポート</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wsl --import ArchLinux C:\wsl\arch C:\wsl\arch\root.tar.gz</span><br><span class="line"># 確認</span><br><span class="line">wsl -l -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="WSL2にアップデート"><a href="#WSL2にアップデート" class="headerlink" title="WSL2にアップデート"></a>WSL2にアップデート</h2><p>もしかしたら、インストールしてきたディストロがWSL2で実行されていないかもしれない。特に、GUIアプリケーションをディストロ内で実行し、それをWindows側でディスプレイとして閲覧したい場合は、WSL2にアップデートするのがおすすめだ。ちなみに、その機能を<code>WSLg</code>という。<br>以下のコマンドで、WSL2になっているかが確認できる。各ディストロの<code>VERSION</code>の箇所が<code>2</code>になっていれば、OKだ。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wsl -l -v</span><br><span class="line"><span class="comment"># VERSIONが2になっていなかったら</span></span><br><span class="line"><span class="comment"># アップデート前にすべて停止させておく</span></span><br><span class="line">wsl --shutdown</span><br><span class="line">wsl --update</span><br><span class="line">wsl --set-default-version 2</span><br><span class="line"><span class="comment"># これらを実行し、再度</span></span><br><span class="line">wsl -l -v</span><br><span class="line"><span class="comment"># 2になっているはず。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="wsl-confの作成"><a href="#wsl-confの作成" class="headerlink" title="wsl.confの作成"></a><code>wsl.conf</code>の作成</h2><p><code>/etc/wsl.conf</code>に配置しよう。<br>設定方法は様々だが、例として以下を紹介する。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[user]</span><br><span class="line">default=verazza</span><br><span class="line"></span><br><span class="line">[boot]</span><br><span class="line">systemd = true</span><br><span class="line">initTimeout = 1000</span><br><span class="line"></span><br><span class="line">[automount]</span><br><span class="line">enable = true</span><br><span class="line">options = &quot;metadata&quot;</span><br><span class="line">mountFsTab = true</span><br><span class="line"></span><br><span class="line">[wsl2]</span><br><span class="line">localhostForwarding = true</span><br><span class="line">memory = 11GB</span><br><span class="line"></span><br><span class="line">[interop]</span><br><span class="line">appendWindowsPath = false</span><br></pre></td></tr></table></figure>
+<p>おそらく一番重要なのは、<code>boot.systemd</code>と<code>interop.appendWindowsPath</code>のキーだと思う。<code>appendWindowsPath</code>は、Windowsの環境変数をWSLのディストロでも引き継ぐかどうか決められる。これを<code>true</code>にすると、起動が遅かったりするので、私は<code>false</code>にしてる。また、<code>boot.initTimeout</code>は起動を早めるが少々注意が必要。詳しくは、以下を参照。<br><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconf">https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconf</a></p>
+<h2 id="wslconfigの作成"><a href="#wslconfigの作成" class="headerlink" title=".wslconfigの作成"></a><code>.wslconfig</code>の作成</h2><p>これは、<code>C:\Users\&lt;user&gt;\.wslconfig</code>に配置しよう。<br>以下、例として</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[wsl2]</span><br><span class="line">guiApplications = true</span><br><span class="line">kernelCommandLine = cgroup_no_v1=all</span><br></pre></td></tr></table></figure>
+<p>主に、ディストロ内で実行されたGUIアプリケーションをWindows側のディスプレイで見るための設定だ。詳しくは、以下を参照。<br><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconfig">https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config#wslconfig</a></p>
+<h2 id="WSLにArchインポート後"><a href="#WSLにArchインポート後" class="headerlink" title="WSLにArchインポート後"></a>WSLにArchインポート後</h2><p>ここからは、WSL-Archでの開発環境構築を行う。<br>ほとんどネイティブにArchをブートしているときに実行するものと大差ない。ということで、それは別記事に書こうと思う。<a href="https://verazza.github.io/posts/14653/">私的ArchLinux開発環境構築</a>を見てほしい。また、各種WSLディストロのソフトウェアを利用中に、クリップボードにコピーしたければ、<a href="https://verazza.github.io/posts/47392/#win32yank">win32yankについて</a>を参照してほしい。</p>
+<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>WSLはとてもいいと思います。第一に、メインOSが荒れないし、第二に、エクスポート・インポートも容易にできる。正直、実機で色々なOSを試してきた身としては、WSLの凄みにもう少し早く気づきたかったですね。</p>
+<h2 id="WSLの高みに近づくために"><a href="#WSLの高みに近づくために" class="headerlink" title="WSLの高みに近づくために"></a>WSLの高みに近づくために</h2><p>例えば、完全なデスクトップ環境をWSLのディストロでも作れるんじゃないかと考える人もいると思う。私もその一人だ。実際に以下を試してみたが、WSL-Ubuntuで、ほんとうにGnomeデスクトップが立ち上がった。<br><a href="https://gist.github.com/tdcosta100/7def60bccc8ae32cf9cacb41064b1c0f">https://gist.github.com/tdcosta100/7def60bccc8ae32cf9cacb41064b1c0f</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zenn.dev/kyoh86/articles/4bf6513aabe517">https://zenn.dev/kyoh86/articles/4bf6513aabe517</a><br><a href="https://blog.yukirii.dev/wsl2-arch-linux/">https://blog.yukirii.dev/wsl2-arch-linux/</a><br><a href="https://zenn.dev/artemit/articles/63e073d53179ae">https://zenn.dev/artemit/articles/63e073d53179ae</a></p>
 ]]></content>
       <tags>
-        <tag>google,x</tag>
+        <tag>Neovim, Windows, WSL, 開発環境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>私的コマンドチートシート</title>
+    <url>/posts/24514/</url>
+    <content><![CDATA[<h1 id="コマンドチートシート"><a href="#コマンドチートシート" class="headerlink" title="コマンドチートシート"></a>コマンドチートシート</h1><h2 id="シンボリックリンクを通す"><a href="#シンボリックリンクを通す" class="headerlink" title="シンボリックリンクを通す"></a>シンボリックリンクを通す</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /path/to/target /path/to/wanna/to/place</span><br></pre></td></tr></table></figure>
+
+<h2 id="特定の階層以下のファイルのパスと内容を表示"><a href="#特定の階層以下のファイルのパスと内容を表示" class="headerlink" title="特定の階層以下のファイルのパスと内容を表示"></a>特定の階層以下のファイルのパスと内容を表示</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find path/to/directory/ -<span class="built_in">type</span> f -<span class="built_in">exec</span> sh -c <span class="string">&#x27;echo &quot;==== &#123;&#125; ====&quot;; cat &#123;&#125;&#x27;</span> \;</span><br></pre></td></tr></table></figure>
+
+<h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><h3 id="静的ファイルからヘッダ情報取得"><a href="#静的ファイルからヘッダ情報取得" class="headerlink" title="静的ファイルからヘッダ情報取得"></a>静的ファイルからヘッダ情報取得</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -I https://example.com/path/to/sample.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><h3 id="再帰的にfindでディレクトリに対してchmod-755"><a href="#再帰的にfindでディレクトリに対してchmod-755" class="headerlink" title="再帰的にfindでディレクトリに対してchmod 755"></a>再帰的にfindでディレクトリに対してchmod 755</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> find /mc -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<h3 id="すべてのファイルをチェック"><a href="#すべてのファイルをチェック" class="headerlink" title="すべてのファイルをチェック"></a>すべてのファイルをチェック</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /path/to/directory -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<h3 id="階層1"><a href="#階層1" class="headerlink" title="階層1"></a>階層1</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /path/to/directory -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<h3 id="その階層のすべてのファイルに対し、実行"><a href="#その階層のすべてのファイルに対し、実行" class="headerlink" title="その階層のすべてのファイルに対し、実行"></a>その階層のすべてのファイルに対し、実行</h3><p>(ここでは、cpコマンドでbackupディレクトリへ)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">cp</span> &#123;&#125; ./backup \;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ファイルの文字コードを出力"><a href="#ファイルの文字コードを出力" class="headerlink" title="ファイルの文字コードを出力"></a>ファイルの文字コードを出力</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">file -i /path/to/file</span><br></pre></td></tr></table></figure>
+
+<h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">zip -r FILENAME.zip FILE_DIR</span><br></pre></td></tr></table></figure>
+<p><a href="https://qiita.com/seyself/items/ae47f1c22a7375a736f3">https://qiita.com/seyself/items/ae47f1c22a7375a736f3</a></p>
+<p>除外</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">zip -r sample.zip sample/ -x <span class="string">&quot;sample/libraries/*&quot;</span> <span class="string">&quot;sample/log/*&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="一個前のコマンドを出力"><a href="#一個前のコマンドを出力" class="headerlink" title="一個前のコマンドを出力"></a>一個前のコマンドを出力</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">history</span> | <span class="built_in">tail</span> -n 1</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="built_in">fc</span> -<span class="built_in">ln</span> -1</span><br></pre></td></tr></table></figure>
+
+<h2 id="一個前のコマンドを再実行"><a href="#一個前のコマンドを再実行" class="headerlink" title="一個前のコマンドを再実行"></a>一個前のコマンドを再実行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">!!</span><br></pre></td></tr></table></figure>
+
+<h2 id="acl"><a href="#acl" class="headerlink" title="acl"></a>acl</h2><p><code>mc</code>ユーザーに対して、<code>/mc/server</code>フォルダおよびそのサブディレクトリとファイルに対する全アクセス権限を再帰的に付与する。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -R -m u:mc:rwx /mc/server:</span><br></pre></td></tr></table></figure>
+<p><code>mc</code>ユーザーに対するデフォルトACLを設定し、将来的に新しく作成されるファイルやディレクトリにも同じ権限が適用されるようにする。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -dR -m u:mc:rwx /mc/server</span><br></pre></td></tr></table></figure>
+
+<h2 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tail</span> -f /var/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+
+<h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tree -I <span class="string">&quot;*.html|*.png|*.jpg&quot;</span></span><br><span class="line"></span><br><span class="line">tree -I venv/</span><br><span class="line">tree -I node_modules/</span><br></pre></td></tr></table></figure>
+
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><h3 id="特定のコミットを削除するには"><a href="#特定のコミットを削除するには" class="headerlink" title="特定のコミットを削除するには"></a>特定のコミットを削除するには</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git revert &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+<h3 id="リモートURLをSSHに変更"><a href="#リモートURLをSSHに変更" class="headerlink" title="リモートURLをSSHに変更"></a>リモートURLをSSHに変更</h3><p>まず、鍵を生成し、それをデプロイ</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;&quot;</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line">git remote set-url origin git@github.com:&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="リモートURLをHTTPSに変更"><a href="#リモートURLをHTTPSに変更" class="headerlink" title="リモートURLをHTTPSに変更"></a>リモートURLをHTTPSに変更</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>
+<h3 id="特定のブランチ名を指定してクローン"><a href="#特定のブランチ名を指定してクローン" class="headerlink" title="特定のブランチ名を指定してクローン"></a>特定のブランチ名を指定してクローン</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b &lt;branch-name&gt; &lt;clone-url&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="access-tokenをローカルに設定"><a href="#access-tokenをローカルに設定" class="headerlink" title="access-tokenをローカルに設定"></a>access-tokenをローカルに設定</h3><p>リポジトリの<code>HTTPS URL</code>にアクセストークンを埋め込む。<br>元の<code>HTTPS URL</code>が<code>https://github.com/username/repository.git</code>の場合、以下の形式に変更する。<br><code>https://your_access_token@github.com/username/repository.git</code><br><code>your_access_token</code>は、生成したアクセストークンに置き換えよう。</p>
+<p>最後に、リモートURLを変更</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin https://your_access_token@github.com/username/repository.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="タグを作ってプッシュ"><a href="#タグを作ってプッシュ" class="headerlink" title="タグを作ってプッシュ"></a>タグを作ってプッシュ</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag -a v1.0 -m <span class="string">&#x27;version 1.0&#x27;</span></span><br><span class="line">git push origin v1.0</span><br></pre></td></tr></table></figure>
+<p>リモートで使ったタグを削除するとき、ローカルには残っているため、それを削除する</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git tag -d &lt;tag-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="新規リモートに対して特定ブランチへのプッシュまで"><a href="#新規リモートに対して特定ブランチへのプッシュまで" class="headerlink" title="新規リモートに対して特定ブランチへのプッシュまで"></a>新規リモートに対して特定ブランチへのプッシュまで</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git checkout -b scala</span><br></pre></td></tr></table></figure>
+
+<h3 id="新規リモートをWEBで作った後、プッシュまで"><a href="#新規リモートをWEBで作った後、プッシュまで" class="headerlink" title="新規リモートをWEBで作った後、プッシュまで"></a>新規リモートをWEBで作った後、プッシュまで</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# updater&quot;</span> &gt;&gt; README.md</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M master</span><br><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="remote-urlを確認するには"><a href="#remote-urlを確認するには" class="headerlink" title="remote-urlを確認するには"></a>remote-urlを確認するには</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h3 id="git-configのリセット"><a href="#git-configのリセット" class="headerlink" title="git configのリセット"></a>git configのリセット</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> credential.helper</span><br><span class="line">git config --global --<span class="built_in">unset</span> credential.credentialStore</span><br></pre></td></tr></table></figure>
+<h3 id="submoduleを一括インポートする"><a href="#submoduleを一括インポートする" class="headerlink" title="submoduleを一括インポートする"></a>submoduleを一括インポートする</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure>
+<h3 id="リモートブランチ名をリネームしたときにローカルでやること"><a href="#リモートブランチ名をリネームしたときにローカルでやること" class="headerlink" title="リモートブランチ名をリネームしたときにローカルでやること"></a>リモートブランチ名をリネームしたときにローカルでやること</h3><p>例えば、<code>sample</code>ブランチを<code>master</code>ブランチに変更したとする。</p>
+<h4 id="ローカルのsampleブランチをmasterにリネームする"><a href="#ローカルのsampleブランチをmasterにリネームする" class="headerlink" title="ローカルのsampleブランチをmasterにリネームする"></a>ローカルの<code>sample</code>ブランチを<code>master</code>にリネームする</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m sample master</span><br></pre></td></tr></table></figure>
+<h4 id="リモート追跡ブランチを更新する"><a href="#リモート追跡ブランチを更新する" class="headerlink" title="リモート追跡ブランチを更新する"></a>リモート追跡ブランチを更新する</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-head origin -a</span><br></pre></td></tr></table></figure>
+<h4 id="追跡ブランチを設定する"><a href="#追跡ブランチを設定する" class="headerlink" title="追跡ブランチを設定する"></a>追跡ブランチを設定する</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch --set-upstream-to=origin/master master</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>ArchLinux, Command, CheatSheet</tag>
       </tags>
   </entry>
   <entry>
