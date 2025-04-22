@@ -1,73 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Github:glyzerレポジトリを立ち上げるまで</title>
-    <url>/posts/33934/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h2 id="回顧録"><a href="#回顧録" class="headerlink" title="回顧録"></a>回顧録</h2><p>ある日、CLI環境を構築する際に、新たなTUI（ターミナルインターフェース）アプリが必要だなと感じた。<br>それは、ChatGPTやGeminiに代表されるAI-Chatアプリだ。それらがターミナルから使えればいいなと思ったのが事の始まりである。<br>そこでgemini-cliというものを知り、GeminiAPIKeyが必要になることを知る。そこからGeminiAPIに興味を持ち、手始めにpythonに接続することで、広範囲の分析が可能になることを知った。<br>これより、プロジェクト<a href="https://github.com/verazza/glyzer">glyzer</a>の始まりである。</p>
-<h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><p><a href="https://github.com/eliben/gemini-cli">eliben&#x2F;gemini-cli</a></p>
-<h2 id="このプロジェクトの理想"><a href="#このプロジェクトの理想" class="headerlink" title="このプロジェクトの理想"></a>このプロジェクトの理想</h2><p>Neovimでの開発中に、特定のキーマップより(<code>&lt;leader&gt;gm</code>など)現在のファイルに対して、geminiと応答を図る。また、入力でディレクトリパスを指定して、その中の指定拡張子よりdbファイルにまとめ、それをソースに、触媒に、栄養にし、応答を図る。<br>2つの環境の類似性より、分析を依頼する。</p>
-<h2 id="gemini-cliに関するコマンド"><a href="#gemini-cliに関するコマンド" class="headerlink" title="gemini-cliに関するコマンド"></a>gemini-cliに関するコマンド</h2><ul>
-<li>ファイル群をdbファイル形式にする<br>これはgeminiが食う。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gemini-cli embed db out.db --files .,*.py</span><br><span class="line"></span><br><span class="line">gemini-cli embed db out.db --files-list question.txt</span><br></pre></td></tr></table></figure>
-<p>PythonはあくまでGeminiAPIを使って、ソースを食わせる役割。別に言語は何でもいいと思う</p>
-<h2 id="現在思考中のもの"><a href="#現在思考中のもの" class="headerlink" title="現在思考中のもの"></a>現在思考中のもの</h2><p>以下、<a href="https://github.com/verazza/glyzer/blob/master/setup.py">glyzer:&#x2F;setup.py</a> の説明<br>gemini-cliコマンドより、検索対象となるコード、それに対する質問となるコード(平文でもコードとみなす)に対して、それらいくつものファイル群を、数値ベクトル・埋め込みベクトルに変換(dbファイルにあたる)したものを、NumPy配列に変換する。単にdbファイルにエクスポートし、数値ベクトルにしても、それらは単なるバイナリデータに過ぎず、特定のデータ型・構造を持たないため、直接的に数値演算が可能になるNumPy配列に変換する必要がある。これにより、データを特定のデータ型(整数、不動小数点など)を持つ多次元配列として解釈できる。これより、コサイン類似性より比較する。コサイン類似度の高いコード片をソートし、出力する。また、その類似性よりわかったコードスニップより、geminiと応答する。</p>
-<p>なぜデータベース(<code>*.db</code>)形式なのか。</p>
-<ul>
-<li>大量の埋め込みベクトルが効率的に保存・管理ができる</li>
-<li>インデックス機能より検索が容易である</li>
-<li>データベースを容易に持ち運び、共有できる</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>Gemini API Docs<br><a href="https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb">https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb</a></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>python, gemini</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</title>
-    <url>/posts/34194/</url>
-    <content><![CDATA[<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Windows, DualBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NginxにModSecurityを適用</title>
-    <url>/posts/39499/</url>
-    <content><![CDATA[<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
-
-<h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure>
-
-<h3 id="ModSecurityのダウンロードとビルド"><a href="#ModSecurityのダウンロードとビルド" class="headerlink" title="ModSecurityのダウンロードとビルド"></a>ModSecurityのダウンロードとビルド</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 -b v3.0.13 https://github.com/SpiderLabs/ModSecurity</span><br><span class="line"><span class="built_in">cd</span> ModSecurity</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">./build.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
-
-<h3 id="nginxのソースコードのダウンロードとビルド"><a href="#nginxのソースコードのダウンロードとビルド" class="headerlink" title="nginxのソースコードのダウンロードとビルド"></a>nginxのソースコードのダウンロードとビルド</h3><p><a href="http://nginx.org/download/">http://nginx.org/download/</a><br>ここより、最新のバージョンのnginxをダウンロードする<br>ここでもいいかも<br><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-[latest nginx version].tar.gz</span><br><span class="line">tar zxvf nginx-[latest nginx version].tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-[latest nginx version]</span><br><span class="line"></span><br><span class="line">./configure --with-compat --add-dynamic-module=../ModSecurity-nginx</span><br><span class="line">make modules</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> objs/ngx_http_modsecurity_module.so /etc/nginx/modules</span><br></pre></td></tr></table></figure>
-
-<h3 id="RuleSetをダウンロードと配置"><a href="#RuleSetをダウンロードと配置" class="headerlink" title="RuleSetをダウンロードと配置"></a>RuleSetをダウンロードと配置</h3><p><a href="https://github.com/coreruleset/coreruleset">https://github.com/coreruleset/coreruleset</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v[latest version].tar.gz</span><br><span class="line">tar -xzvf v[latest version].tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/modsec/coreruleset</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/crs-setup.conf.example /etc/nginx/modsec/coreruleset/crs-setup.conf</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/rules /etc/nginx/modsec/coreruleset/</span><br></pre></td></tr></table></figure>
-
-<h3 id="必要なファイルのダウンロード"><a href="#必要なファイルのダウンロード" class="headerlink" title="必要なファイルのダウンロード"></a>必要なファイルのダウンロード</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended -O /etc/nginx/modsec/modsecurity.conf</span><br><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/unicode.mapping -O /etc/nginx/modsec/unicode.mapping</span><br></pre></td></tr></table></figure>
-
-<h3 id="Nginx設定ファイルを編集"><a href="#Nginx設定ファイルを編集" class="headerlink" title="Nginx設定ファイルを編集"></a>Nginx設定ファイルを編集</h3><p><code>/etc/nginx/nginx.conf</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Nginx, ModSecurity</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ArchLinuxでCLI開発環境を整える</title>
     <url>/posts/54214/</url>
     <content><![CDATA[<!--
@@ -139,6 +72,73 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
+    <title>Github:glyzerレポジトリを立ち上げるまで</title>
+    <url>/posts/33934/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h2 id="回顧録"><a href="#回顧録" class="headerlink" title="回顧録"></a>回顧録</h2><p>ある日、CLI環境を構築する際に、新たなTUI（ターミナルインターフェース）アプリが必要だなと感じた。<br>それは、ChatGPTやGeminiに代表されるAI-Chatアプリだ。それらがターミナルから使えればいいなと思ったのが事の始まりである。<br>そこでgemini-cliというものを知り、GeminiAPIKeyが必要になることを知る。そこからGeminiAPIに興味を持ち、手始めにpythonに接続することで、広範囲の分析が可能になることを知った。<br>これより、プロジェクト<a href="https://github.com/verazza/glyzer">glyzer</a>の始まりである。</p>
+<h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><p><a href="https://github.com/eliben/gemini-cli">eliben&#x2F;gemini-cli</a></p>
+<h2 id="このプロジェクトの理想"><a href="#このプロジェクトの理想" class="headerlink" title="このプロジェクトの理想"></a>このプロジェクトの理想</h2><p>Neovimでの開発中に、特定のキーマップより(<code>&lt;leader&gt;gm</code>など)現在のファイルに対して、geminiと応答を図る。また、入力でディレクトリパスを指定して、その中の指定拡張子よりdbファイルにまとめ、それをソースに、触媒に、栄養にし、応答を図る。<br>2つの環境の類似性より、分析を依頼する。</p>
+<h2 id="gemini-cliに関するコマンド"><a href="#gemini-cliに関するコマンド" class="headerlink" title="gemini-cliに関するコマンド"></a>gemini-cliに関するコマンド</h2><ul>
+<li>ファイル群をdbファイル形式にする<br>これはgeminiが食う。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gemini-cli embed db out.db --files .,*.py</span><br><span class="line"></span><br><span class="line">gemini-cli embed db out.db --files-list question.txt</span><br></pre></td></tr></table></figure>
+<p>PythonはあくまでGeminiAPIを使って、ソースを食わせる役割。別に言語は何でもいいと思う</p>
+<h2 id="現在思考中のもの"><a href="#現在思考中のもの" class="headerlink" title="現在思考中のもの"></a>現在思考中のもの</h2><p>以下、<a href="https://github.com/verazza/glyzer/blob/master/setup.py">glyzer:&#x2F;setup.py</a> の説明<br>gemini-cliコマンドより、検索対象となるコード、それに対する質問となるコード(平文でもコードとみなす)に対して、それらいくつものファイル群を、数値ベクトル・埋め込みベクトルに変換(dbファイルにあたる)したものを、NumPy配列に変換する。単にdbファイルにエクスポートし、数値ベクトルにしても、それらは単なるバイナリデータに過ぎず、特定のデータ型・構造を持たないため、直接的に数値演算が可能になるNumPy配列に変換する必要がある。これにより、データを特定のデータ型(整数、不動小数点など)を持つ多次元配列として解釈できる。これより、コサイン類似性より比較する。コサイン類似度の高いコード片をソートし、出力する。また、その類似性よりわかったコードスニップより、geminiと応答する。</p>
+<p>なぜデータベース(<code>*.db</code>)形式なのか。</p>
+<ul>
+<li>大量の埋め込みベクトルが効率的に保存・管理ができる</li>
+<li>インデックス機能より検索が容易である</li>
+<li>データベースを容易に持ち運び、共有できる</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>Gemini API Docs<br><a href="https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb">https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>python, gemini</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</title>
+    <url>/posts/34194/</url>
+    <content><![CDATA[<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Windows, DualBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NginxにModSecurityを適用</title>
+    <url>/posts/39499/</url>
+    <content><![CDATA[<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure>
+
+<h3 id="ModSecurityのダウンロードとビルド"><a href="#ModSecurityのダウンロードとビルド" class="headerlink" title="ModSecurityのダウンロードとビルド"></a>ModSecurityのダウンロードとビルド</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 -b v3.0.13 https://github.com/SpiderLabs/ModSecurity</span><br><span class="line"><span class="built_in">cd</span> ModSecurity</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">./build.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="nginxのソースコードのダウンロードとビルド"><a href="#nginxのソースコードのダウンロードとビルド" class="headerlink" title="nginxのソースコードのダウンロードとビルド"></a>nginxのソースコードのダウンロードとビルド</h3><p><a href="http://nginx.org/download/">http://nginx.org/download/</a><br>ここより、最新のバージョンのnginxをダウンロードする<br>ここでもいいかも<br><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-[latest nginx version].tar.gz</span><br><span class="line">tar zxvf nginx-[latest nginx version].tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-[latest nginx version]</span><br><span class="line"></span><br><span class="line">./configure --with-compat --add-dynamic-module=../ModSecurity-nginx</span><br><span class="line">make modules</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> objs/ngx_http_modsecurity_module.so /etc/nginx/modules</span><br></pre></td></tr></table></figure>
+
+<h3 id="RuleSetをダウンロードと配置"><a href="#RuleSetをダウンロードと配置" class="headerlink" title="RuleSetをダウンロードと配置"></a>RuleSetをダウンロードと配置</h3><p><a href="https://github.com/coreruleset/coreruleset">https://github.com/coreruleset/coreruleset</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v[latest version].tar.gz</span><br><span class="line">tar -xzvf v[latest version].tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/modsec/coreruleset</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/crs-setup.conf.example /etc/nginx/modsec/coreruleset/crs-setup.conf</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/rules /etc/nginx/modsec/coreruleset/</span><br></pre></td></tr></table></figure>
+
+<h3 id="必要なファイルのダウンロード"><a href="#必要なファイルのダウンロード" class="headerlink" title="必要なファイルのダウンロード"></a>必要なファイルのダウンロード</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended -O /etc/nginx/modsec/modsecurity.conf</span><br><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/unicode.mapping -O /etc/nginx/modsec/unicode.mapping</span><br></pre></td></tr></table></figure>
+
+<h3 id="Nginx設定ファイルを編集"><a href="#Nginx設定ファイルを編集" class="headerlink" title="Nginx設定ファイルを編集"></a>Nginx設定ファイルを編集</h3><p><code>/etc/nginx/nginx.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Nginx, ModSecurity</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NginxにSSLを導入</title>
     <url>/posts/21623/</url>
     <content><![CDATA[<h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure>
@@ -174,25 +174,6 @@ See the LICENSE file in the source directory for details.
 ]]></content>
       <tags>
         <tag>ArchLinux, 2FA, Google-Authendicator, SSH</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Website Terms and Policies</title>
-    <url>/posts/41809/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>This post contains privacy policy and terms of service using at <a href="https://github.com/verazza/kishax-web">kishax-web</a>.</p>
-<h2 id="Privacy-Policy"><a href="#Privacy-Policy" class="headerlink" title="Privacy Policy"></a>Privacy Policy</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">This Privacy Policy describes how we collect, use, and protect your personal information when you use our application (&quot;the App&quot;). By using the App, you agree to the practices described in this policy.</span><br><span class="line"></span><br><span class="line">1. Information We Collect</span><br><span class="line">We may collect the following information:</span><br><span class="line"></span><br><span class="line">Your X or Google username and profile information.</span><br><span class="line">Your email address (if you grant permission).</span><br><span class="line">2. How We Use Your Information</span><br><span class="line">The information we collect is used to:</span><br><span class="line"></span><br><span class="line">Authenticate your login to the App.</span><br><span class="line">Provide personalized services within the App.</span><br><span class="line">Contact you regarding important updates or changes to the App.</span><br><span class="line">3. Data Protection</span><br><span class="line">We are committed to protecting your personal information and use appropriate security measures to safeguard it.</span><br><span class="line"></span><br><span class="line">4. Third-Party Sharing</span><br><span class="line">We do not share your information with third parties except as required by law or necessary for the operation of the App.</span><br><span class="line"></span><br><span class="line">5. Contact Us</span><br><span class="line">If you have any questions about this Privacy Policy, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
-
-<h2 id="Terms-Of-Service"><a href="#Terms-Of-Service" class="headerlink" title="Terms Of Service"></a>Terms Of Service</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">These Terms of Service (&quot;Terms&quot;) govern your use of our application (&quot;the App&quot;). By accessing or using the App, you agree to comply with these Terms.</span><br><span class="line"></span><br><span class="line">1. Acceptable Use</span><br><span class="line">You must use the App in compliance with all applicable laws and regulations.</span><br><span class="line">You are responsible for any content you create or upload to the App.</span><br><span class="line">2. Prohibited Actions</span><br><span class="line">You may not:</span><br><span class="line"></span><br><span class="line">Use the App for any unlawful activities.</span><br><span class="line">Attempt to reverse-engineer or interfere with the App&#x27;s functionality.</span><br><span class="line">3. Limitation of Liability</span><br><span class="line">We are not responsible for any damages or losses resulting from your use of the App.</span><br><span class="line"></span><br><span class="line">4. Termination</span><br><span class="line">We reserve the right to suspend or terminate your access to the App for violations of these Terms.</span><br><span class="line"></span><br><span class="line">5. Changes to the Terms</span><br><span class="line">We may update these Terms from time to time. Continued use of the App constitutes acceptance of the updated Terms.</span><br><span class="line"></span><br><span class="line">6. Contact Us</span><br><span class="line">If you have any questions about these Terms, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>google,x</tag>
       </tags>
   </entry>
   <entry>
@@ -272,32 +253,6 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>私的MySQLチートシート</title>
-    <url>/posts/49418/</url>
-    <content><![CDATA[<h1 id="MySQLチートシート"><a href="#MySQLチートシート" class="headerlink" title="MySQLチートシート"></a>MySQLチートシート</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S mysql mysql-workbench</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/lib/mysql/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R mysql:mysql /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R 750 /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now mysqld</span><br></pre></td></tr></table></figure>
-
-<h2 id="もし、dbeaverなどでrootにログインできなかったら、"><a href="#もし、dbeaverなどでrootにログインできなかったら、" class="headerlink" title="もし、dbeaverなどでrootにログインできなかったら、"></a>もし、<code>dbeaver</code>などでrootにログインできなかったら、</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> mysql.user <span class="keyword">SET</span> authentication_string<span class="operator">=</span>PASSWORD(<span class="string">&#x27;新しいパスワード&#x27;</span>), plugin<span class="operator">=</span><span class="string">&#x27;mysql_native_password&#x27;</span> <span class="keyword">WHERE</span> <span class="keyword">User</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
-
-<h2 id="データインポートするのが遅かったら"><a href="#データインポートするのが遅かったら" class="headerlink" title="データインポートするのが遅かったら"></a>データインポートするのが遅かったら</h2><p>一番早いのは、ログインしてから</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">use [database];</span><br><span class="line">source <span class="operator">~</span><span class="operator">/</span>file.sql</span><br></pre></td></tr></table></figure>
-
-<h2 id="mysql-import-export中の進捗をログで表示"><a href="#mysql-import-export中の進捗をログで表示" class="headerlink" title="mysql import, export中の進捗をログで表示"></a>mysql import, export中の進捗をログで表示</h2><h3 id="インストール-1"><a href="#インストール-1" class="headerlink" title="インストール"></a>インストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pv</span><br></pre></td></tr></table></figure>
-
-<h3 id="実際に使ってみる"><a href="#実際に使ってみる" class="headerlink" title="実際に使ってみる"></a>実際に使ってみる</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># import</span></span><br><span class="line">pv ~/downloads/forum.sql | <span class="built_in">sudo</span> mariadb --max_allowed_packet=64M web</span><br><span class="line"></span><br><span class="line"><span class="comment"># export</span></span><br><span class="line">mysqldump --max_allowed_packet=64M -u root -p web | pv &gt; ~/downloads/forum.sql</span><br></pre></td></tr></table></figure>
-
-<h2 id="exportで失敗しないために"><a href="#exportで失敗しないために" class="headerlink" title="exportで失敗しないために"></a>exportで失敗しないために</h2><p><code>mysqldump</code>コマンドの引数で、<code>max_allowed_packet</code>を指定する</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysqldump --max_allowed_packet=64M -u root -p web &gt; ~/path/to/sample.sql</span><br></pre></td></tr></table></figure>
-
-<h2 id="auth-socketプラグインを使っているかどうか検証"><a href="#auth-socketプラグインを使っているかどうか検証" class="headerlink" title="auth_socketプラグインを使っているかどうか検証"></a><code>auth_socket</code>プラグインを使っているかどうか検証</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">user</span>, host, plugin <span class="keyword">FROM</span> mysql.user <span class="keyword">WHERE</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;mc&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="INSERTでSELECT参照"><a href="#INSERTでSELECT参照" class="headerlink" title="INSERTでSELECT参照"></a>INSERTでSELECT参照</h2><p>例として、<code>members</code>テーブルのものを<code>users</code>テーブルに移植する。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> users (name, password, email)</span><br><span class="line"><span class="keyword">SELECT</span> name, password, email</span><br><span class="line"><span class="keyword">FROM</span> members;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>CheatSheet, MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>WSLを使う！ Windows開発環境構築</title>
     <url>/posts/17845/</url>
     <content><![CDATA[<!--
@@ -354,69 +309,40 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>私的コマンドチートシート</title>
-    <url>/posts/24514/</url>
-    <content><![CDATA[<h1 id="コマンドチートシート"><a href="#コマンドチートシート" class="headerlink" title="コマンドチートシート"></a>コマンドチートシート</h1><h2 id="シンボリックリンクを通す"><a href="#シンボリックリンクを通す" class="headerlink" title="シンボリックリンクを通す"></a>シンボリックリンクを通す</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /path/to/target /path/to/wanna/to/place</span><br></pre></td></tr></table></figure>
+    <title>Website Terms and Policies</title>
+    <url>/posts/41809/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
 
-<h2 id="特定の階層以下のファイルのパスと内容を表示"><a href="#特定の階層以下のファイルのパスと内容を表示" class="headerlink" title="特定の階層以下のファイルのパスと内容を表示"></a>特定の階層以下のファイルのパスと内容を表示</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find path/to/directory/ -<span class="built_in">type</span> f -<span class="built_in">exec</span> sh -c <span class="string">&#x27;echo &quot;==== &#123;&#125; ====&quot;; cat &#123;&#125;&#x27;</span> \;</span><br></pre></td></tr></table></figure>
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>This post contains privacy policy and terms of service using at <a href="https://github.com/verazza/kishax-web">kishax-web</a>.</p>
+<h2 id="Privacy-Policy"><a href="#Privacy-Policy" class="headerlink" title="Privacy Policy"></a>Privacy Policy</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">This Privacy Policy describes how we collect, use, and protect your personal information when you use our application (&quot;the App&quot;). By using the App, you agree to the practices described in this policy.</span><br><span class="line"></span><br><span class="line">1. Information We Collect</span><br><span class="line">We may collect the following information:</span><br><span class="line"></span><br><span class="line">Your X or Google username and profile information.</span><br><span class="line">Your email address (if you grant permission).</span><br><span class="line">2. How We Use Your Information</span><br><span class="line">The information we collect is used to:</span><br><span class="line"></span><br><span class="line">Authenticate your login to the App.</span><br><span class="line">Provide personalized services within the App.</span><br><span class="line">Contact you regarding important updates or changes to the App.</span><br><span class="line">3. Data Protection</span><br><span class="line">We are committed to protecting your personal information and use appropriate security measures to safeguard it.</span><br><span class="line"></span><br><span class="line">4. Third-Party Sharing</span><br><span class="line">We do not share your information with third parties except as required by law or necessary for the operation of the App.</span><br><span class="line"></span><br><span class="line">5. Contact Us</span><br><span class="line">If you have any questions about this Privacy Policy, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
 
-<h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><h3 id="静的ファイルからヘッダ情報取得"><a href="#静的ファイルからヘッダ情報取得" class="headerlink" title="静的ファイルからヘッダ情報取得"></a>静的ファイルからヘッダ情報取得</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -I https://example.com/path/to/sample.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><h3 id="再帰的にfindでディレクトリに対してchmod-755"><a href="#再帰的にfindでディレクトリに対してchmod-755" class="headerlink" title="再帰的にfindでディレクトリに対してchmod 755"></a>再帰的にfindでディレクトリに対してchmod 755</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> find /mc -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
-<h3 id="すべてのファイルをチェック"><a href="#すべてのファイルをチェック" class="headerlink" title="すべてのファイルをチェック"></a>すべてのファイルをチェック</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /path/to/directory -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure>
-<h3 id="階層1"><a href="#階層1" class="headerlink" title="階層1"></a>階層1</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /path/to/directory -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure>
-<h3 id="その階層のすべてのファイルに対し、実行"><a href="#その階層のすべてのファイルに対し、実行" class="headerlink" title="その階層のすべてのファイルに対し、実行"></a>その階層のすべてのファイルに対し、実行</h3><p>(ここでは、cpコマンドでbackupディレクトリへ)</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">cp</span> &#123;&#125; ./backup \;</span><br></pre></td></tr></table></figure>
-
-<h2 id="ファイルの文字コードを出力"><a href="#ファイルの文字コードを出力" class="headerlink" title="ファイルの文字コードを出力"></a>ファイルの文字コードを出力</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">file -i /path/to/file</span><br></pre></td></tr></table></figure>
-
-<h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">zip -r FILENAME.zip FILE_DIR</span><br></pre></td></tr></table></figure>
-<p><a href="https://qiita.com/seyself/items/ae47f1c22a7375a736f3">https://qiita.com/seyself/items/ae47f1c22a7375a736f3</a></p>
-<p>除外</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">zip -r sample.zip sample/ -x <span class="string">&quot;sample/libraries/*&quot;</span> <span class="string">&quot;sample/log/*&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="一個前のコマンドを出力"><a href="#一個前のコマンドを出力" class="headerlink" title="一個前のコマンドを出力"></a>一個前のコマンドを出力</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">history</span> | <span class="built_in">tail</span> -n 1</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="built_in">fc</span> -<span class="built_in">ln</span> -1</span><br></pre></td></tr></table></figure>
-
-<h2 id="一個前のコマンドを再実行"><a href="#一個前のコマンドを再実行" class="headerlink" title="一個前のコマンドを再実行"></a>一個前のコマンドを再実行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">!!</span><br></pre></td></tr></table></figure>
-
-<h2 id="acl"><a href="#acl" class="headerlink" title="acl"></a>acl</h2><p><code>mc</code>ユーザーに対して、<code>/mc/server</code>フォルダおよびそのサブディレクトリとファイルに対する全アクセス権限を再帰的に付与する。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -R -m u:mc:rwx /mc/server:</span><br></pre></td></tr></table></figure>
-<p><code>mc</code>ユーザーに対するデフォルトACLを設定し、将来的に新しく作成されるファイルやディレクトリにも同じ権限が適用されるようにする。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -dR -m u:mc:rwx /mc/server</span><br></pre></td></tr></table></figure>
-
-<h2 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tail</span> -f /var/log/nginx/access.log</span><br></pre></td></tr></table></figure>
-
-<h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tree -I <span class="string">&quot;*.html|*.png|*.jpg&quot;</span></span><br><span class="line"></span><br><span class="line">tree -I venv/</span><br><span class="line">tree -I node_modules/</span><br></pre></td></tr></table></figure>
-
-<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><h3 id="特定のコミットを削除するには"><a href="#特定のコミットを削除するには" class="headerlink" title="特定のコミットを削除するには"></a>特定のコミットを削除するには</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git revert &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
-<h3 id="リモートURLをSSHに変更"><a href="#リモートURLをSSHに変更" class="headerlink" title="リモートURLをSSHに変更"></a>リモートURLをSSHに変更</h3><p>まず、鍵を生成し、それをデプロイ</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;&quot;</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line">git remote set-url origin git@github.com:&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>
-
-<h3 id="リモートURLをHTTPSに変更"><a href="#リモートURLをHTTPSに変更" class="headerlink" title="リモートURLをHTTPSに変更"></a>リモートURLをHTTPSに変更</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>
-<h3 id="特定のブランチ名を指定してクローン"><a href="#特定のブランチ名を指定してクローン" class="headerlink" title="特定のブランチ名を指定してクローン"></a>特定のブランチ名を指定してクローン</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b &lt;branch-name&gt; &lt;clone-url&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="access-tokenをローカルに設定"><a href="#access-tokenをローカルに設定" class="headerlink" title="access-tokenをローカルに設定"></a>access-tokenをローカルに設定</h3><p>リポジトリの<code>HTTPS URL</code>にアクセストークンを埋め込む。<br>元の<code>HTTPS URL</code>が<code>https://github.com/username/repository.git</code>の場合、以下の形式に変更する。<br><code>https://your_access_token@github.com/username/repository.git</code><br><code>your_access_token</code>は、生成したアクセストークンに置き換えよう。</p>
-<p>最後に、リモートURLを変更</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin https://your_access_token@github.com/username/repository.git</span><br></pre></td></tr></table></figure>
-
-<h3 id="タグを作ってプッシュ"><a href="#タグを作ってプッシュ" class="headerlink" title="タグを作ってプッシュ"></a>タグを作ってプッシュ</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag -a v1.0 -m <span class="string">&#x27;version 1.0&#x27;</span></span><br><span class="line">git push origin v1.0</span><br></pre></td></tr></table></figure>
-<p>リモートで使ったタグを削除するとき、ローカルには残っているため、それを削除する</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git tag -d &lt;tag-name&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="新規リモートに対して特定ブランチへのプッシュまで"><a href="#新規リモートに対して特定ブランチへのプッシュまで" class="headerlink" title="新規リモートに対して特定ブランチへのプッシュまで"></a>新規リモートに対して特定ブランチへのプッシュまで</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git checkout -b scala</span><br></pre></td></tr></table></figure>
-
-<h3 id="新規リモートをWEBで作った後、プッシュまで"><a href="#新規リモートをWEBで作った後、プッシュまで" class="headerlink" title="新規リモートをWEBで作った後、プッシュまで"></a>新規リモートをWEBで作った後、プッシュまで</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# updater&quot;</span> &gt;&gt; README.md</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M master</span><br><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<h3 id="remote-urlを確認するには"><a href="#remote-urlを確認するには" class="headerlink" title="remote-urlを確認するには"></a>remote-urlを確認するには</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-<h3 id="git-configのリセット"><a href="#git-configのリセット" class="headerlink" title="git configのリセット"></a>git configのリセット</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> credential.helper</span><br><span class="line">git config --global --<span class="built_in">unset</span> credential.credentialStore</span><br></pre></td></tr></table></figure>
-<h3 id="submoduleを一括インポートする"><a href="#submoduleを一括インポートする" class="headerlink" title="submoduleを一括インポートする"></a>submoduleを一括インポートする</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure>
-<h3 id="リモートブランチ名をリネームしたときにローカルでやること"><a href="#リモートブランチ名をリネームしたときにローカルでやること" class="headerlink" title="リモートブランチ名をリネームしたときにローカルでやること"></a>リモートブランチ名をリネームしたときにローカルでやること</h3><p>例えば、<code>sample</code>ブランチを<code>master</code>ブランチに変更したとする。</p>
-<h4 id="ローカルのsampleブランチをmasterにリネームする"><a href="#ローカルのsampleブランチをmasterにリネームする" class="headerlink" title="ローカルのsampleブランチをmasterにリネームする"></a>ローカルの<code>sample</code>ブランチを<code>master</code>にリネームする</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m sample master</span><br></pre></td></tr></table></figure>
-<h4 id="リモート追跡ブランチを更新する"><a href="#リモート追跡ブランチを更新する" class="headerlink" title="リモート追跡ブランチを更新する"></a>リモート追跡ブランチを更新する</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-head origin -a</span><br></pre></td></tr></table></figure>
-<h4 id="追跡ブランチを設定する"><a href="#追跡ブランチを設定する" class="headerlink" title="追跡ブランチを設定する"></a>追跡ブランチを設定する</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch --set-upstream-to=origin/master master</span><br></pre></td></tr></table></figure>
+<h2 id="Terms-Of-Service"><a href="#Terms-Of-Service" class="headerlink" title="Terms Of Service"></a>Terms Of Service</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">These Terms of Service (&quot;Terms&quot;) govern your use of our application (&quot;the App&quot;). By accessing or using the App, you agree to comply with these Terms.</span><br><span class="line"></span><br><span class="line">1. Acceptable Use</span><br><span class="line">You must use the App in compliance with all applicable laws and regulations.</span><br><span class="line">You are responsible for any content you create or upload to the App.</span><br><span class="line">2. Prohibited Actions</span><br><span class="line">You may not:</span><br><span class="line"></span><br><span class="line">Use the App for any unlawful activities.</span><br><span class="line">Attempt to reverse-engineer or interfere with the App&#x27;s functionality.</span><br><span class="line">3. Limitation of Liability</span><br><span class="line">We are not responsible for any damages or losses resulting from your use of the App.</span><br><span class="line"></span><br><span class="line">4. Termination</span><br><span class="line">We reserve the right to suspend or terminate your access to the App for violations of these Terms.</span><br><span class="line"></span><br><span class="line">5. Changes to the Terms</span><br><span class="line">We may update these Terms from time to time. Continued use of the App constitutes acceptance of the updated Terms.</span><br><span class="line"></span><br><span class="line">6. Contact Us</span><br><span class="line">If you have any questions about these Terms, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>ArchLinux, Command, CheatSheet</tag>
+        <tag>google,x</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生成AIとの共生</title>
+    <url>/posts/30026/</url>
+    <content><![CDATA[<h1 id="生成AIをプログラミングに活用することについて"><a href="#生成AIをプログラミングに活用することについて" class="headerlink" title="生成AIをプログラミングに活用することについて"></a>生成AIをプログラミングに活用することについて</h1><h2 id="賢い人とは"><a href="#賢い人とは" class="headerlink" title="賢い人とは"></a>賢い人とは</h2><p>賢い人とは、抽象度（視点）が高く、共通項を見つける能力に長けた人のことを言う。即ち、部分から全体、全体から部分を考えることのできる能力に秀でた人のことだ。<br>確かに、生成AIを用いることで、誰でも母国語である自然言語でコードを生成できる。それ即ち、<del>部分から</del>全体を知れる。</p>
+<h2 id="生成AIがもたらすもの"><a href="#生成AIがもたらすもの" class="headerlink" title="生成AIがもたらすもの"></a>生成AIがもたらすもの</h2><p>しかし、そこに__過程__はない。部分から全体、全体から部分を考えられる人が賢い人だと表現したが、共通項を見つける作業をすっ飛ばしてその能力が上がることはないと思うのだ。ゆえに、生成AIを用いることで自らの抽象度が上がることはないのだ。</p>
+<h2 id="過程とは"><a href="#過程とは" class="headerlink" title="過程とは"></a>過程とは</h2><p>一方、その__過程__とは何か？<br>「逆元的である」という表現を思いついた。部分から全体、全体から部分を可能にするのは数学においては、間違いなく定義だ。defがあれば即ち、必要十分条件があれば、どんな例題だって思いつけるし解けるだろう。また、多くの例題をひとまとめにいわば統一的に書いたものこそ定義である。コード生成はこの定義を自らに落とすことなく全体を述べてしまう。  </p>
+<h2 id="生成AIがもたらす恩恵"><a href="#生成AIがもたらす恩恵" class="headerlink" title="生成AIがもたらす恩恵"></a>生成AIがもたらす恩恵</h2><p>しかし、自然言語からコードへの等価交換はなんといっても魅力的だ。<br>実際、コードを理解することを確認するには、それを自らの自然言語で説明できるかという点に集約されるだろう。</p>
+<h2 id="生成AIを扱う上での注意点"><a href="#生成AIを扱う上での注意点" class="headerlink" title="生成AIを扱う上での注意点"></a>生成AIを扱う上での注意点</h2><p>私が生成AIを用いてコード生成するときに注意していることは、自然言語からコードを生成された後のコードを一通り読み、何らかの自らの解釈を加えるということだ。<br>そのコードが即座に実行可能であれば、実行して確認することもできるだろう。</p>
+<h2 id="生成AIを扱う上での理想"><a href="#生成AIを扱う上での理想" class="headerlink" title="生成AIを扱う上での理想"></a>生成AIを扱う上での理想</h2><p>しかし、我々は生成AIを使いたい、もって言い換えれば、生成AIに使役されることなく生成AIを道具、自らの糧にしたい人が多いはずだ。それには、単純に生成AIが生成する全体としてのコードを眺めるだけではいけない。なぜなら、部分から全体を考えるにあたっての自らの定義（武器）を持たずして、生成AIと同じ視点、即ち、生成AIと同じ抽象度を維持することはできないのだ。</p>
+<h2 id="臨界点"><a href="#臨界点" class="headerlink" title="臨界点"></a>臨界点</h2><p>人のメモリには限界があるので、defを多岐の分野で、一人の人間が生成AIと同レベルに抽象的に表現することはできないだろうが、なにか一部分、特定の分野においては生成AIと同レベルに考えることができると私は信じている。</p>
+<h2 id="プログラミング力を高めるには"><a href="#プログラミング力を高めるには" class="headerlink" title="プログラミング力を高めるには"></a>プログラミング力を高めるには</h2><p>さしあたっては、真にプログラミングを身に着けたいのであれば、生成AIを超える覚悟を持って、批判的に扱うべきだ。また、コード生成になにかのAPIを使ったものなのであれば、そのAPIを作った開発者のドキュメントぐらいは見るべきだろう。それを知らずして、生成AIを超える抽象度を維持することはできないからだ。</p>
+<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>今回は、生成AIを使うことについて深く考えた。きっかけは、このままプログラミングに生成AIを使っていて、ほんとうに自らのプログラミングスキルが身につくものかと疑問視したからだ。<br>下記の参考にあるrの住人のピエロがいった「賢い人」について知ったことで、ここ数日の疑問に私なりの回答を出せた気がする。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>rの住人ピエロより<br><a href="https://youtu.be/fFQ9kax20I0?si=f59Kuw5A8jezI7En">https://youtu.be/fFQ9kax20I0?si=f59Kuw5A8jezI7En</a></p>
+]]></content>
+      <tags>
+        <tag>LLM</tag>
       </tags>
   </entry>
   <entry>
@@ -519,5 +445,97 @@ See the LICENSE file in the source directory for details.
 <h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>書いてて思った、面倒だ！！！</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zenn.dev/ytjvdcm/articles/0efb9112468de3">https://zenn.dev/ytjvdcm/articles/0efb9112468de3</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>私的MySQLチートシート</title>
+    <url>/posts/49418/</url>
+    <content><![CDATA[<h1 id="MySQLチートシート"><a href="#MySQLチートシート" class="headerlink" title="MySQLチートシート"></a>MySQLチートシート</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S mysql mysql-workbench</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/lib/mysql/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R mysql:mysql /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R 750 /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now mysqld</span><br></pre></td></tr></table></figure>
+
+<h2 id="もし、dbeaverなどでrootにログインできなかったら、"><a href="#もし、dbeaverなどでrootにログインできなかったら、" class="headerlink" title="もし、dbeaverなどでrootにログインできなかったら、"></a>もし、<code>dbeaver</code>などでrootにログインできなかったら、</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> mysql.user <span class="keyword">SET</span> authentication_string<span class="operator">=</span>PASSWORD(<span class="string">&#x27;新しいパスワード&#x27;</span>), plugin<span class="operator">=</span><span class="string">&#x27;mysql_native_password&#x27;</span> <span class="keyword">WHERE</span> <span class="keyword">User</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
+
+<h2 id="データインポートするのが遅かったら"><a href="#データインポートするのが遅かったら" class="headerlink" title="データインポートするのが遅かったら"></a>データインポートするのが遅かったら</h2><p>一番早いのは、ログインしてから</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">use [database];</span><br><span class="line">source <span class="operator">~</span><span class="operator">/</span>file.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysql-import-export中の進捗をログで表示"><a href="#mysql-import-export中の進捗をログで表示" class="headerlink" title="mysql import, export中の進捗をログで表示"></a>mysql import, export中の進捗をログで表示</h2><h3 id="インストール-1"><a href="#インストール-1" class="headerlink" title="インストール"></a>インストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pv</span><br></pre></td></tr></table></figure>
+
+<h3 id="実際に使ってみる"><a href="#実際に使ってみる" class="headerlink" title="実際に使ってみる"></a>実際に使ってみる</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># import</span></span><br><span class="line">pv ~/downloads/forum.sql | <span class="built_in">sudo</span> mariadb --max_allowed_packet=64M web</span><br><span class="line"></span><br><span class="line"><span class="comment"># export</span></span><br><span class="line">mysqldump --max_allowed_packet=64M -u root -p web | pv &gt; ~/downloads/forum.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="exportで失敗しないために"><a href="#exportで失敗しないために" class="headerlink" title="exportで失敗しないために"></a>exportで失敗しないために</h2><p><code>mysqldump</code>コマンドの引数で、<code>max_allowed_packet</code>を指定する</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysqldump --max_allowed_packet=64M -u root -p web &gt; ~/path/to/sample.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="auth-socketプラグインを使っているかどうか検証"><a href="#auth-socketプラグインを使っているかどうか検証" class="headerlink" title="auth_socketプラグインを使っているかどうか検証"></a><code>auth_socket</code>プラグインを使っているかどうか検証</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">user</span>, host, plugin <span class="keyword">FROM</span> mysql.user <span class="keyword">WHERE</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;mc&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="INSERTでSELECT参照"><a href="#INSERTでSELECT参照" class="headerlink" title="INSERTでSELECT参照"></a>INSERTでSELECT参照</h2><p>例として、<code>members</code>テーブルのものを<code>users</code>テーブルに移植する。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> users (name, password, email)</span><br><span class="line"><span class="keyword">SELECT</span> name, password, email</span><br><span class="line"><span class="keyword">FROM</span> members;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>CheatSheet, MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>私的コマンドチートシート</title>
+    <url>/posts/24514/</url>
+    <content><![CDATA[<h1 id="コマンドチートシート"><a href="#コマンドチートシート" class="headerlink" title="コマンドチートシート"></a>コマンドチートシート</h1><h2 id="シンボリックリンクを通す"><a href="#シンボリックリンクを通す" class="headerlink" title="シンボリックリンクを通す"></a>シンボリックリンクを通す</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /path/to/target /path/to/wanna/to/place</span><br></pre></td></tr></table></figure>
+
+<h2 id="特定の階層以下のファイルのパスと内容を表示"><a href="#特定の階層以下のファイルのパスと内容を表示" class="headerlink" title="特定の階層以下のファイルのパスと内容を表示"></a>特定の階層以下のファイルのパスと内容を表示</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find path/to/directory/ -<span class="built_in">type</span> f -<span class="built_in">exec</span> sh -c <span class="string">&#x27;echo &quot;==== &#123;&#125; ====&quot;; cat &#123;&#125;&#x27;</span> \;</span><br></pre></td></tr></table></figure>
+
+<h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><h3 id="静的ファイルからヘッダ情報取得"><a href="#静的ファイルからヘッダ情報取得" class="headerlink" title="静的ファイルからヘッダ情報取得"></a>静的ファイルからヘッダ情報取得</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -I https://example.com/path/to/sample.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><h3 id="再帰的にfindでディレクトリに対してchmod-755"><a href="#再帰的にfindでディレクトリに対してchmod-755" class="headerlink" title="再帰的にfindでディレクトリに対してchmod 755"></a>再帰的にfindでディレクトリに対してchmod 755</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> find /mc -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<h3 id="すべてのファイルをチェック"><a href="#すべてのファイルをチェック" class="headerlink" title="すべてのファイルをチェック"></a>すべてのファイルをチェック</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /path/to/directory -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<h3 id="階層1"><a href="#階層1" class="headerlink" title="階層1"></a>階層1</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find /path/to/directory -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<h3 id="その階層のすべてのファイルに対し、実行"><a href="#その階層のすべてのファイルに対し、実行" class="headerlink" title="その階層のすべてのファイルに対し、実行"></a>その階層のすべてのファイルに対し、実行</h3><p>(ここでは、cpコマンドでbackupディレクトリへ)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">cp</span> &#123;&#125; ./backup \;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ファイルの文字コードを出力"><a href="#ファイルの文字コードを出力" class="headerlink" title="ファイルの文字コードを出力"></a>ファイルの文字コードを出力</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">file -i /path/to/file</span><br></pre></td></tr></table></figure>
+
+<h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">zip -r FILENAME.zip FILE_DIR</span><br></pre></td></tr></table></figure>
+<p><a href="https://qiita.com/seyself/items/ae47f1c22a7375a736f3">https://qiita.com/seyself/items/ae47f1c22a7375a736f3</a></p>
+<p>除外</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">zip -r sample.zip sample/ -x <span class="string">&quot;sample/libraries/*&quot;</span> <span class="string">&quot;sample/log/*&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="一個前のコマンドを出力"><a href="#一個前のコマンドを出力" class="headerlink" title="一個前のコマンドを出力"></a>一個前のコマンドを出力</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">history</span> | <span class="built_in">tail</span> -n 1</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="built_in">fc</span> -<span class="built_in">ln</span> -1</span><br></pre></td></tr></table></figure>
+
+<h2 id="一個前のコマンドを再実行"><a href="#一個前のコマンドを再実行" class="headerlink" title="一個前のコマンドを再実行"></a>一個前のコマンドを再実行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">!!</span><br></pre></td></tr></table></figure>
+
+<h2 id="acl"><a href="#acl" class="headerlink" title="acl"></a>acl</h2><p><code>mc</code>ユーザーに対して、<code>/mc/server</code>フォルダおよびそのサブディレクトリとファイルに対する全アクセス権限を再帰的に付与する。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -R -m u:mc:rwx /mc/server:</span><br></pre></td></tr></table></figure>
+<p><code>mc</code>ユーザーに対するデフォルトACLを設定し、将来的に新しく作成されるファイルやディレクトリにも同じ権限が適用されるようにする。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -dR -m u:mc:rwx /mc/server</span><br></pre></td></tr></table></figure>
+
+<h2 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tail</span> -f /var/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+
+<h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tree -I <span class="string">&quot;*.html|*.png|*.jpg&quot;</span></span><br><span class="line"></span><br><span class="line">tree -I venv/</span><br><span class="line">tree -I node_modules/</span><br></pre></td></tr></table></figure>
+
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><h3 id="特定のコミットを削除するには"><a href="#特定のコミットを削除するには" class="headerlink" title="特定のコミットを削除するには"></a>特定のコミットを削除するには</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git revert &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+<h3 id="リモートURLをSSHに変更"><a href="#リモートURLをSSHに変更" class="headerlink" title="リモートURLをSSHに変更"></a>リモートURLをSSHに変更</h3><p>まず、鍵を生成し、それをデプロイ</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;&quot;</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line">git remote set-url origin git@github.com:&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="リモートURLをHTTPSに変更"><a href="#リモートURLをHTTPSに変更" class="headerlink" title="リモートURLをHTTPSに変更"></a>リモートURLをHTTPSに変更</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>
+<h3 id="特定のブランチ名を指定してクローン"><a href="#特定のブランチ名を指定してクローン" class="headerlink" title="特定のブランチ名を指定してクローン"></a>特定のブランチ名を指定してクローン</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b &lt;branch-name&gt; &lt;clone-url&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="access-tokenをローカルに設定"><a href="#access-tokenをローカルに設定" class="headerlink" title="access-tokenをローカルに設定"></a>access-tokenをローカルに設定</h3><p>リポジトリの<code>HTTPS URL</code>にアクセストークンを埋め込む。<br>元の<code>HTTPS URL</code>が<code>https://github.com/username/repository.git</code>の場合、以下の形式に変更する。<br><code>https://your_access_token@github.com/username/repository.git</code><br><code>your_access_token</code>は、生成したアクセストークンに置き換えよう。</p>
+<p>最後に、リモートURLを変更</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin https://your_access_token@github.com/username/repository.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="タグを作ってプッシュ"><a href="#タグを作ってプッシュ" class="headerlink" title="タグを作ってプッシュ"></a>タグを作ってプッシュ</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag -a v1.0 -m <span class="string">&#x27;version 1.0&#x27;</span></span><br><span class="line">git push origin v1.0</span><br></pre></td></tr></table></figure>
+<p>リモートで使ったタグを削除するとき、ローカルには残っているため、それを削除する</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git tag -d &lt;tag-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="新規リモートに対して特定ブランチへのプッシュまで"><a href="#新規リモートに対して特定ブランチへのプッシュまで" class="headerlink" title="新規リモートに対して特定ブランチへのプッシュまで"></a>新規リモートに対して特定ブランチへのプッシュまで</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git checkout -b scala</span><br></pre></td></tr></table></figure>
+
+<h3 id="新規リモートをWEBで作った後、プッシュまで"><a href="#新規リモートをWEBで作った後、プッシュまで" class="headerlink" title="新規リモートをWEBで作った後、プッシュまで"></a>新規リモートをWEBで作った後、プッシュまで</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# updater&quot;</span> &gt;&gt; README.md</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M master</span><br><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="remote-urlを確認するには"><a href="#remote-urlを確認するには" class="headerlink" title="remote-urlを確認するには"></a>remote-urlを確認するには</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h3 id="git-configのリセット"><a href="#git-configのリセット" class="headerlink" title="git configのリセット"></a>git configのリセット</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> credential.helper</span><br><span class="line">git config --global --<span class="built_in">unset</span> credential.credentialStore</span><br></pre></td></tr></table></figure>
+<h3 id="submoduleを一括インポートする"><a href="#submoduleを一括インポートする" class="headerlink" title="submoduleを一括インポートする"></a>submoduleを一括インポートする</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure>
+<h3 id="リモートブランチ名をリネームしたときにローカルでやること"><a href="#リモートブランチ名をリネームしたときにローカルでやること" class="headerlink" title="リモートブランチ名をリネームしたときにローカルでやること"></a>リモートブランチ名をリネームしたときにローカルでやること</h3><p>例えば、<code>sample</code>ブランチを<code>master</code>ブランチに変更したとする。</p>
+<h4 id="ローカルのsampleブランチをmasterにリネームする"><a href="#ローカルのsampleブランチをmasterにリネームする" class="headerlink" title="ローカルのsampleブランチをmasterにリネームする"></a>ローカルの<code>sample</code>ブランチを<code>master</code>にリネームする</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m sample master</span><br></pre></td></tr></table></figure>
+<h4 id="リモート追跡ブランチを更新する"><a href="#リモート追跡ブランチを更新する" class="headerlink" title="リモート追跡ブランチを更新する"></a>リモート追跡ブランチを更新する</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-head origin -a</span><br></pre></td></tr></table></figure>
+<h4 id="追跡ブランチを設定する"><a href="#追跡ブランチを設定する" class="headerlink" title="追跡ブランチを設定する"></a>追跡ブランチを設定する</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch --set-upstream-to=origin/master master</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>ArchLinux, Command, CheatSheet</tag>
+      </tags>
   </entry>
 </search>
