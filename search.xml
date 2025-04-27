@@ -105,6 +105,16 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
+    <title>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</title>
+    <url>/posts/34194/</url>
+    <content><![CDATA[<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Windows, DualBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NginxにModSecurityを適用</title>
     <url>/posts/39499/</url>
     <content><![CDATA[<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
@@ -126,29 +136,6 @@ See the LICENSE file in the source directory for details.
 ]]></content>
       <tags>
         <tag>Nginx, ModSecurity</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NginxにSSLを導入</title>
-    <url>/posts/21623/</url>
-    <content><![CDATA[<h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure>
-
-<h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure>
-<p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo certbot --nginx -d keyp.f5.si,kishax.f5.si</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Nginx, SSL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</title>
-    <url>/posts/34194/</url>
-    <content><![CDATA[<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Windows, DualBoot</tag>
       </tags>
   </entry>
   <entry>
@@ -174,6 +161,19 @@ See the LICENSE file in the source directory for details.
 ]]></content>
       <tags>
         <tag>ArchLinux, 2FA, Google-Authendicator, SSH</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NginxにSSLを導入</title>
+    <url>/posts/21623/</url>
+    <content><![CDATA[<h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure>
+<p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo certbot --nginx -d keyp.f5.si,kishax.f5.si</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Nginx, SSL</tag>
       </tags>
   </entry>
   <entry>
@@ -252,25 +252,6 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>生成AIとの共生1</title>
-    <url>/posts/30026/</url>
-    <content><![CDATA[<h1 id="生成AIをプログラミングに活用することについて"><a href="#生成AIをプログラミングに活用することについて" class="headerlink" title="生成AIをプログラミングに活用することについて"></a>生成AIをプログラミングに活用することについて</h1><h2 id="賢い人とは"><a href="#賢い人とは" class="headerlink" title="賢い人とは"></a>賢い人とは</h2><p>賢い人とは、抽象度（視点）が高く、共通項を見つける能力に長けた人のことを言う。即ち、部分から全体、全体から部分を考えることのできる能力に秀でた人のことだ。<br>確かに、生成AIを用いることで、誰でも母国語である自然言語でコードを生成できる。それ即ち、<del>部分から</del>全体を知れる。</p>
-<h2 id="生成AIがもたらすもの"><a href="#生成AIがもたらすもの" class="headerlink" title="生成AIがもたらすもの"></a>生成AIがもたらすもの</h2><p>しかし、そこに__過程__はない。部分から全体、全体から部分を考えられる人が賢い人だと表現したが、共通項を見つける作業をすっ飛ばしてその能力が上がることはないと思うのだ。ゆえに、生成AIを用いることで自らの抽象度が上がることはないのだ。</p>
-<h2 id="過程とは"><a href="#過程とは" class="headerlink" title="過程とは"></a>過程とは</h2><p>一方、その__過程__とは何か？<br>「逆元的である」という表現を思いついた。部分から全体、全体から部分を可能にするのは数学においては、間違いなく定義だ。defがあれば即ち、必要十分条件があれば、どんな例題だって思いつけるし解けるだろう。また、多くの例題をひとまとめにいわば統一的に書いたものこそ定義である。コード生成はこの定義を自らに落とすことなく全体を述べてしまう。  </p>
-<h2 id="生成AIがもたらす恩恵"><a href="#生成AIがもたらす恩恵" class="headerlink" title="生成AIがもたらす恩恵"></a>生成AIがもたらす恩恵</h2><p>しかし、自然言語からコードへの等価交換はなんといっても魅力的だ。<br>実際、コードを理解することを確認するには、それを自らの自然言語で説明できるかという点に集約されるだろう。</p>
-<h2 id="生成AIを扱う上での注意点"><a href="#生成AIを扱う上での注意点" class="headerlink" title="生成AIを扱う上での注意点"></a>生成AIを扱う上での注意点</h2><p>私が生成AIを用いてコード生成するときに注意していることは、自然言語からコードを生成された後のコードを一通り読み、何らかの自らの解釈を加えるということだ。<br>そのコードが即座に実行可能であれば、実行して確認することもできるだろう。</p>
-<h2 id="生成AIを扱う上での理想"><a href="#生成AIを扱う上での理想" class="headerlink" title="生成AIを扱う上での理想"></a>生成AIを扱う上での理想</h2><p>しかし、我々は生成AIを使いたい、もって言い換えれば、生成AIに使役されることなく生成AIを道具、自らの糧にしたい人が多いはずだ。それには、単純に生成AIが生成する全体としてのコードを眺めるだけではいけない。なぜなら、部分から全体を考えるにあたっての自らの定義（武器）を持たずして、生成AIと同じ視点、即ち、生成AIと同じ抽象度を維持することはできないのだ。</p>
-<h2 id="臨界点"><a href="#臨界点" class="headerlink" title="臨界点"></a>臨界点</h2><p>人のメモリには限界があるので、defを多岐の分野で、一人の人間が生成AIと同レベルに抽象的に表現することはできないだろうが、なにか一部分、特定の分野においては生成AIと同レベルに考えることができると私は信じている。</p>
-<h2 id="プログラミング力を高めるには"><a href="#プログラミング力を高めるには" class="headerlink" title="プログラミング力を高めるには"></a>プログラミング力を高めるには</h2><p>さしあたっては、真にプログラミングを身に着けたいのであれば、生成AIを超える覚悟を持って、批判的に扱うべきだ。また、コード生成になにかのAPIを使ったものなのであれば、そのAPIを作った開発者のドキュメントぐらいは見るべきだろう。それを知らずして、生成AIを超える抽象度を維持することはできないからだ。</p>
-<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>今回は、生成AIを使うことについて深く考えた。きっかけは、このままプログラミングに生成AIを使っていて、ほんとうに自らのプログラミングスキルが身につくものかと疑問視したからだ。<br>下記の参考にあるrの住人のピエロがいった「賢い人」について知ったことで、ここ数日の疑問に私なりの回答を出せた気がする。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>rの住人ピエロより<br><a href="https://youtu.be/fFQ9kax20I0?si=f59Kuw5A8jezI7En">https://youtu.be/fFQ9kax20I0?si=f59Kuw5A8jezI7En</a></p>
-<h2 id="続き"><a href="#続き" class="headerlink" title="続き"></a>続き</h2><p><a href="https://verazza.f5.si/posts/8821/">生成AIとの共生2</a>を見てね。</p>
-]]></content>
-      <tags>
-        <tag>LLM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>WSLを使わない! Windows開発環境構築</title>
     <url>/posts/47392/</url>
     <content><![CDATA[<!--
@@ -344,6 +325,25 @@ See the LICENSE file in the source directory for details.
 ]]></content>
       <tags>
         <tag>Neovim, Windows, 開発環境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生成AIとの共生1</title>
+    <url>/posts/30026/</url>
+    <content><![CDATA[<h1 id="生成AIをプログラミングに活用することについて"><a href="#生成AIをプログラミングに活用することについて" class="headerlink" title="生成AIをプログラミングに活用することについて"></a>生成AIをプログラミングに活用することについて</h1><h2 id="賢い人とは"><a href="#賢い人とは" class="headerlink" title="賢い人とは"></a>賢い人とは</h2><p>賢い人とは、抽象度（視点）が高く、共通項を見つける能力に長けた人のことを言う。即ち、部分から全体、全体から部分を考えることのできる能力に秀でた人のことだ。<br>確かに、生成AIを用いることで、誰でも母国語である自然言語でコードを生成できる。それ即ち、<del>部分から</del>全体を知れる。</p>
+<h2 id="生成AIがもたらすもの"><a href="#生成AIがもたらすもの" class="headerlink" title="生成AIがもたらすもの"></a>生成AIがもたらすもの</h2><p>しかし、そこに__過程__はない。部分から全体、全体から部分を考えられる人が賢い人だと表現したが、共通項を見つける作業をすっ飛ばしてその能力が上がることはないと思うのだ。ゆえに、生成AIを用いることで自らの抽象度が上がることはないのだ。</p>
+<h2 id="過程とは"><a href="#過程とは" class="headerlink" title="過程とは"></a>過程とは</h2><p>一方、その__過程__とは何か？<br>「逆元的である」という表現を思いついた。部分から全体、全体から部分を可能にするのは数学においては、間違いなく定義だ。defがあれば即ち、必要十分条件があれば、どんな例題だって思いつけるし解けるだろう。また、多くの例題をひとまとめにいわば統一的に書いたものこそ定義である。コード生成はこの定義を自らに落とすことなく全体を述べてしまう。  </p>
+<h2 id="生成AIがもたらす恩恵"><a href="#生成AIがもたらす恩恵" class="headerlink" title="生成AIがもたらす恩恵"></a>生成AIがもたらす恩恵</h2><p>しかし、自然言語からコードへの等価交換はなんといっても魅力的だ。<br>実際、コードを理解することを確認するには、それを自らの自然言語で説明できるかという点に集約されるだろう。</p>
+<h2 id="生成AIを扱う上での注意点"><a href="#生成AIを扱う上での注意点" class="headerlink" title="生成AIを扱う上での注意点"></a>生成AIを扱う上での注意点</h2><p>私が生成AIを用いてコード生成するときに注意していることは、自然言語からコードを生成された後のコードを一通り読み、何らかの自らの解釈を加えるということだ。<br>そのコードが即座に実行可能であれば、実行して確認することもできるだろう。</p>
+<h2 id="生成AIを扱う上での理想"><a href="#生成AIを扱う上での理想" class="headerlink" title="生成AIを扱う上での理想"></a>生成AIを扱う上での理想</h2><p>しかし、我々は生成AIを使いたい、もって言い換えれば、生成AIに使役されることなく生成AIを道具、自らの糧にしたい人が多いはずだ。それには、単純に生成AIが生成する全体としてのコードを眺めるだけではいけない。なぜなら、部分から全体を考えるにあたっての自らの定義（武器）を持たずして、生成AIと同じ視点、即ち、生成AIと同じ抽象度を維持することはできないのだ。</p>
+<h2 id="臨界点"><a href="#臨界点" class="headerlink" title="臨界点"></a>臨界点</h2><p>人のメモリには限界があるので、defを多岐の分野で、一人の人間が生成AIと同レベルに抽象的に表現することはできないだろうが、なにか一部分、特定の分野においては生成AIと同レベルに考えることができると私は信じている。</p>
+<h2 id="プログラミング力を高めるには"><a href="#プログラミング力を高めるには" class="headerlink" title="プログラミング力を高めるには"></a>プログラミング力を高めるには</h2><p>さしあたっては、真にプログラミングを身に着けたいのであれば、生成AIを超える覚悟を持って、批判的に扱うべきだ。また、コード生成になにかのAPIを使ったものなのであれば、そのAPIを作った開発者のドキュメントぐらいは見るべきだろう。それを知らずして、生成AIを超える抽象度を維持することはできないからだ。</p>
+<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>今回は、生成AIを使うことについて深く考えた。きっかけは、このままプログラミングに生成AIを使っていて、ほんとうに自らのプログラミングスキルが身につくものかと疑問視したからだ。<br>下記の参考にあるrの住人のピエロがいった「賢い人」について知ったことで、ここ数日の疑問に私なりの回答を出せた気がする。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>rの住人ピエロより<br><a href="https://youtu.be/fFQ9kax20I0?si=f59Kuw5A8jezI7En">https://youtu.be/fFQ9kax20I0?si=f59Kuw5A8jezI7En</a></p>
+<h2 id="続き"><a href="#続き" class="headerlink" title="続き"></a>続き</h2><p><a href="https://verazza.f5.si/posts/8821/">生成AIとの共生2</a>を見てね。</p>
+]]></content>
+      <tags>
+        <tag>LLM</tag>
       </tags>
   </entry>
   <entry>
