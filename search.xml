@@ -68,7 +68,9 @@ See the LICENSE file in the source directory for details.
 <h2 id="discordoをCLI環境で使えるようにする"><a href="#discordoをCLI環境で使えるようにする" class="headerlink" title="discordoをCLI環境で使えるようにする"></a>discordoをCLI環境で使えるようにする</h2><p>何度か試行したが、できなかった。<br><del>まず、discordトークンは、機密情報なので、libsecretかgnome-keyringかkwalletを使用したい。<br>GUIではアンロックは容易だが、CLIでのキーリングのアンロックがサポートされていないシークレットサービスも少なくない。<br>ということで、まずは、CLI上でキーリングをアンロックし、discordoでログインできるかどうかを確認する必要がある。<code>opensc</code>パッケージに同封されている<code>pkcs11-tool</code>よりCLIでのアンロックを試したが、あれは、<code>gnome-keyring</code>で使えるようなものだった。CLIでは<code>gnome-keyring-daemon</code>が起動できないため、失敗に終わった。</del></p>
 ]]></content>
       <tags>
-        <tag>ArchLinux, CLI, 開発環境</tag>
+        <tag>ArchLinux</tag>
+        <tag>CLI</tag>
+        <tag>開発環境</tag>
       </tags>
   </entry>
   <entry>
@@ -101,23 +103,60 @@ See the LICENSE file in the source directory for details.
 </ul>
 ]]></content>
       <tags>
-        <tag>python, gemini</tag>
+        <tag>python</tag>
+        <tag>gemini</tag>
       </tags>
   </entry>
   <entry>
     <title>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</title>
     <url>/posts/34194/</url>
-    <content><![CDATA[<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
 <figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>Windows, DualBoot</tag>
+        <tag>Windows</tag>
+        <tag>DualBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NginxにSSLを導入</title>
+    <url>/posts/21623/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure>
+<p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo certbot --nginx -d keyp.f5.si,kishax.f5.si</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>SSL</tag>
       </tags>
   </entry>
   <entry>
     <title>NginxにModSecurityを適用</title>
     <url>/posts/39499/</url>
-    <content><![CDATA[<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
 
 <h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure>
 
@@ -135,45 +174,53 @@ See the LICENSE file in the source directory for details.
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>Nginx, ModSecurity</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NginxにSSLを導入</title>
-    <url>/posts/21623/</url>
-    <content><![CDATA[<h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure>
-
-<h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure>
-<p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo certbot --nginx -d keyp.f5.si,kishax.f5.si</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Nginx, SSL</tag>
+        <tag>Nginx</tag>
+        <tag>ModSecurity</tag>
       </tags>
   </entry>
   <entry>
     <title>OBSやVBCableを使わずに音声を内部ルーティング</title>
     <url>/posts/54038/</url>
-    <content><![CDATA[<h1 id="OBSから脱却"><a href="#OBSから脱却" class="headerlink" title="OBSから脱却"></a>OBSから脱却</h1><p>jackパッケージでサウンドの内部ルーティングが容易に。</p>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="OBSから脱却"><a href="#OBSから脱却" class="headerlink" title="OBSから脱却"></a>OBSから脱却</h1><p>jackパッケージでサウンドの内部ルーティングが容易に。</p>
 <h1 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pipewire pipewire-pulse pipewire-jack qjackctl</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl --user restart pipewire</span><br><span class="line">systemctl --user restart pipewire-pulse</span><br><span class="line">systemctl --user restart pipewire-media-session</span><br></pre></td></tr></table></figure>
 <p>jack, setupのinterfaceに持ってるオーディオインターフェースを選択<br>あとは、グラフよりルーティング<br><img src="/images/jack_graph.png" alt="jack_graph"></p>
 ]]></content>
       <tags>
-        <tag>OBS, VBCable, jack, ArchLinux</tag>
+        <tag>ArchLinux</tag>
+        <tag>OBS</tag>
+        <tag>VBCable</tag>
+        <tag>Jack</tag>
       </tags>
   </entry>
   <entry>
     <title>SSHログインに2FA導入</title>
     <url>/posts/18876/</url>
-    <content><![CDATA[<h1 id="sshに2FAを導入するにあたって"><a href="#sshに2FAを導入するにあたって" class="headerlink" title="sshに2FAを導入するにあたって"></a>sshに2FAを導入するにあたって</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libpam-google-authenticator</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="sshに2FAを導入するにあたって"><a href="#sshに2FAを導入するにあたって" class="headerlink" title="sshに2FAを導入するにあたって"></a>sshに2FAを導入するにあたって</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libpam-google-authenticator</span><br></pre></td></tr></table></figure>
 <p>ユーザーごとに鍵を作る</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">google-authenticator</span><br></pre></td></tr></table></figure>
 
 <h2 id="参照"><a href="#参照" class="headerlink" title="参照"></a>参照</h2><p><a href="https://wiki.archlinux.jp/index.php/Google_Authenticator#.E3.82.A4.E3.83.B3.E3.82.B9.E3.83.88.E3.83.BC.E3.83.AB">https://wiki.archlinux.jp/index.php/Google_Authenticator#.E3.82.A4.E3.83.B3.E3.82.B9.E3.83.88.E3.83.BC.E3.83.AB</a><br><a href="https://wiki.archlinux.jp/index.php/OpenSSH#.E4.BA.8C.E8.A6.81.E7.B4.A0.E8.AA.8D.E8.A8.BC.E3.81.A8.E5.85.AC.E9.96.8B.E9.8D.B5">https://wiki.archlinux.jp/index.php/OpenSSH#.E4.BA.8C.E8.A6.81.E7.B4.A0.E8.AA.8D.E8.A8.BC.E3.81.A8.E5.85.AC.E9.96.8B.E9.8D.B5</a></p>
 ]]></content>
       <tags>
-        <tag>ArchLinux, 2FA, Google-Authendicator, SSH</tag>
+        <tag>ArchLinux</tag>
+        <tag>2FA</tag>
+        <tag>Google-Authendicator</tag>
+        <tag>SSH</tag>
       </tags>
   </entry>
   <entry>
@@ -229,7 +276,10 @@ See the LICENSE file in the source directory for details.
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zenn.dev/kyoh86/articles/4bf6513aabe517">https://zenn.dev/kyoh86/articles/4bf6513aabe517</a><br><a href="https://blog.yukirii.dev/wsl2-arch-linux/">https://blog.yukirii.dev/wsl2-arch-linux/</a><br><a href="https://zenn.dev/artemit/articles/63e073d53179ae">https://zenn.dev/artemit/articles/63e073d53179ae</a></p>
 ]]></content>
       <tags>
-        <tag>Neovim, Windows, WSL, 開発環境</tag>
+        <tag>開発環境</tag>
+        <tag>Windows</tag>
+        <tag>Neovim</tag>
+        <tag>WSL</tag>
       </tags>
   </entry>
   <entry>
@@ -324,13 +374,21 @@ See the LICENSE file in the source directory for details.
 <h2 id="Terms-Of-Service"><a href="#Terms-Of-Service" class="headerlink" title="Terms Of Service"></a>Terms Of Service</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">These Terms of Service (&quot;Terms&quot;) govern your use of our application (&quot;the App&quot;). By accessing or using the App, you agree to comply with these Terms.</span><br><span class="line"></span><br><span class="line">1. Acceptable Use</span><br><span class="line">You must use the App in compliance with all applicable laws and regulations.</span><br><span class="line">You are responsible for any content you create or upload to the App.</span><br><span class="line">2. Prohibited Actions</span><br><span class="line">You may not:</span><br><span class="line"></span><br><span class="line">Use the App for any unlawful activities.</span><br><span class="line">Attempt to reverse-engineer or interfere with the App&#x27;s functionality.</span><br><span class="line">3. Limitation of Liability</span><br><span class="line">We are not responsible for any damages or losses resulting from your use of the App.</span><br><span class="line"></span><br><span class="line">4. Termination</span><br><span class="line">We reserve the right to suspend or terminate your access to the App for violations of these Terms.</span><br><span class="line"></span><br><span class="line">5. Changes to the Terms</span><br><span class="line">We may update these Terms from time to time. Continued use of the App constitutes acceptance of the updated Terms.</span><br><span class="line"></span><br><span class="line">6. Contact Us</span><br><span class="line">If you have any questions about these Terms, please contact us at [maekawatakaya10.8@gmail.com].</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>google,x</tag>
+        <tag>google</tag>
+        <tag>x</tag>
       </tags>
   </entry>
   <entry>
     <title>生成AIとの共生1</title>
     <url>/posts/30026/</url>
-    <content><![CDATA[<h1 id="生成AIをプログラミングに活用することについて"><a href="#生成AIをプログラミングに活用することについて" class="headerlink" title="生成AIをプログラミングに活用することについて"></a>生成AIをプログラミングに活用することについて</h1><h2 id="賢い人とは"><a href="#賢い人とは" class="headerlink" title="賢い人とは"></a>賢い人とは</h2><p>賢い人とは、抽象度（視点）が高く、共通項を見つける能力に長けた人のことを言う。即ち、部分から全体、全体から部分を考えることのできる能力に秀でた人のことだ。<br>確かに、生成AIを用いることで、誰でも母国語である自然言語でコードを生成できる。それ即ち、<del>部分から</del>全体を知れる。</p>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="生成AIをプログラミングに活用することについて"><a href="#生成AIをプログラミングに活用することについて" class="headerlink" title="生成AIをプログラミングに活用することについて"></a>生成AIをプログラミングに活用することについて</h1><h2 id="賢い人とは"><a href="#賢い人とは" class="headerlink" title="賢い人とは"></a>賢い人とは</h2><p>賢い人とは、抽象度（視点）が高く、共通項を見つける能力に長けた人のことを言う。即ち、部分から全体、全体から部分を考えることのできる能力に秀でた人のことだ。<br>確かに、生成AIを用いることで、誰でも母国語である自然言語でコードを生成できる。それ即ち、<del>部分から</del>全体を知れる。</p>
 <h2 id="生成AIがもたらすもの"><a href="#生成AIがもたらすもの" class="headerlink" title="生成AIがもたらすもの"></a>生成AIがもたらすもの</h2><p>しかし、そこに__過程__はない。部分から全体、全体から部分を考えられる人が賢い人だと表現したが、共通項を見つける作業をすっ飛ばしてその能力が上がることはないと思うのだ。ゆえに、生成AIを用いることで自らの抽象度が上がることはないのだ。</p>
 <h2 id="過程とは"><a href="#過程とは" class="headerlink" title="過程とは"></a>過程とは</h2><p>一方、その__過程__とは何か？<br>「逆元的である」という表現を思いついた。部分から全体、全体から部分を可能にするのは数学においては、間違いなく定義だ。defがあれば即ち、必要十分条件があれば、どんな例題だって思いつけるし解けるだろう。また、多くの例題をひとまとめにいわば統一的に書いたものこそ定義である。コード生成はこの定義を自らに落とすことなく全体を述べてしまう。  </p>
 <h2 id="生成AIがもたらす恩恵"><a href="#生成AIがもたらす恩恵" class="headerlink" title="生成AIがもたらす恩恵"></a>生成AIがもたらす恩恵</h2><p>しかし、自然言語からコードへの等価交換はなんといっても魅力的だ。<br>実際、コードを理解することを確認するには、それを自らの自然言語で説明できるかという点に集約されるだろう。</p>
@@ -349,7 +407,14 @@ See the LICENSE file in the source directory for details.
   <entry>
     <title>生成AIとの共生2</title>
     <url>/posts/8821/</url>
-    <content><![CDATA[<h1 id="生成AIは「賢さ」を奪うのか？プログラミング学習における考察"><a href="#生成AIは「賢さ」を奪うのか？プログラミング学習における考察" class="headerlink" title="生成AIは「賢さ」を奪うのか？プログラミング学習における考察"></a>生成AIは「賢さ」を奪うのか？プログラミング学習における考察</h1><h2 id="前回まで"><a href="#前回まで" class="headerlink" title="前回まで"></a>前回まで</h2><p><a href="https://verazza.f5.si/posts/30026/">生成AIとの共生1</a>を見てね。  </p>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="生成AIは「賢さ」を奪うのか？プログラミング学習における考察"><a href="#生成AIは「賢さ」を奪うのか？プログラミング学習における考察" class="headerlink" title="生成AIは「賢さ」を奪うのか？プログラミング学習における考察"></a>生成AIは「賢さ」を奪うのか？プログラミング学習における考察</h1><h2 id="前回まで"><a href="#前回まで" class="headerlink" title="前回まで"></a>前回まで</h2><p><a href="https://verazza.f5.si/posts/30026/">生成AIとの共生1</a>を見てね。  </p>
 <h2 id="会話"><a href="#会話" class="headerlink" title="会話"></a>会話</h2><p>以下、私の親友（以降友達Rと呼ぶ）との会話（議論？）を通して収穫したものをここで述べるとしよう。<br>また、彼ならば、別に無断でメッセージを記事にしても文句の1つや2つで許してくれるだろうと断っておく。<br>匿名だし！！  </p>
 <p>【実際のDiscordでの会話】</p>
 <p>(04&#x2F;23&#x2F;25)<br>(0-0)友達R:<br>課題4つC++で書いた後、課題5が全部matlabで書き直せなんやけど<br>Chatgptに書き換えてって言ったら9割型正解のコード出してくれるな</p>
@@ -471,11 +536,22 @@ See the LICENSE file in the source directory for details.
 <h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>書いてて思った、面倒だ！！！</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zenn.dev/ytjvdcm/articles/0efb9112468de3">https://zenn.dev/ytjvdcm/articles/0efb9112468de3</a></p>
 ]]></content>
+      <tags>
+        <tag>ArchLinux</tag>
+        <tag>環境構築</tag>
+      </tags>
   </entry>
   <entry>
     <title>私的MySQLチートシート</title>
     <url>/posts/49418/</url>
-    <content><![CDATA[<h1 id="MySQLチートシート"><a href="#MySQLチートシート" class="headerlink" title="MySQLチートシート"></a>MySQLチートシート</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S mysql mysql-workbench</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/lib/mysql/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R mysql:mysql /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R 750 /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now mysqld</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="MySQLチートシート"><a href="#MySQLチートシート" class="headerlink" title="MySQLチートシート"></a>MySQLチートシート</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S mysql mysql-workbench</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/lib/mysql/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R mysql:mysql /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R 750 /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now mysqld</span><br></pre></td></tr></table></figure>
 
 <h2 id="もし、dbeaverなどでrootにログインできなかったら、"><a href="#もし、dbeaverなどでrootにログインできなかったら、" class="headerlink" title="もし、dbeaverなどでrootにログインできなかったら、"></a>もし、<code>dbeaver</code>などでrootにログインできなかったら、</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> mysql.user <span class="keyword">SET</span> authentication_string<span class="operator">=</span>PASSWORD(<span class="string">&#x27;新しいパスワード&#x27;</span>), plugin<span class="operator">=</span><span class="string">&#x27;mysql_native_password&#x27;</span> <span class="keyword">WHERE</span> <span class="keyword">User</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
 
@@ -495,13 +571,21 @@ See the LICENSE file in the source directory for details.
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> users (name, password, email)</span><br><span class="line"><span class="keyword">SELECT</span> name, password, email</span><br><span class="line"><span class="keyword">FROM</span> members;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>CheatSheet, MySQL</tag>
+        <tag>CheatSheet</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
     <title>私的コマンドチートシート</title>
     <url>/posts/24514/</url>
-    <content><![CDATA[<h1 id="コマンドチートシート"><a href="#コマンドチートシート" class="headerlink" title="コマンドチートシート"></a>コマンドチートシート</h1><h2 id="シンボリックリンクを通す"><a href="#シンボリックリンクを通す" class="headerlink" title="シンボリックリンクを通す"></a>シンボリックリンクを通す</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /path/to/target /path/to/wanna/to/place</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="コマンドチートシート"><a href="#コマンドチートシート" class="headerlink" title="コマンドチートシート"></a>コマンドチートシート</h1><h2 id="シンボリックリンクを通す"><a href="#シンボリックリンクを通す" class="headerlink" title="シンボリックリンクを通す"></a>シンボリックリンクを通す</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /path/to/target /path/to/wanna/to/place</span><br></pre></td></tr></table></figure>
 
 <h2 id="特定の階層以下のファイルのパスと内容を表示"><a href="#特定の階層以下のファイルのパスと内容を表示" class="headerlink" title="特定の階層以下のファイルのパスと内容を表示"></a>特定の階層以下のファイルのパスと内容を表示</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find path/to/directory/ -<span class="built_in">type</span> f -<span class="built_in">exec</span> sh -c <span class="string">&#x27;echo &quot;==== &#123;&#125; ====&quot;; cat &#123;&#125;&#x27;</span> \;</span><br></pre></td></tr></table></figure>
 
@@ -562,8 +646,8 @@ See the LICENSE file in the source directory for details.
 ]]></content>
       <tags>
         <tag>ArchLinux</tag>
-        <tag>Command</tag>
         <tag>CheatSheet</tag>
+        <tag>Command</tag>
       </tags>
   </entry>
 </search>
