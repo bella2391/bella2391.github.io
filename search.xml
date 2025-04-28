@@ -108,45 +108,6 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</title>
-    <url>/posts/34194/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Windows</tag>
-        <tag>DualBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NginxにSSLを導入</title>
-    <url>/posts/21623/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure>
-
-<h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure>
-<p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo certbot --nginx -d keyp.f5.si,kishax.f5.si</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Nginx</tag>
-        <tag>SSL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NginxにModSecurityを適用</title>
     <url>/posts/39499/</url>
     <content><![CDATA[<!--
@@ -191,13 +152,74 @@ See the LICENSE file in the source directory for details.
 <h1 id="OBSから脱却"><a href="#OBSから脱却" class="headerlink" title="OBSから脱却"></a>OBSから脱却</h1><p>jackパッケージでサウンドの内部ルーティングが容易に。</p>
 <h1 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pipewire pipewire-pulse pipewire-jack qjackctl</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl --user restart pipewire</span><br><span class="line">systemctl --user restart pipewire-pulse</span><br><span class="line">systemctl --user restart pipewire-media-session</span><br></pre></td></tr></table></figure>
-<p>jack, setupのinterfaceに持ってるオーディオインターフェースを選択<br>あとは、グラフよりルーティング<br><img src="/images/jack_graph.png" alt="jack_graph"></p>
+<p>jack, setupのinterfaceに持ってるオーディオインターフェースを選択<br>あとは、グラフよりルーティング<br><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3628758/e1e25ade-583d-4dfe-8a88-0181888877f7.png" alt="jack_graph.png"></p>
 ]]></content>
       <tags>
         <tag>ArchLinux</tag>
         <tag>OBS</tag>
         <tag>VBCable</tag>
         <tag>Jack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NginxにSSLを導入</title>
+    <url>/posts/21623/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure>
+<p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo certbot --nginx -d keyp.f5.si,kishax.f5.si</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>SSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>QiitaとHexoで同時投稿をするために</title>
+    <url>/posts/8859/</url>
+    <content><![CDATA[<h1 id="QiitaとHexoで同時投稿するには"><a href="#QiitaとHexoで同時投稿するには" class="headerlink" title="QiitaとHexoで同時投稿するには"></a>QiitaとHexoで同時投稿するには</h1><p>どちらもMarkDown形式のファイルを自動化されたcss、javascriptと合わせて、最終的に、htmlに変換するサービスを提供している。<code>npm</code>パッケージリポジトリににそれらをCLIから操作できる便利なツールが出ているため、先に、<code>npm</code>使える状況にないよって人は以下を参考にしてね。<br><a href="https://qiita.com/verazza/items/1561e33b12f83d650f8f#nvm%E3%81%AB%E3%82%88%E3%82%8Bnpmnode%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89">私的ArchLinux開発環境構築 &gt;&gt; nvmによるnpm&#x2F;node環境構築</a></p>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i --save-dev hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>これを実行した後は、どのディレクトリ階層でも、<code>hexo</code>コマンドが使えるようになっていると思う。次に、ディレクトリ階層を作っていくが、それを1から構成するのは骨が折れるので、以下を実行し、必要ファイルを<code>hexo</code>に生成してもらう。</p>
+<h3 id="ファイル配置"><a href="#ファイル配置" class="headerlink" title="ファイル配置"></a>ファイル配置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 作業ディレクトリを作ってその中で実行する。</span></span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<h3 id="記事の作成"><a href="#記事の作成" class="headerlink" title="記事の作成"></a>記事の作成</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;&lt;title&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>これにより、<code>source/_posts/</code>内に<code>&lt;title&gt;.md</code>が追加されるので、それを編集する。</p>
+<h3 id="ローカルサーバー起動（テスト）"><a href="#ローカルサーバー起動（テスト）" class="headerlink" title="ローカルサーバー起動（テスト）"></a>ローカルサーバー起動（テスト）</h3><p>規定では、<code>http://localhost:4000</code>で起動される。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<h3 id="カスタマイズ"><a href="#カスタマイズ" class="headerlink" title="カスタマイズ"></a>カスタマイズ</h3><h4 id="デプロイヤー"><a href="#デプロイヤー" class="headerlink" title="デプロイヤー"></a>デプロイヤー</h4><p>以下、Githubをデプロイ先として考える。<br>現状、<code>source/_posts/</code>に<code>*.md</code>ファイルを配置し、<code>hexo server</code>をすることで、ローカルでそれらを確認できるが、実際は、リモートで配信するためのプッシュ（デプロイ）が必要になる。別にGithubのワークフローでも自動プッシュが可能。しかし、私はコマンド派。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<p><code>_config.yml</code>の変更場所</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># デプロイ先のレポジトリ名が`&lt;user&gt;.github.io`の場合</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://&lt;user&gt;.github.io/</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/&lt;user&gt;/&lt;user&gt;.github.io</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="テーマ"><a href="#テーマ" class="headerlink" title="テーマ"></a>テーマ</h4><p>私は、<a href="https://github.com/jerryc127/hexo-theme-butterfly">jerryc127&#x2F;hexo-theme-butterfly</a>を使っています。他にも、テーマはたくさんあるので好みのものを選ぼう。<br><a href="https://hexo.io/themes/">https://hexo.io/themes/</a></p>
+<h4 id="リンク簡略化〜永久リンクを短くする〜"><a href="#リンク簡略化〜永久リンクを短くする〜" class="headerlink" title="リンク簡略化〜永久リンクを短くする〜"></a>リンク簡略化〜永久リンクを短くする〜</h4><p>デフォルトの設定では、投稿後のリンクは、<code>https://&lt;デプロイ先のURL&gt;/2025/04/28/&lt;title&gt;/</code>となるが、以下を導入することで、<code>https://&lt;デプロイ先URL&gt;/posts/8821/</code>というURLでアクセスできるようになる。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+<p><code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">posts/:abbrlink/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Qiita（Qiita-CLI）"><a href="#Qiita（Qiita-CLI）" class="headerlink" title="Qiita（Qiita-CLI）"></a>Qiita（Qiita-CLI）</h2><h3 id="インストール-1"><a href="#インストール-1" class="headerlink" title="インストール"></a>インストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i @qiita/qiita-cli --save-dev</span><br></pre></td></tr></table></figure>
+<p>これにより、<code>npx</code>コマンドを経由して、<code>qiita</code>コマンドが使えるようになった。以下、初回に限り実行するもの。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npx qiita init</span><br><span class="line">npx qiita login</span><br></pre></td></tr></table></figure>
+<p>ここで私は困った。<br>この<code>qiita</code>コマンドでは、<code>--root</code>引数により、ルートプロジェクトは設定できるものの、<code>public</code>ディレクトリは必要なのだ。<br>一方、<code>hexo</code>では、<code>*.md</code>ファイルが<code>source/_posts/</code>ディレクトリに配置する。ここをうまいこと統合する必要がある。<br>そこで、私が、その、<code>hexo</code>から<code>qiita</code>への橋渡しとなるバッシュスクリプトを開発した。それが以下である。<br><code>deploy_to_qiita.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -rf ./public</span><br><span class="line"><span class="built_in">cp</span> -r ./source/_posts/ ./public</span><br><span class="line"></span><br><span class="line">find ./public -<span class="built_in">type</span> f -name <span class="string">&#x27;*.md&#x27;</span> -<span class="built_in">exec</span> bash -c <span class="string">&#x27;</span></span><br><span class="line"><span class="string">  FILE=&quot;$1&quot;</span></span><br><span class="line"><span class="string">  FRONT_MATTER=$(head -n 999 &quot;$FILE&quot; | grep -E &quot;^title:|tags:|abbrlink:|date:&quot;)</span></span><br><span class="line"><span class="string">  UPDATED_AT=$(echo &quot;$FRONT_MATTER&quot; | grep -oE &quot;date: (.*)&quot; | sed -E &quot;s/^date: //&quot;)</span></span><br><span class="line"><span class="string">  POST_ID=$(echo &quot;$FRONT_MATTER&quot; | grep -oE &quot;abbrlink: (.*)&quot; | sed -E &quot;s/^abbrlink: //&quot;)</span></span><br><span class="line"><span class="string">  sed -i &quot;1a updated_at: \&quot;$&#123;UPDATED_AT&#125;\&quot;&quot; &quot;$FILE&quot;</span></span><br><span class="line"><span class="string">  sed -i &quot;2a private: false&quot; &quot;$FILE&quot;</span></span><br><span class="line"><span class="string">  sed -i &quot;3a id: \&quot;$&#123;POST_ID&#125;\&quot;&quot; &quot;$FILE&quot;</span></span><br><span class="line"><span class="string">  sed -i &quot;4a organization_url_name: null&quot; &quot;$FILE&quot;</span></span><br><span class="line"><span class="string">  sed -i &quot;5a slide: false&quot; &quot;$FILE&quot;</span></span><br><span class="line"><span class="string">  sed -i &quot;6a ignorePublish: false&quot; &quot;$FILE&quot;</span></span><br><span class="line"><span class="string">&#x27;</span> _ &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 個別処理したい場合は以下を使用</span></span><br><span class="line"><span class="comment"># declare -a basenames</span></span><br><span class="line"><span class="comment"># while IFS= read -r -d $&#x27;\0&#x27; file; do</span></span><br><span class="line"><span class="comment">#   basename=$(basename &quot;$file&quot; .md)</span></span><br><span class="line"><span class="comment">#   basenames+=(&quot;$basename&quot;)</span></span><br><span class="line"><span class="comment"># done &lt; &lt;(find ./source/_posts -type f -name &#x27;*.md&#x27; -print0)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for basename in &quot;$&#123;basenames[@]&#125;&quot;; do</span></span><br><span class="line"><span class="comment">#   echo &quot;Publishing: $basename.md&quot;</span></span><br><span class="line"><span class="comment">#   npx qiita publish &quot;$basename&quot;</span></span><br><span class="line"><span class="comment"># done</span></span><br><span class="line"></span><br><span class="line">npx qiita publish --all</span><br></pre></td></tr></table></figure>
+<p>これにより、Qiitaで投稿する際に必要になる、キー<code>updated_at;private;id;organization_url_name;slide;ignorePublish;</code>などが<code>hexo new &quot;&lt;title&gt;&quot;</code>コマンドで生成された<code>source/_posts/</code>内にある<code>*.md</code>ファイルに対して、自動で追加され、そのまま投稿できるようになる。<br>なお、一度、ルートディレクトリの<code>public</code>を削除し、<code>source/_posts/</code>内の<code>*.md</code>ファイルをコピーした後で、<code>sed</code>コマンドによるファイル操作を行うので、元の<code>*.md</code>ファイルが汚染されることはない。<br>最新の<code>deploy_to_qiita.sh</code>については、以下を参照してほしい。更新があれば、記事の方も更新するようにするので、同じ内容になるかとは思う。(一応)<br><a href="https://github.com/verazza/blog/blob/master/deploy_to_qiita.sh">https://github.com/verazza/blog/blob/master/deploy_to_qiita.sh</a></p>
+<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>今回は、記事作成および投稿に<code>hexo</code>を使っていた私が<code>qiita</code>にも、一応投稿しておくか！ってことで、<code>Qiita-CLI</code>を使いましたが、良い機会になりました。やっぱコマンド触ってるだけでエンジニアっぽい…</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/jerryc127/hexo-theme-butterfly">jerryc127&#x2F;hexo-theme-butterfly</a>テーマを使うときに<br><a href="https://sj-note.com/hexo-butterfly-upgrade">https://sj-note.com/hexo-butterfly-upgrade</a></p>
+<p><code>hexo</code>の有用プラグインの検索に<br><a href="https://qiita.com/ORCHESTRA_TAPE/items/a0c795904e33cdf043d7">https://qiita.com/ORCHESTRA_TAPE/items/a0c795904e33cdf043d7</a></p>
+]]></content>
+      <tags>
+        <tag>Qiita</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -277,8 +299,8 @@ See the LICENSE file in the source directory for details.
 ]]></content>
       <tags>
         <tag>開発環境</tag>
-        <tag>Windows</tag>
         <tag>Neovim</tag>
+        <tag>Windows</tag>
         <tag>WSL</tag>
       </tags>
   </entry>
@@ -355,7 +377,9 @@ See the LICENSE file in the source directory for details.
 <figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">New-Item</span> <span class="literal">-ItemType</span> Junction <span class="literal">-Path</span> <span class="string">&quot;nvim&quot;</span> <span class="literal">-Target</span> <span class="string">&quot;<span class="variable">$env:LOCALAPPDATA</span>\nvim&quot;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>Neovim, Windows, 開発環境</tag>
+        <tag>開発環境</tag>
+        <tag>Neovim</tag>
+        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -376,6 +400,24 @@ See the LICENSE file in the source directory for details.
       <tags>
         <tag>google</tag>
         <tag>x</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows側の日付と時刻が同期しない問題</title>
+    <url>/posts/34194/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Windows</tag>
+        <tag>DualBoot</tag>
       </tags>
   </entry>
   <entry>
