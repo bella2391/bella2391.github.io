@@ -489,40 +489,6 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>私的MySQLチートシート</title>
-    <url>/posts/49418/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h1 id="MySQLチートシート"><a href="#MySQLチートシート" class="headerlink" title="MySQLチートシート"></a>MySQLチートシート</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S mysql mysql-workbench</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/lib/mysql/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R mysql:mysql /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R 750 /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now mysqld</span><br></pre></td></tr></table></figure>
-
-<h2 id="もし、dbeaverなどでrootにログインできなかったら、"><a href="#もし、dbeaverなどでrootにログインできなかったら、" class="headerlink" title="もし、dbeaverなどでrootにログインできなかったら、"></a>もし、<code>dbeaver</code>などでrootにログインできなかったら、</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> mysql.user <span class="keyword">SET</span> authentication_string<span class="operator">=</span>PASSWORD(<span class="string">&#x27;新しいパスワード&#x27;</span>), plugin<span class="operator">=</span><span class="string">&#x27;mysql_native_password&#x27;</span> <span class="keyword">WHERE</span> <span class="keyword">User</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
-
-<h2 id="データインポートするのが遅かったら"><a href="#データインポートするのが遅かったら" class="headerlink" title="データインポートするのが遅かったら"></a>データインポートするのが遅かったら</h2><p>一番早いのは、ログインしてから</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">use [database];</span><br><span class="line">source <span class="operator">~</span><span class="operator">/</span>file.sql</span><br></pre></td></tr></table></figure>
-
-<h2 id="mysql-import-export中の進捗をログで表示"><a href="#mysql-import-export中の進捗をログで表示" class="headerlink" title="mysql import, export中の進捗をログで表示"></a>mysql import, export中の進捗をログで表示</h2><h3 id="インストール-1"><a href="#インストール-1" class="headerlink" title="インストール"></a>インストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pv</span><br></pre></td></tr></table></figure>
-
-<h3 id="実際に使ってみる"><a href="#実際に使ってみる" class="headerlink" title="実際に使ってみる"></a>実際に使ってみる</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># import</span></span><br><span class="line">pv ~/downloads/forum.sql | <span class="built_in">sudo</span> mariadb --max_allowed_packet=64M web</span><br><span class="line"></span><br><span class="line"><span class="comment"># export</span></span><br><span class="line">mysqldump --max_allowed_packet=64M -u root -p web | pv &gt; ~/downloads/forum.sql</span><br></pre></td></tr></table></figure>
-
-<h2 id="exportで失敗しないために"><a href="#exportで失敗しないために" class="headerlink" title="exportで失敗しないために"></a>exportで失敗しないために</h2><p><code>mysqldump</code>コマンドの引数で、<code>max_allowed_packet</code>を指定する</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysqldump --max_allowed_packet=64M -u root -p web &gt; ~/path/to/sample.sql</span><br></pre></td></tr></table></figure>
-
-<h2 id="auth-socketプラグインを使っているかどうか検証"><a href="#auth-socketプラグインを使っているかどうか検証" class="headerlink" title="auth_socketプラグインを使っているかどうか検証"></a><code>auth_socket</code>プラグインを使っているかどうか検証</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">user</span>, host, plugin <span class="keyword">FROM</span> mysql.user <span class="keyword">WHERE</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;mc&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="INSERTでSELECT参照"><a href="#INSERTでSELECT参照" class="headerlink" title="INSERTでSELECT参照"></a>INSERTでSELECT参照</h2><p>例として、<code>members</code>テーブルのものを<code>users</code>テーブルに移植する。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> users (name, password, email)</span><br><span class="line"><span class="keyword">SELECT</span> name, password, email</span><br><span class="line"><span class="keyword">FROM</span> members;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>CheatSheet</tag>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>私的ArchLinux開発環境構築</title>
     <url>/posts/14653/</url>
     <content><![CDATA[<!--
@@ -625,6 +591,40 @@ See the LICENSE file in the source directory for details.
       <tags>
         <tag>ArchLinux</tag>
         <tag>環境構築</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>私的MySQLチートシート</title>
+    <url>/posts/49418/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="MySQLチートシート"><a href="#MySQLチートシート" class="headerlink" title="MySQLチートシート"></a>MySQLチートシート</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S mysql mysql-workbench</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/lib/mysql/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R mysql:mysql /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R 750 /var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now mysqld</span><br></pre></td></tr></table></figure>
+
+<h2 id="もし、dbeaverなどでrootにログインできなかったら、"><a href="#もし、dbeaverなどでrootにログインできなかったら、" class="headerlink" title="もし、dbeaverなどでrootにログインできなかったら、"></a>もし、<code>dbeaver</code>などでrootにログインできなかったら、</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> mysql.user <span class="keyword">SET</span> authentication_string<span class="operator">=</span>PASSWORD(<span class="string">&#x27;新しいパスワード&#x27;</span>), plugin<span class="operator">=</span><span class="string">&#x27;mysql_native_password&#x27;</span> <span class="keyword">WHERE</span> <span class="keyword">User</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
+
+<h2 id="データインポートするのが遅かったら"><a href="#データインポートするのが遅かったら" class="headerlink" title="データインポートするのが遅かったら"></a>データインポートするのが遅かったら</h2><p>一番早いのは、ログインしてから</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">use [database];</span><br><span class="line">source <span class="operator">~</span><span class="operator">/</span>file.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysql-import-export中の進捗をログで表示"><a href="#mysql-import-export中の進捗をログで表示" class="headerlink" title="mysql import, export中の進捗をログで表示"></a>mysql import, export中の進捗をログで表示</h2><h3 id="インストール-1"><a href="#インストール-1" class="headerlink" title="インストール"></a>インストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pv</span><br></pre></td></tr></table></figure>
+
+<h3 id="実際に使ってみる"><a href="#実際に使ってみる" class="headerlink" title="実際に使ってみる"></a>実際に使ってみる</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># import</span></span><br><span class="line">pv ~/downloads/forum.sql | <span class="built_in">sudo</span> mariadb --max_allowed_packet=64M web</span><br><span class="line"></span><br><span class="line"><span class="comment"># export</span></span><br><span class="line">mysqldump --max_allowed_packet=64M -u root -p web | pv &gt; ~/downloads/forum.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="exportで失敗しないために"><a href="#exportで失敗しないために" class="headerlink" title="exportで失敗しないために"></a>exportで失敗しないために</h2><p><code>mysqldump</code>コマンドの引数で、<code>max_allowed_packet</code>を指定する</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysqldump --max_allowed_packet=64M -u root -p web &gt; ~/path/to/sample.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="auth-socketプラグインを使っているかどうか検証"><a href="#auth-socketプラグインを使っているかどうか検証" class="headerlink" title="auth_socketプラグインを使っているかどうか検証"></a><code>auth_socket</code>プラグインを使っているかどうか検証</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">user</span>, host, plugin <span class="keyword">FROM</span> mysql.user <span class="keyword">WHERE</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;mc&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="INSERTでSELECT参照"><a href="#INSERTでSELECT参照" class="headerlink" title="INSERTでSELECT参照"></a>INSERTでSELECT参照</h2><p>例として、<code>members</code>テーブルのものを<code>users</code>テーブルに移植する。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> users (name, password, email)</span><br><span class="line"><span class="keyword">SELECT</span> name, password, email</span><br><span class="line"><span class="keyword">FROM</span> members;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>CheatSheet</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
