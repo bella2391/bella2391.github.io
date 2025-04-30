@@ -74,38 +74,6 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>NginxにModSecurityを適用</title>
-    <url>/posts/39499/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
-
-<h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure>
-
-<h3 id="ModSecurityのダウンロードとビルド"><a href="#ModSecurityのダウンロードとビルド" class="headerlink" title="ModSecurityのダウンロードとビルド"></a>ModSecurityのダウンロードとビルド</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 -b v3.0.13 https://github.com/SpiderLabs/ModSecurity</span><br><span class="line"><span class="built_in">cd</span> ModSecurity</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">./build.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
-
-<h3 id="nginxのソースコードのダウンロードとビルド"><a href="#nginxのソースコードのダウンロードとビルド" class="headerlink" title="nginxのソースコードのダウンロードとビルド"></a>nginxのソースコードのダウンロードとビルド</h3><p><a href="http://nginx.org/download/">http://nginx.org/download/</a><br>ここより、最新のバージョンのnginxをダウンロードする<br>ここでもいいかも<br><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-[latest nginx version].tar.gz</span><br><span class="line">tar zxvf nginx-[latest nginx version].tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-[latest nginx version]</span><br><span class="line"></span><br><span class="line">./configure --with-compat --add-dynamic-module=../ModSecurity-nginx</span><br><span class="line">make modules</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> objs/ngx_http_modsecurity_module.so /etc/nginx/modules</span><br></pre></td></tr></table></figure>
-
-<h3 id="RuleSetをダウンロードと配置"><a href="#RuleSetをダウンロードと配置" class="headerlink" title="RuleSetをダウンロードと配置"></a>RuleSetをダウンロードと配置</h3><p><a href="https://github.com/coreruleset/coreruleset">https://github.com/coreruleset/coreruleset</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v[latest version].tar.gz</span><br><span class="line">tar -xzvf v[latest version].tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/modsec/coreruleset</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/crs-setup.conf.example /etc/nginx/modsec/coreruleset/crs-setup.conf</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/rules /etc/nginx/modsec/coreruleset/</span><br></pre></td></tr></table></figure>
-
-<h3 id="必要なファイルのダウンロード"><a href="#必要なファイルのダウンロード" class="headerlink" title="必要なファイルのダウンロード"></a>必要なファイルのダウンロード</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended -O /etc/nginx/modsec/modsecurity.conf</span><br><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/unicode.mapping -O /etc/nginx/modsec/unicode.mapping</span><br></pre></td></tr></table></figure>
-
-<h3 id="Nginx設定ファイルを編集"><a href="#Nginx設定ファイルを編集" class="headerlink" title="Nginx設定ファイルを編集"></a>Nginx設定ファイルを編集</h3><p><code>/etc/nginx/nginx.conf</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Nginx</tag>
-        <tag>ModSecurity</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Github:glyzerレポジトリを立ち上げるまで</title>
     <url>/posts/33934/</url>
     <content><![CDATA[<!--
@@ -158,6 +126,38 @@ See the LICENSE file in the source directory for details.
       <tags>
         <tag>Nginx</tag>
         <tag>SSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NginxにModSecurityを適用</title>
+    <url>/posts/39499/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure>
+
+<h3 id="ModSecurityのダウンロードとビルド"><a href="#ModSecurityのダウンロードとビルド" class="headerlink" title="ModSecurityのダウンロードとビルド"></a>ModSecurityのダウンロードとビルド</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 -b v3.0.13 https://github.com/SpiderLabs/ModSecurity</span><br><span class="line"><span class="built_in">cd</span> ModSecurity</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">./build.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="nginxのソースコードのダウンロードとビルド"><a href="#nginxのソースコードのダウンロードとビルド" class="headerlink" title="nginxのソースコードのダウンロードとビルド"></a>nginxのソースコードのダウンロードとビルド</h3><p><a href="http://nginx.org/download/">http://nginx.org/download/</a><br>ここより、最新のバージョンのnginxをダウンロードする<br>ここでもいいかも<br><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-[latest nginx version].tar.gz</span><br><span class="line">tar zxvf nginx-[latest nginx version].tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-[latest nginx version]</span><br><span class="line"></span><br><span class="line">./configure --with-compat --add-dynamic-module=../ModSecurity-nginx</span><br><span class="line">make modules</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> objs/ngx_http_modsecurity_module.so /etc/nginx/modules</span><br></pre></td></tr></table></figure>
+
+<h3 id="RuleSetをダウンロードと配置"><a href="#RuleSetをダウンロードと配置" class="headerlink" title="RuleSetをダウンロードと配置"></a>RuleSetをダウンロードと配置</h3><p><a href="https://github.com/coreruleset/coreruleset">https://github.com/coreruleset/coreruleset</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v[latest version].tar.gz</span><br><span class="line">tar -xzvf v[latest version].tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/modsec/coreruleset</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/crs-setup.conf.example /etc/nginx/modsec/coreruleset/crs-setup.conf</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/rules /etc/nginx/modsec/coreruleset/</span><br></pre></td></tr></table></figure>
+
+<h3 id="必要なファイルのダウンロード"><a href="#必要なファイルのダウンロード" class="headerlink" title="必要なファイルのダウンロード"></a>必要なファイルのダウンロード</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended -O /etc/nginx/modsec/modsecurity.conf</span><br><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/unicode.mapping -O /etc/nginx/modsec/unicode.mapping</span><br></pre></td></tr></table></figure>
+
+<h3 id="Nginx設定ファイルを編集"><a href="#Nginx設定ファイルを編集" class="headerlink" title="Nginx設定ファイルを編集"></a>Nginx設定ファイルを編集</h3><p><code>/etc/nginx/nginx.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>ModSecurity</tag>
       </tags>
   </entry>
   <entry>
@@ -665,7 +665,7 @@ See the LICENSE file in the source directory for details.
 <h2 id="一個前のコマンドを再実行"><a href="#一個前のコマンドを再実行" class="headerlink" title="一個前のコマンドを再実行"></a>一個前のコマンドを再実行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">!!</span><br></pre></td></tr></table></figure>
 
 <h2 id="acl"><a href="#acl" class="headerlink" title="acl"></a>acl</h2><p><code>mc</code>ユーザーに対して、<code>/mc/server</code>フォルダおよびそのサブディレクトリとファイルに対する全アクセス権限を再帰的に付与する。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -R -m u:mc:rwx /mc/server:</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -R -m u:mc:rwx /mc/server</span><br></pre></td></tr></table></figure>
 <p><code>mc</code>ユーザーに対するデフォルトACLを設定し、将来的に新しく作成されるファイルやディレクトリにも同じ権限が適用されるようにする。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -dR -m u:mc:rwx /mc/server</span><br></pre></td></tr></table></figure>
 
