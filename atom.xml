@@ -367,32 +367,6 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
   </entry>
   
   <entry>
-    <title>NginxにSSLを導入</title>
-    <link href="https://verazza.f5.si/posts/21623/"/>
-    <id>https://verazza.f5.si/posts/21623/</id>
-    <published>2025-01-31T15:00:00.000Z</published>
-    <updated>2025-04-30T15:23:05.955Z</updated>
-    
-    <content type="html"><![CDATA[<!--Copyright (c) 2025 verazzaThis file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.See the LICENSE file in the source directory for details.(https://creativecommons.org/licenses/by-nc-sa/4.0/)--><h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure><h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure><p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot --nginx -d sample.com,sample2.com</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 In</summary>
-      
-    
-    
-    
-    
-    <category term="Nginx" scheme="https://verazza.f5.si/tags/Nginx/"/>
-    
-    <category term="SSL" scheme="https://verazza.f5.si/tags/SSL/"/>
-    
-  </entry>
-  
-  <entry>
     <title>NginxにModSecurityを適用</title>
     <link href="https://verazza.f5.si/posts/39499/"/>
     <id>https://verazza.f5.si/posts/39499/</id>
@@ -415,6 +389,32 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     <category term="Nginx" scheme="https://verazza.f5.si/tags/Nginx/"/>
     
     <category term="ModSecurity" scheme="https://verazza.f5.si/tags/ModSecurity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NginxにSSLを導入</title>
+    <link href="https://verazza.f5.si/posts/21623/"/>
+    <id>https://verazza.f5.si/posts/21623/</id>
+    <published>2025-01-31T15:00:00.000Z</published>
+    <updated>2025-04-30T15:23:05.955Z</updated>
+    
+    <content type="html"><![CDATA[<!--Copyright (c) 2025 verazzaThis file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.See the LICENSE file in the source directory for details.(https://creativecommons.org/licenses/by-nc-sa/4.0/)--><h1 id="NginxにSSLを導入するまで"><a href="#NginxにSSLを導入するまで" class="headerlink" title="NginxにSSLを導入するまで"></a>NginxにSSLを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S certbot</span><br><span class="line"></span><br><span class="line">sudo pacman -S certbot-nginx</span><br></pre></td></tr></table></figure><h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure><p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot --nginx -d sample.com,sample2.com</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 In</summary>
+      
+    
+    
+    
+    
+    <category term="Nginx" scheme="https://verazza.f5.si/tags/Nginx/"/>
+    
+    <category term="SSL" scheme="https://verazza.f5.si/tags/SSL/"/>
     
   </entry>
   
