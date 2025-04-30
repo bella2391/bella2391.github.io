@@ -121,7 +121,7 @@ See the LICENSE file in the source directory for details.
 
 <h2 id="鍵生成"><a href="#鍵生成" class="headerlink" title="鍵生成"></a>鍵生成</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx</span><br></pre></td></tr></table></figure>
 <p>新たにドメインを増やす場合、既存のSSL証明書に新たに追加することが可能。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo certbot --nginx -d keyp.f5.si,kishax.f5.si</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo certbot --nginx -d sample.com,sample2.com</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>Nginx</tag>
