@@ -129,28 +129,6 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>OBSやVBCableを使わずに音声を内部ルーティング</title>
-    <url>/posts/54038/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h1 id="OBSから脱却"><a href="#OBSから脱却" class="headerlink" title="OBSから脱却"></a>OBSから脱却</h1><p>jackパッケージでサウンドの内部ルーティングが容易に。</p>
-<h1 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pipewire pipewire-pulse pipewire-jack qjackctl</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl --user restart pipewire</span><br><span class="line">systemctl --user restart pipewire-pulse</span><br><span class="line">systemctl --user restart pipewire-media-session</span><br></pre></td></tr></table></figure>
-<p>jack, setupのinterfaceに持ってるオーディオインターフェースを選択<br>あとは、グラフよりルーティング<br><img src="/images/jack_graph.png" alt="jack_graph.png"></p>
-]]></content>
-      <tags>
-        <tag>ArchLinux</tag>
-        <tag>OBS</tag>
-        <tag>VBCable</tag>
-        <tag>Jack</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NginxにModSecurityを適用</title>
     <url>/posts/39499/</url>
     <content><![CDATA[<!--
@@ -180,6 +158,28 @@ See the LICENSE file in the source directory for details.
       <tags>
         <tag>Nginx</tag>
         <tag>ModSecurity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OBSやVBCableを使わずに音声を内部ルーティング</title>
+    <url>/posts/54038/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="OBSから脱却"><a href="#OBSから脱却" class="headerlink" title="OBSから脱却"></a>OBSから脱却</h1><p>jackパッケージでサウンドの内部ルーティングが容易に。</p>
+<h1 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S pipewire pipewire-pulse pipewire-jack qjackctl</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl --user restart pipewire</span><br><span class="line">systemctl --user restart pipewire-pulse</span><br><span class="line">systemctl --user restart pipewire-media-session</span><br></pre></td></tr></table></figure>
+<p>jack, setupのinterfaceに持ってるオーディオインターフェースを選択<br>あとは、グラフよりルーティング<br><img src="/images/jack_graph.png" alt="jack_graph.png"></p>
+]]></content>
+      <tags>
+        <tag>ArchLinux</tag>
+        <tag>OBS</tag>
+        <tag>VBCable</tag>
+        <tag>Jack</tag>
       </tags>
   </entry>
   <entry>
@@ -417,24 +417,6 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>Windows側の日付と時刻が同期しない問題</title>
-    <url>/posts/34194/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
-<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Windows</tag>
-        <tag>DualBoot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>生成AIとの共生1</title>
     <url>/posts/30026/</url>
     <content><![CDATA[<!--
@@ -458,6 +440,24 @@ See the LICENSE file in the source directory for details.
 ]]></content>
       <tags>
         <tag>LLM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows側の日付と時刻が同期しない問題</title>
+    <url>/posts/34194/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"><a href="#Linux-Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題" class="headerlink" title="Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題"></a>Linux, Windowsのデュアルブート環境で、Windows側の日付と時刻が同期しない問題</h1><h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>Windows側でハードウェアクロックをUTCで扱うように設定する。<br>以下実行後は再起動必須。</p>
+<figure class="highlight pwsh"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /t REG_DWORD /d <span class="number">1</span> /f</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Windows</tag>
+        <tag>DualBoot</tag>
       </tags>
   </entry>
   <entry>
@@ -707,6 +707,7 @@ See the LICENSE file in the source directory for details.
 <p>初めてプッシュする場合は、以下を実行しよう。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -u origin dev</span><br></pre></td></tr></table></figure>
 <h4 id="レポジトリ名を変更時にローカルですること"><a href="#レポジトリ名を変更時にローカルですること" class="headerlink" title="レポジトリ名を変更時にローカルですること"></a>レポジトリ名を変更時にローカルですること</h4><h5 id="リモートレポジトリURLを新しいものにする"><a href="#リモートレポジトリURLを新しいものにする" class="headerlink" title="リモートレポジトリURLを新しいものにする"></a>リモートレポジトリURLを新しいものにする</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin &lt;new-repo-url&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="リモートを追加"><a href="#リモートを追加" class="headerlink" title="リモートを追加"></a>リモートを追加</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>ArchLinux</tag>
