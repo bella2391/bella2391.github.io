@@ -3,11 +3,11 @@
   <title>verazza blog</title>
   
   <subtitle>CLI愛好家</subtitle>
-  <link href="https://verazza.dev/atom.xml" rel="self"/>
+  <link href="https://verazza.dev/blog/atom.xml" rel="self"/>
   
-  <link href="https://verazza.dev/"/>
+  <link href="https://verazza.dev/blog/"/>
   <updated>2025-04-30T19:01:41.253Z</updated>
-  <id>https://verazza.dev/</id>
+  <id>https://verazza.dev/blog/</id>
   
   <author>
     <name>verazza</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>QiitaとHexoで同時投稿をするために</title>
-    <link href="https://verazza.dev/posts/8859/"/>
-    <id>https://verazza.dev/posts/8859/</id>
+    <link href="https://verazza.dev/blog/posts/8859/"/>
+    <id>https://verazza.dev/blog/posts/8859/</id>
     <published>2025-04-28T07:01:00.000Z</published>
     <updated>2025-04-30T19:01:41.253Z</updated>
     
@@ -34,16 +34,16 @@
     
     
     
-    <category term="Qiita" scheme="https://verazza.dev/tags/Qiita/"/>
+    <category term="Qiita" scheme="https://verazza.dev/blog/tags/Qiita/"/>
     
-    <category term="Hexo" scheme="https://verazza.dev/tags/Hexo/"/>
+    <category term="Hexo" scheme="https://verazza.dev/blog/tags/Hexo/"/>
     
   </entry>
   
   <entry>
     <title>生成AIとの共生2</title>
-    <link href="https://verazza.dev/posts/8821/"/>
-    <id>https://verazza.dev/posts/8821/</id>
+    <link href="https://verazza.dev/blog/posts/8821/"/>
+    <id>https://verazza.dev/blog/posts/8821/</id>
     <published>2025-04-23T08:52:50.000Z</published>
     <updated>2025-04-30T21:21:03.367Z</updated>
     
@@ -60,14 +60,14 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="LLM" scheme="https://verazza.dev/tags/LLM/"/>
+    <category term="LLM" scheme="https://verazza.dev/blog/tags/LLM/"/>
     
   </entry>
   
   <entry>
     <title>生成AIとの共生1</title>
-    <link href="https://verazza.dev/posts/30026/"/>
-    <id>https://verazza.dev/posts/30026/</id>
+    <link href="https://verazza.dev/blog/posts/30026/"/>
+    <id>https://verazza.dev/blog/posts/30026/</id>
     <published>2025-04-22T22:02:03.000Z</published>
     <updated>2025-04-30T21:21:10.355Z</updated>
     
@@ -84,14 +84,14 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="LLM" scheme="https://verazza.dev/tags/LLM/"/>
+    <category term="LLM" scheme="https://verazza.dev/blog/tags/LLM/"/>
     
   </entry>
   
   <entry>
     <title>Windows側の日付と時刻が同期しない問題</title>
-    <link href="https://verazza.dev/posts/34194/"/>
-    <id>https://verazza.dev/posts/34194/</id>
+    <link href="https://verazza.dev/blog/posts/34194/"/>
+    <id>https://verazza.dev/blog/posts/34194/</id>
     <published>2025-04-19T19:10:01.000Z</published>
     <updated>2025-04-27T17:53:31.893Z</updated>
     
@@ -108,16 +108,16 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="Windows" scheme="https://verazza.dev/tags/Windows/"/>
+    <category term="Windows" scheme="https://verazza.dev/blog/tags/Windows/"/>
     
-    <category term="DualBoot" scheme="https://verazza.dev/tags/DualBoot/"/>
+    <category term="DualBoot" scheme="https://verazza.dev/blog/tags/DualBoot/"/>
     
   </entry>
   
   <entry>
     <title>私的MySQLチートシート</title>
-    <link href="https://verazza.dev/posts/49418/"/>
-    <id>https://verazza.dev/posts/49418/</id>
+    <link href="https://verazza.dev/blog/posts/49418/"/>
+    <id>https://verazza.dev/blog/posts/49418/</id>
     <published>2025-04-19T18:28:55.000Z</published>
     <updated>2025-04-27T16:38:46.220Z</updated>
     
@@ -134,20 +134,20 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="CheatSheet" scheme="https://verazza.dev/tags/CheatSheet/"/>
+    <category term="CheatSheet" scheme="https://verazza.dev/blog/tags/CheatSheet/"/>
     
-    <category term="MySQL" scheme="https://verazza.dev/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://verazza.dev/blog/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>私的コマンドチートシート</title>
-    <link href="https://verazza.dev/posts/24514/"/>
-    <id>https://verazza.dev/posts/24514/</id>
+    <link href="https://verazza.dev/blog/posts/24514/"/>
+    <id>https://verazza.dev/blog/posts/24514/</id>
     <published>2025-04-19T18:04:11.000Z</published>
-    <updated>2025-05-01T08:48:55.500Z</updated>
+    <updated>2025-05-07T09:39:15.880Z</updated>
     
-    <content type="html"><![CDATA[<!--Copyright (c) 2025 verazzaThis file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.See the LICENSE file in the source directory for details.(https://creativecommons.org/licenses/by-nc-sa/4.0/)--><h1 id="コマンドチートシート"><a href="#コマンドチートシート" class="headerlink" title="コマンドチートシート"></a>コマンドチートシート</h1><h2 id="シンボリックリンクを通す"><a href="#シンボリックリンクを通す" class="headerlink" title="シンボリックリンクを通す"></a>シンボリックリンクを通す</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /path/to/target /path/to/wanna/to/place</span><br></pre></td></tr></table></figure><h2 id="特定の階層以下のファイルのパスと内容を表示"><a href="#特定の階層以下のファイルのパスと内容を表示" class="headerlink" title="特定の階層以下のファイルのパスと内容を表示"></a>特定の階層以下のファイルのパスと内容を表示</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find path/to/directory/ -<span class="built_in">type</span> f -<span class="built_in">exec</span> sh -c <span class="string">&#x27;echo &quot;==== &#123;&#125; ====&quot;; cat &#123;&#125;&#x27;</span> \;</span><br></pre></td></tr></table></figure><h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><h3 id="静的ファイルからヘッダ情報取得"><a href="#静的ファイルからヘッダ情報取得" class="headerlink" title="静的ファイルからヘッダ情報取得"></a>静的ファイルからヘッダ情報取得</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -I https://example.com/path/to/sample.txt</span><br></pre></td></tr></table></figure><h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><h3 id="再帰的にfindでディレクトリに対してchmod-755"><a href="#再帰的にfindでディレクトリに対してchmod-755" class="headerlink" title="再帰的にfindでディレクトリに対してchmod 755"></a>再帰的にfindでディレクトリに対してchmod 755</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> find /mc -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br></pre></td></tr></table></figure><h3 id="すべてのファイルをチェック"><a href="#すべてのファイルをチェック" class="headerlink" title="すべてのファイルをチェック"></a>すべてのファイルをチェック</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /path/to/directory -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure><h3 id="階層1"><a href="#階層1" class="headerlink" title="階層1"></a>階層1</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /path/to/directory -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure><h3 id="その階層のすべてのファイルに対し、実行"><a href="#その階層のすべてのファイルに対し、実行" class="headerlink" title="その階層のすべてのファイルに対し、実行"></a>その階層のすべてのファイルに対し、実行</h3><p>(ここでは、cpコマンドでbackupディレクトリへ)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">cp</span> &#123;&#125; ./backup \;</span><br></pre></td></tr></table></figure><h2 id="ファイルの文字コードを出力"><a href="#ファイルの文字コードを出力" class="headerlink" title="ファイルの文字コードを出力"></a>ファイルの文字コードを出力</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file -i /path/to/file</span><br></pre></td></tr></table></figure><h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r FILENAME.zip FILE_DIR</span><br></pre></td></tr></table></figure><p><a href="https://qiita.com/seyself/items/ae47f1c22a7375a736f3">https://qiita.com/seyself/items/ae47f1c22a7375a736f3</a></p><p>除外</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r sample.zip sample/ -x <span class="string">&quot;sample/libraries/*&quot;</span> <span class="string">&quot;sample/log/*&quot;</span></span><br></pre></td></tr></table></figure><h2 id="一個前のコマンドを出力"><a href="#一個前のコマンドを出力" class="headerlink" title="一個前のコマンドを出力"></a>一個前のコマンドを出力</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span> | <span class="built_in">tail</span> -n 1</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="built_in">fc</span> -<span class="built_in">ln</span> -1</span><br></pre></td></tr></table></figure><h2 id="一個前のコマンドを再実行"><a href="#一個前のコマンドを再実行" class="headerlink" title="一個前のコマンドを再実行"></a>一個前のコマンドを再実行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!!</span><br></pre></td></tr></table></figure><h2 id="acl"><a href="#acl" class="headerlink" title="acl"></a>acl</h2><p><code>mc</code>ユーザーに対して、<code>/mc/server</code>フォルダおよびそのサブディレクトリとファイルに対する全アクセス権限を再帰的に付与する。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -R -m u:mc:rwx /mc/server</span><br></pre></td></tr></table></figure><p><code>mc</code>ユーザーに対するデフォルトACLを設定し、将来的に新しく作成されるファイルやディレクトリにも同じ権限が適用されるようにする。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -dR -m u:mc:rwx /mc/server</span><br></pre></td></tr></table></figure><h2 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tail</span> -f /var/log/nginx/access.log</span><br></pre></td></tr></table></figure><h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tree -I <span class="string">&quot;*.html|*.png|*.jpg&quot;</span></span><br><span class="line"></span><br><span class="line">tree -I venv/</span><br><span class="line">tree -I node_modules/</span><br></pre></td></tr></table></figure><h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><h3 id="特定のコミットを削除するには"><a href="#特定のコミットを削除するには" class="headerlink" title="特定のコミットを削除するには"></a>特定のコミットを削除するには</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit-id&gt;</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure><h3 id="リモートURLをSSHに変更"><a href="#リモートURLをSSHに変更" class="headerlink" title="リモートURLをSSHに変更"></a>リモートURLをSSHに変更</h3><p>まず、鍵を生成し、それをデプロイ</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;&quot;</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line">git remote set-url origin git@github.com:&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure><h3 id="リモートURLをHTTPSに変更"><a href="#リモートURLをHTTPSに変更" class="headerlink" title="リモートURLをHTTPSに変更"></a>リモートURLをHTTPSに変更</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure><h3 id="特定のブランチ名を指定してクローン"><a href="#特定のブランチ名を指定してクローン" class="headerlink" title="特定のブランチ名を指定してクローン"></a>特定のブランチ名を指定してクローン</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b &lt;branch-name&gt; &lt;clone-url&gt;</span><br></pre></td></tr></table></figure><h3 id="access-tokenをローカルに設定"><a href="#access-tokenをローカルに設定" class="headerlink" title="access-tokenをローカルに設定"></a>access-tokenをローカルに設定</h3><p>リポジトリの<code>HTTPS URL</code>にアクセストークンを埋め込む。<br>元の<code>HTTPS URL</code>が<code>https://github.com/username/repository.git</code>の場合、以下の形式に変更する。<br><code>https://your_access_token@github.com/username/repository.git</code><br><code>your_access_token</code>は、生成したアクセストークンに置き換えよう。</p><p>最後に、リモートURLを変更</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https://your_access_token@github.com/username/repository.git</span><br></pre></td></tr></table></figure><h3 id="タグを作ってプッシュ"><a href="#タグを作ってプッシュ" class="headerlink" title="タグを作ってプッシュ"></a>タグを作ってプッシュ</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.0 -m <span class="string">&#x27;version 1.0&#x27;</span></span><br><span class="line">git push origin v1.0</span><br></pre></td></tr></table></figure><p>リモートで使ったタグを削除するとき、ローカルには残っているため、それを削除する</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;tag-name&gt;</span><br></pre></td></tr></table></figure><h3 id="新規リモートに対して特定ブランチへのプッシュまで"><a href="#新規リモートに対して特定ブランチへのプッシュまで" class="headerlink" title="新規リモートに対して特定ブランチへのプッシュまで"></a>新規リモートに対して特定ブランチへのプッシュまで</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git checkout -b scala</span><br></pre></td></tr></table></figure><h3 id="新規リモートをWEBで作った後、プッシュまで"><a href="#新規リモートをWEBで作った後、プッシュまで" class="headerlink" title="新規リモートをWEBで作った後、プッシュまで"></a>新規リモートをWEBで作った後、プッシュまで</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# updater&quot;</span> &gt;&gt; README.md</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M master</span><br><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure><h3 id="remote-urlを確認するには"><a href="#remote-urlを確認するには" class="headerlink" title="remote-urlを確認するには"></a>remote-urlを確認するには</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure><h3 id="git-configのリセット"><a href="#git-configのリセット" class="headerlink" title="git configのリセット"></a>git configのリセット</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> credential.helper</span><br><span class="line">git config --global --<span class="built_in">unset</span> credential.credentialStore</span><br></pre></td></tr></table></figure><h3 id="submoduleを一括インポートする"><a href="#submoduleを一括インポートする" class="headerlink" title="submoduleを一括インポートする"></a>submoduleを一括インポートする</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure><h3 id="リモートブランチ名をリネームしたときにローカルでやること"><a href="#リモートブランチ名をリネームしたときにローカルでやること" class="headerlink" title="リモートブランチ名をリネームしたときにローカルでやること"></a>リモートブランチ名をリネームしたときにローカルでやること</h3><p>例えば、<code>sample</code>ブランチを<code>master</code>ブランチに変更したとする。</p><h4 id="ローカルのsampleブランチをmasterにリネームする"><a href="#ローカルのsampleブランチをmasterにリネームする" class="headerlink" title="ローカルのsampleブランチをmasterにリネームする"></a>ローカルの<code>sample</code>ブランチを<code>master</code>にリネームする</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m sample master</span><br></pre></td></tr></table></figure><h4 id="リモート追跡ブランチを更新する"><a href="#リモート追跡ブランチを更新する" class="headerlink" title="リモート追跡ブランチを更新する"></a>リモート追跡ブランチを更新する</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-head origin -a</span><br></pre></td></tr></table></figure><h4 id="追跡ブランチを設定する"><a href="#追跡ブランチを設定する" class="headerlink" title="追跡ブランチを設定する"></a>追跡ブランチを設定する</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream-to=origin/master master</span><br></pre></td></tr></table></figure><h4 id="ブランチを切り替える"><a href="#ブランチを切り替える" class="headerlink" title="ブランチを切り替える"></a>ブランチを切り替える</h4><h5 id="現在どのブランチにいるかを確認"><a href="#現在どのブランチにいるかを確認" class="headerlink" title="現在どのブランチにいるかを確認"></a>現在どのブランチにいるかを確認</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure><h5 id="ローカルでmasterブランチのものをdevブランチに変更してプッシュする"><a href="#ローカルでmasterブランチのものをdevブランチに変更してプッシュする" class="headerlink" title="ローカルでmasterブランチのものをdevブランチに変更してプッシュする"></a>ローカルでmasterブランチのものをdevブランチに変更してプッシュする</h5><p>ローカルにdevブランチを作成し、masterブランチの内容を引き継ぎ、そのブランチに切り替えることができる。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev master</span><br></pre></td></tr></table></figure><p>これを実行した後は、以下を実行し、devの左に<code>*</code>がついていることを確認しよう。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure><p>初めてプッシュする場合は、以下を実行しよう。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin dev</span><br></pre></td></tr></table></figure><h4 id="レポジトリ名を変更時にローカルですること"><a href="#レポジトリ名を変更時にローカルですること" class="headerlink" title="レポジトリ名を変更時にローカルですること"></a>レポジトリ名を変更時にローカルですること</h4><h5 id="リモートレポジトリURLを新しいものにする"><a href="#リモートレポジトリURLを新しいものにする" class="headerlink" title="リモートレポジトリURLを新しいものにする"></a>リモートレポジトリURLを新しいものにする</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin &lt;new-repo-url&gt;</span><br></pre></td></tr></table></figure><h4 id="リモートを追加"><a href="#リモートを追加" class="headerlink" title="リモートを追加"></a>リモートを追加</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<!--Copyright (c) 2025 verazzaThis file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.See the LICENSE file in the source directory for details.(https://creativecommons.org/licenses/by-nc-sa/4.0/)--><h1 id="コマンドチートシート"><a href="#コマンドチートシート" class="headerlink" title="コマンドチートシート"></a>コマンドチートシート</h1><h2 id="シンボリックリンクを通す"><a href="#シンボリックリンクを通す" class="headerlink" title="シンボリックリンクを通す"></a>シンボリックリンクを通す</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /path/to/target /path/to/wanna/to/place</span><br></pre></td></tr></table></figure><h2 id="特定の階層以下のファイルのパスと内容を表示"><a href="#特定の階層以下のファイルのパスと内容を表示" class="headerlink" title="特定の階層以下のファイルのパスと内容を表示"></a>特定の階層以下のファイルのパスと内容を表示</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find path/to/directory/ -<span class="built_in">type</span> f -<span class="built_in">exec</span> sh -c <span class="string">&#x27;echo &quot;==== &#123;&#125; ====&quot;; cat &#123;&#125;&#x27;</span> \;</span><br></pre></td></tr></table></figure><h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><h3 id="静的ファイルからヘッダ情報取得"><a href="#静的ファイルからヘッダ情報取得" class="headerlink" title="静的ファイルからヘッダ情報取得"></a>静的ファイルからヘッダ情報取得</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -I https://example.com/path/to/sample.txt</span><br></pre></td></tr></table></figure><h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><h3 id="再帰的にfindでディレクトリに対してchmod-755"><a href="#再帰的にfindでディレクトリに対してchmod-755" class="headerlink" title="再帰的にfindでディレクトリに対してchmod 755"></a>再帰的にfindでディレクトリに対してchmod 755</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> find /mc -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br></pre></td></tr></table></figure><h3 id="すべてのファイルをチェック"><a href="#すべてのファイルをチェック" class="headerlink" title="すべてのファイルをチェック"></a>すべてのファイルをチェック</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /path/to/directory -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure><h3 id="階層1"><a href="#階層1" class="headerlink" title="階層1"></a>階層1</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /path/to/directory -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> file -i &#123;&#125; \;</span><br></pre></td></tr></table></figure><h3 id="その階層のすべてのファイルに対し、実行"><a href="#その階層のすべてのファイルに対し、実行" class="headerlink" title="その階層のすべてのファイルに対し、実行"></a>その階層のすべてのファイルに対し、実行</h3><p>(ここでは、cpコマンドでbackupディレクトリへ)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -maxdepth 1 -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">cp</span> &#123;&#125; ./backup \;</span><br></pre></td></tr></table></figure><h2 id="ファイルの文字コードを出力"><a href="#ファイルの文字コードを出力" class="headerlink" title="ファイルの文字コードを出力"></a>ファイルの文字コードを出力</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file -i /path/to/file</span><br></pre></td></tr></table></figure><h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r FILENAME.zip FILE_DIR</span><br></pre></td></tr></table></figure><p><a href="https://qiita.com/seyself/items/ae47f1c22a7375a736f3">https://qiita.com/seyself/items/ae47f1c22a7375a736f3</a></p><p>除外</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r sample.zip sample/ -x <span class="string">&quot;sample/libraries/*&quot;</span> <span class="string">&quot;sample/log/*&quot;</span></span><br></pre></td></tr></table></figure><h2 id="一個前のコマンドを出力"><a href="#一個前のコマンドを出力" class="headerlink" title="一個前のコマンドを出力"></a>一個前のコマンドを出力</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span> | <span class="built_in">tail</span> -n 1</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="built_in">fc</span> -<span class="built_in">ln</span> -1</span><br></pre></td></tr></table></figure><h2 id="一個前のコマンドを再実行"><a href="#一個前のコマンドを再実行" class="headerlink" title="一個前のコマンドを再実行"></a>一個前のコマンドを再実行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!!</span><br></pre></td></tr></table></figure><h2 id="acl"><a href="#acl" class="headerlink" title="acl"></a>acl</h2><p><code>mc</code>ユーザーに対して、<code>/mc/server</code>フォルダおよびそのサブディレクトリとファイルに対する全アクセス権限を再帰的に付与する。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -R -m u:mc:rwx /mc/server</span><br></pre></td></tr></table></figure><p><code>mc</code>ユーザーに対するデフォルトACLを設定し、将来的に新しく作成されるファイルやディレクトリにも同じ権限が適用されるようにする。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setfacl -dR -m u:mc:rwx /mc/server</span><br></pre></td></tr></table></figure><h2 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tail</span> -f /var/log/nginx/access.log</span><br></pre></td></tr></table></figure><h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tree -I <span class="string">&quot;*.html|*.png|*.jpg&quot;</span></span><br><span class="line"></span><br><span class="line">tree -I venv/</span><br><span class="line">tree -I node_modules/</span><br></pre></td></tr></table></figure><h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><h3 id="特定のコミットを削除するには"><a href="#特定のコミットを削除するには" class="headerlink" title="特定のコミットを削除するには"></a>特定のコミットを削除するには</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit-id&gt;</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure><h3 id="リモートURLをSSHに変更"><a href="#リモートURLをSSHに変更" class="headerlink" title="リモートURLをSSHに変更"></a>リモートURLをSSHに変更</h3><p>まず、鍵を生成し、それをデプロイ</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;&quot;</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line">git remote set-url origin git@github.com:&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure><h3 id="リモートURLをHTTPSに変更"><a href="#リモートURLをHTTPSに変更" class="headerlink" title="リモートURLをHTTPSに変更"></a>リモートURLをHTTPSに変更</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure><h3 id="特定のブランチ名を指定してクローン"><a href="#特定のブランチ名を指定してクローン" class="headerlink" title="特定のブランチ名を指定してクローン"></a>特定のブランチ名を指定してクローン</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b &lt;branch-name&gt; &lt;clone-url&gt;</span><br></pre></td></tr></table></figure><h3 id="access-tokenをローカルに設定"><a href="#access-tokenをローカルに設定" class="headerlink" title="access-tokenをローカルに設定"></a>access-tokenをローカルに設定</h3><p>リポジトリの<code>HTTPS URL</code>にアクセストークンを埋め込む。<br>元の<code>HTTPS URL</code>が<code>https://github.com/username/repository.git</code>の場合、以下の形式に変更する。<br><code>https://your_access_token@github.com/username/repository.git</code><br><code>your_access_token</code>は、生成したアクセストークンに置き換えよう。</p><p>最後に、リモートURLを変更</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https://your_access_token@github.com/username/repository.git</span><br></pre></td></tr></table></figure><h3 id="タグを作ってプッシュ"><a href="#タグを作ってプッシュ" class="headerlink" title="タグを作ってプッシュ"></a>タグを作ってプッシュ</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.0 -m <span class="string">&#x27;version 1.0&#x27;</span></span><br><span class="line">git push origin v1.0</span><br></pre></td></tr></table></figure><p>リモートで使ったタグを削除するとき、ローカルには残っているため、それを削除する</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;tag-name&gt;</span><br></pre></td></tr></table></figure><h3 id="新規リモートに対して特定ブランチへのプッシュまで"><a href="#新規リモートに対して特定ブランチへのプッシュまで" class="headerlink" title="新規リモートに対して特定ブランチへのプッシュまで"></a>新規リモートに対して特定ブランチへのプッシュまで</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git checkout -b scala</span><br></pre></td></tr></table></figure><h3 id="新規リモートをWEBで作った後、プッシュまで"><a href="#新規リモートをWEBで作った後、プッシュまで" class="headerlink" title="新規リモートをWEBで作った後、プッシュまで"></a>新規リモートをWEBで作った後、プッシュまで</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# updater&quot;</span> &gt;&gt; README.md</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M master</span><br><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure><h3 id="remote-urlを確認するには"><a href="#remote-urlを確認するには" class="headerlink" title="remote-urlを確認するには"></a>remote-urlを確認するには</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure><h3 id="git-configのリセット"><a href="#git-configのリセット" class="headerlink" title="git configのリセット"></a>git configのリセット</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> credential.helper</span><br><span class="line">git config --global --<span class="built_in">unset</span> credential.credentialStore</span><br></pre></td></tr></table></figure><h3 id="submoduleを一括インポートする"><a href="#submoduleを一括インポートする" class="headerlink" title="submoduleを一括インポートする"></a>submoduleを一括インポートする</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure><h3 id="リモートブランチ名をリネームしたときにローカルでやること"><a href="#リモートブランチ名をリネームしたときにローカルでやること" class="headerlink" title="リモートブランチ名をリネームしたときにローカルでやること"></a>リモートブランチ名をリネームしたときにローカルでやること</h3><p>例えば、<code>sample</code>ブランチを<code>master</code>ブランチに変更したとする。</p><h4 id="ローカルのsampleブランチをmasterにリネームする"><a href="#ローカルのsampleブランチをmasterにリネームする" class="headerlink" title="ローカルのsampleブランチをmasterにリネームする"></a>ローカルの<code>sample</code>ブランチを<code>master</code>にリネームする</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m sample master</span><br></pre></td></tr></table></figure><h4 id="リモート追跡ブランチを更新する"><a href="#リモート追跡ブランチを更新する" class="headerlink" title="リモート追跡ブランチを更新する"></a>リモート追跡ブランチを更新する</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-head origin -a</span><br></pre></td></tr></table></figure><h4 id="追跡ブランチを設定する"><a href="#追跡ブランチを設定する" class="headerlink" title="追跡ブランチを設定する"></a>追跡ブランチを設定する</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream-to=origin/master master</span><br></pre></td></tr></table></figure><h4 id="ブランチを切り替える"><a href="#ブランチを切り替える" class="headerlink" title="ブランチを切り替える"></a>ブランチを切り替える</h4><h5 id="現在どのブランチにいるかを確認"><a href="#現在どのブランチにいるかを確認" class="headerlink" title="現在どのブランチにいるかを確認"></a>現在どのブランチにいるかを確認</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure><h5 id="ローカルでmasterブランチのものをdevブランチに変更してプッシュする"><a href="#ローカルでmasterブランチのものをdevブランチに変更してプッシュする" class="headerlink" title="ローカルでmasterブランチのものをdevブランチに変更してプッシュする"></a>ローカルでmasterブランチのものをdevブランチに変更してプッシュする</h5><p>ローカルにdevブランチを作成し、masterブランチの内容を引き継ぎ、そのブランチに切り替えることができる。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev master</span><br></pre></td></tr></table></figure><p>これを実行した後は、以下を実行し、devの左に<code>*</code>がついていることを確認しよう。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure><p>初めてプッシュする場合は、以下を実行しよう。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin dev</span><br></pre></td></tr></table></figure><h4 id="レポジトリ名を変更時にローカルですること"><a href="#レポジトリ名を変更時にローカルですること" class="headerlink" title="レポジトリ名を変更時にローカルですること"></a>レポジトリ名を変更時にローカルですること</h4><h5 id="リモートレポジトリURLを新しいものにする"><a href="#リモートレポジトリURLを新しいものにする" class="headerlink" title="リモートレポジトリURLを新しいものにする"></a>リモートレポジトリURLを新しいものにする</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin &lt;new-repo-url&gt;</span><br></pre></td></tr></table></figure><h4 id="リモートを追加"><a href="#リモートを追加" class="headerlink" title="リモートを追加"></a>リモートを追加</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git</span><br></pre></td></tr></table></figure><h4 id="gitmodule"><a href="#gitmodule" class="headerlink" title="gitmodule"></a>gitmodule</h4><h5 id="追加"><a href="#追加" class="headerlink" title="追加"></a>追加</h5><p>パス<code>sub</code>に対し、サブモジュールをインポートする例</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule https://github.com/&lt;user&gt;/&lt;repo&gt;.git ./sub</span><br></pre></td></tr></table></figure><h5 id="再帰的にインポート"><a href="#再帰的にインポート" class="headerlink" title="再帰的にインポート"></a>再帰的にインポート</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
@@ -160,18 +160,18 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="ArchLinux" scheme="https://verazza.dev/tags/ArchLinux/"/>
+    <category term="ArchLinux" scheme="https://verazza.dev/blog/tags/ArchLinux/"/>
     
-    <category term="CheatSheet" scheme="https://verazza.dev/tags/CheatSheet/"/>
+    <category term="CheatSheet" scheme="https://verazza.dev/blog/tags/CheatSheet/"/>
     
-    <category term="Command" scheme="https://verazza.dev/tags/Command/"/>
+    <category term="Command" scheme="https://verazza.dev/blog/tags/Command/"/>
     
   </entry>
   
   <entry>
     <title>OBSやVBCableを使わずに音声を内部ルーティング</title>
-    <link href="https://verazza.dev/posts/54038/"/>
-    <id>https://verazza.dev/posts/54038/</id>
+    <link href="https://verazza.dev/blog/posts/54038/"/>
+    <id>https://verazza.dev/blog/posts/54038/</id>
     <published>2025-04-19T17:54:47.000Z</published>
     <updated>2025-04-30T19:03:02.875Z</updated>
     
@@ -188,20 +188,20 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="ArchLinux" scheme="https://verazza.dev/tags/ArchLinux/"/>
+    <category term="ArchLinux" scheme="https://verazza.dev/blog/tags/ArchLinux/"/>
     
-    <category term="OBS" scheme="https://verazza.dev/tags/OBS/"/>
+    <category term="OBS" scheme="https://verazza.dev/blog/tags/OBS/"/>
     
-    <category term="VBCable" scheme="https://verazza.dev/tags/VBCable/"/>
+    <category term="VBCable" scheme="https://verazza.dev/blog/tags/VBCable/"/>
     
-    <category term="Jack" scheme="https://verazza.dev/tags/Jack/"/>
+    <category term="Jack" scheme="https://verazza.dev/blog/tags/Jack/"/>
     
   </entry>
   
   <entry>
     <title>Github:glyzerレポジトリを立ち上げるまで</title>
-    <link href="https://verazza.dev/posts/33934/"/>
-    <id>https://verazza.dev/posts/33934/</id>
+    <link href="https://verazza.dev/blog/posts/33934/"/>
+    <id>https://verazza.dev/blog/posts/33934/</id>
     <published>2025-03-28T14:59:00.000Z</published>
     <updated>2025-04-27T16:42:39.516Z</updated>
     
@@ -218,16 +218,16 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="python" scheme="https://verazza.dev/tags/python/"/>
+    <category term="python" scheme="https://verazza.dev/blog/tags/python/"/>
     
-    <category term="gemini" scheme="https://verazza.dev/tags/gemini/"/>
+    <category term="gemini" scheme="https://verazza.dev/blog/tags/gemini/"/>
     
   </entry>
   
   <entry>
     <title>ArchLinuxでCLI開発環境を整える</title>
-    <link href="https://verazza.dev/posts/54214/"/>
-    <id>https://verazza.dev/posts/54214/</id>
+    <link href="https://verazza.dev/blog/posts/54214/"/>
+    <id>https://verazza.dev/blog/posts/54214/</id>
     <published>2025-03-27T23:54:00.000Z</published>
     <updated>2025-04-27T16:42:56.566Z</updated>
     
@@ -244,18 +244,18 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="ArchLinux" scheme="https://verazza.dev/tags/ArchLinux/"/>
+    <category term="ArchLinux" scheme="https://verazza.dev/blog/tags/ArchLinux/"/>
     
-    <category term="CLI" scheme="https://verazza.dev/tags/CLI/"/>
+    <category term="CLI" scheme="https://verazza.dev/blog/tags/CLI/"/>
     
-    <category term="開発環境" scheme="https://verazza.dev/tags/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/"/>
+    <category term="開発環境" scheme="https://verazza.dev/blog/tags/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/"/>
     
   </entry>
   
   <entry>
     <title>WSLを使う！ Windows開発環境構築</title>
-    <link href="https://verazza.dev/posts/17845/"/>
-    <id>https://verazza.dev/posts/17845/</id>
+    <link href="https://verazza.dev/blog/posts/17845/"/>
+    <id>https://verazza.dev/blog/posts/17845/</id>
     <published>2025-03-23T17:54:00.000Z</published>
     <updated>2025-04-27T16:39:42.479Z</updated>
     
@@ -272,20 +272,20 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="開発環境" scheme="https://verazza.dev/tags/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/"/>
+    <category term="開発環境" scheme="https://verazza.dev/blog/tags/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/"/>
     
-    <category term="Neovim" scheme="https://verazza.dev/tags/Neovim/"/>
+    <category term="Neovim" scheme="https://verazza.dev/blog/tags/Neovim/"/>
     
-    <category term="Windows" scheme="https://verazza.dev/tags/Windows/"/>
+    <category term="Windows" scheme="https://verazza.dev/blog/tags/Windows/"/>
     
-    <category term="WSL" scheme="https://verazza.dev/tags/WSL/"/>
+    <category term="WSL" scheme="https://verazza.dev/blog/tags/WSL/"/>
     
   </entry>
   
   <entry>
     <title>WSLを使わない! Windows開発環境構築</title>
-    <link href="https://verazza.dev/posts/47392/"/>
-    <id>https://verazza.dev/posts/47392/</id>
+    <link href="https://verazza.dev/blog/posts/47392/"/>
+    <id>https://verazza.dev/blog/posts/47392/</id>
     <published>2025-03-14T09:52:00.000Z</published>
     <updated>2025-04-27T16:56:45.772Z</updated>
     
@@ -302,18 +302,18 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="開発環境" scheme="https://verazza.dev/tags/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/"/>
+    <category term="開発環境" scheme="https://verazza.dev/blog/tags/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/"/>
     
-    <category term="Neovim" scheme="https://verazza.dev/tags/Neovim/"/>
+    <category term="Neovim" scheme="https://verazza.dev/blog/tags/Neovim/"/>
     
-    <category term="Windows" scheme="https://verazza.dev/tags/Windows/"/>
+    <category term="Windows" scheme="https://verazza.dev/blog/tags/Windows/"/>
     
   </entry>
   
   <entry>
     <title>私的ArchLinux開発環境構築</title>
-    <link href="https://verazza.dev/posts/14653/"/>
-    <id>https://verazza.dev/posts/14653/</id>
+    <link href="https://verazza.dev/blog/posts/14653/"/>
+    <id>https://verazza.dev/blog/posts/14653/</id>
     <published>2025-03-13T03:09:00.000Z</published>
     <updated>2025-04-27T16:38:22.068Z</updated>
     
@@ -330,16 +330,16 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="ArchLinux" scheme="https://verazza.dev/tags/ArchLinux/"/>
+    <category term="ArchLinux" scheme="https://verazza.dev/blog/tags/ArchLinux/"/>
     
-    <category term="環境構築" scheme="https://verazza.dev/tags/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/"/>
+    <category term="環境構築" scheme="https://verazza.dev/blog/tags/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/"/>
     
   </entry>
   
   <entry>
     <title>SSHログインに2FA導入</title>
-    <link href="https://verazza.dev/posts/18876/"/>
-    <id>https://verazza.dev/posts/18876/</id>
+    <link href="https://verazza.dev/blog/posts/18876/"/>
+    <id>https://verazza.dev/blog/posts/18876/</id>
     <published>2025-02-17T15:00:00.000Z</published>
     <updated>2025-04-27T16:41:15.223Z</updated>
     
@@ -356,46 +356,20 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="ArchLinux" scheme="https://verazza.dev/tags/ArchLinux/"/>
+    <category term="ArchLinux" scheme="https://verazza.dev/blog/tags/ArchLinux/"/>
     
-    <category term="2FA" scheme="https://verazza.dev/tags/2FA/"/>
+    <category term="2FA" scheme="https://verazza.dev/blog/tags/2FA/"/>
     
-    <category term="Google-Authendicator" scheme="https://verazza.dev/tags/Google-Authendicator/"/>
+    <category term="Google-Authendicator" scheme="https://verazza.dev/blog/tags/Google-Authendicator/"/>
     
-    <category term="SSH" scheme="https://verazza.dev/tags/SSH/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NginxにModSecurityを適用</title>
-    <link href="https://verazza.dev/posts/39499/"/>
-    <id>https://verazza.dev/posts/39499/</id>
-    <published>2025-01-31T15:00:00.000Z</published>
-    <updated>2025-04-27T16:41:56.426Z</updated>
-    
-    <content type="html"><![CDATA[<!--Copyright (c) 2025 verazzaThis file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.See the LICENSE file in the source directory for details.(https://creativecommons.org/licenses/by-nc-sa/4.0/)--><h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure><h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure><h3 id="ModSecurityのダウンロードとビルド"><a href="#ModSecurityのダウンロードとビルド" class="headerlink" title="ModSecurityのダウンロードとビルド"></a>ModSecurityのダウンロードとビルド</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 -b v3.0.13 https://github.com/SpiderLabs/ModSecurity</span><br><span class="line"><span class="built_in">cd</span> ModSecurity</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">./build.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure><h3 id="nginxのソースコードのダウンロードとビルド"><a href="#nginxのソースコードのダウンロードとビルド" class="headerlink" title="nginxのソースコードのダウンロードとビルド"></a>nginxのソースコードのダウンロードとビルド</h3><p><a href="http://nginx.org/download/">http://nginx.org/download/</a><br>ここより、最新のバージョンのnginxをダウンロードする<br>ここでもいいかも<br><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-[latest nginx version].tar.gz</span><br><span class="line">tar zxvf nginx-[latest nginx version].tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-[latest nginx version]</span><br><span class="line"></span><br><span class="line">./configure --with-compat --add-dynamic-module=../ModSecurity-nginx</span><br><span class="line">make modules</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> objs/ngx_http_modsecurity_module.so /etc/nginx/modules</span><br></pre></td></tr></table></figure><h3 id="RuleSetをダウンロードと配置"><a href="#RuleSetをダウンロードと配置" class="headerlink" title="RuleSetをダウンロードと配置"></a>RuleSetをダウンロードと配置</h3><p><a href="https://github.com/coreruleset/coreruleset">https://github.com/coreruleset/coreruleset</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v[latest version].tar.gz</span><br><span class="line">tar -xzvf v[latest version].tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/modsec/coreruleset</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/crs-setup.conf.example /etc/nginx/modsec/coreruleset/crs-setup.conf</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/rules /etc/nginx/modsec/coreruleset/</span><br></pre></td></tr></table></figure><h3 id="必要なファイルのダウンロード"><a href="#必要なファイルのダウンロード" class="headerlink" title="必要なファイルのダウンロード"></a>必要なファイルのダウンロード</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended -O /etc/nginx/modsec/modsecurity.conf</span><br><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/unicode.mapping -O /etc/nginx/modsec/unicode.mapping</span><br></pre></td></tr></table></figure><h3 id="Nginx設定ファイルを編集"><a href="#Nginx設定ファイルを編集" class="headerlink" title="Nginx設定ファイルを編集"></a>Nginx設定ファイルを編集</h3><p><code>/etc/nginx/nginx.conf</code></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 In</summary>
-      
-    
-    
-    
-    
-    <category term="Nginx" scheme="https://verazza.dev/tags/Nginx/"/>
-    
-    <category term="ModSecurity" scheme="https://verazza.dev/tags/ModSecurity/"/>
+    <category term="SSH" scheme="https://verazza.dev/blog/tags/SSH/"/>
     
   </entry>
   
   <entry>
     <title>NginxにSSLを導入</title>
-    <link href="https://verazza.dev/posts/21623/"/>
-    <id>https://verazza.dev/posts/21623/</id>
+    <link href="https://verazza.dev/blog/posts/21623/"/>
+    <id>https://verazza.dev/blog/posts/21623/</id>
     <published>2025-01-31T15:00:00.000Z</published>
     <updated>2025-04-30T15:23:05.955Z</updated>
     
@@ -412,16 +386,42 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="Nginx" scheme="https://verazza.dev/tags/Nginx/"/>
+    <category term="Nginx" scheme="https://verazza.dev/blog/tags/Nginx/"/>
     
-    <category term="SSL" scheme="https://verazza.dev/tags/SSL/"/>
+    <category term="SSL" scheme="https://verazza.dev/blog/tags/SSL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NginxにModSecurityを適用</title>
+    <link href="https://verazza.dev/blog/posts/39499/"/>
+    <id>https://verazza.dev/blog/posts/39499/</id>
+    <published>2025-01-31T15:00:00.000Z</published>
+    <updated>2025-04-27T16:41:56.426Z</updated>
+    
+    <content type="html"><![CDATA[<!--Copyright (c) 2025 verazzaThis file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.See the LICENSE file in the source directory for details.(https://creativecommons.org/licenses/by-nc-sa/4.0/)--><h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure><h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure><h3 id="ModSecurityのダウンロードとビルド"><a href="#ModSecurityのダウンロードとビルド" class="headerlink" title="ModSecurityのダウンロードとビルド"></a>ModSecurityのダウンロードとビルド</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 -b v3.0.13 https://github.com/SpiderLabs/ModSecurity</span><br><span class="line"><span class="built_in">cd</span> ModSecurity</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">./build.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure><h3 id="nginxのソースコードのダウンロードとビルド"><a href="#nginxのソースコードのダウンロードとビルド" class="headerlink" title="nginxのソースコードのダウンロードとビルド"></a>nginxのソースコードのダウンロードとビルド</h3><p><a href="http://nginx.org/download/">http://nginx.org/download/</a><br>ここより、最新のバージョンのnginxをダウンロードする<br>ここでもいいかも<br><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-[latest nginx version].tar.gz</span><br><span class="line">tar zxvf nginx-[latest nginx version].tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-[latest nginx version]</span><br><span class="line"></span><br><span class="line">./configure --with-compat --add-dynamic-module=../ModSecurity-nginx</span><br><span class="line">make modules</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> objs/ngx_http_modsecurity_module.so /etc/nginx/modules</span><br></pre></td></tr></table></figure><h3 id="RuleSetをダウンロードと配置"><a href="#RuleSetをダウンロードと配置" class="headerlink" title="RuleSetをダウンロードと配置"></a>RuleSetをダウンロードと配置</h3><p><a href="https://github.com/coreruleset/coreruleset">https://github.com/coreruleset/coreruleset</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v[latest version].tar.gz</span><br><span class="line">tar -xzvf v[latest version].tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/modsec/coreruleset</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/crs-setup.conf.example /etc/nginx/modsec/coreruleset/crs-setup.conf</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/rules /etc/nginx/modsec/coreruleset/</span><br></pre></td></tr></table></figure><h3 id="必要なファイルのダウンロード"><a href="#必要なファイルのダウンロード" class="headerlink" title="必要なファイルのダウンロード"></a>必要なファイルのダウンロード</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended -O /etc/nginx/modsec/modsecurity.conf</span><br><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/unicode.mapping -O /etc/nginx/modsec/unicode.mapping</span><br></pre></td></tr></table></figure><h3 id="Nginx設定ファイルを編集"><a href="#Nginx設定ファイルを編集" class="headerlink" title="Nginx設定ファイルを編集"></a>Nginx設定ファイルを編集</h3><p><code>/etc/nginx/nginx.conf</code></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 In</summary>
+      
+    
+    
+    
+    
+    <category term="Nginx" scheme="https://verazza.dev/blog/tags/Nginx/"/>
+    
+    <category term="ModSecurity" scheme="https://verazza.dev/blog/tags/ModSecurity/"/>
     
   </entry>
   
   <entry>
     <title>Website Terms and Policies</title>
-    <link href="https://verazza.dev/posts/41809/"/>
-    <id>https://verazza.dev/posts/41809/</id>
+    <link href="https://verazza.dev/blog/posts/41809/"/>
+    <id>https://verazza.dev/blog/posts/41809/</id>
     <published>2024-12-31T01:32:55.000Z</published>
     <updated>2025-05-05T08:51:11.839Z</updated>
     
@@ -438,9 +438,9 @@ This file is distributed under the terms of the Creative Commons Attribution-Non
     
     
     
-    <category term="google" scheme="https://verazza.dev/tags/google/"/>
+    <category term="google" scheme="https://verazza.dev/blog/tags/google/"/>
     
-    <category term="x" scheme="https://verazza.dev/tags/x/"/>
+    <category term="x" scheme="https://verazza.dev/blog/tags/x/"/>
     
   </entry>
   
