@@ -15,10 +15,10 @@ https://verazza.dev/blog
 https://verazza.dev/blog/tags/ArchLinux/
 https://verazza.dev/blog/tags/CLI/
 https://verazza.dev/blog/tags/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/
-https://verazza.dev/blog/tags/Nginx/
-https://verazza.dev/blog/tags/ModSecurity/
 https://verazza.dev/blog/tags/python/
 https://verazza.dev/blog/tags/gemini/
+https://verazza.dev/blog/tags/Nginx/
+https://verazza.dev/blog/tags/ModSecurity/
 https://verazza.dev/blog/tags/SSL/
 https://verazza.dev/blog/tags/OBS/
 https://verazza.dev/blog/tags/VBCable/

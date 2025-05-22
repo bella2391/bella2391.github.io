@@ -74,38 +74,6 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
-    <title>NginxにModSecurityを適用</title>
-    <url>/blog/posts/39499/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
-
-<h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure>
-
-<h3 id="ModSecurityのダウンロードとビルド"><a href="#ModSecurityのダウンロードとビルド" class="headerlink" title="ModSecurityのダウンロードとビルド"></a>ModSecurityのダウンロードとビルド</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 -b v3.0.13 https://github.com/SpiderLabs/ModSecurity</span><br><span class="line"><span class="built_in">cd</span> ModSecurity</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">./build.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
-
-<h3 id="nginxのソースコードのダウンロードとビルド"><a href="#nginxのソースコードのダウンロードとビルド" class="headerlink" title="nginxのソースコードのダウンロードとビルド"></a>nginxのソースコードのダウンロードとビルド</h3><p><a href="http://nginx.org/download/">http://nginx.org/download/</a><br>ここより、最新のバージョンのnginxをダウンロードする<br>ここでもいいかも<br><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-[latest nginx version].tar.gz</span><br><span class="line">tar zxvf nginx-[latest nginx version].tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-[latest nginx version]</span><br><span class="line"></span><br><span class="line">./configure --with-compat --add-dynamic-module=../ModSecurity-nginx</span><br><span class="line">make modules</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> objs/ngx_http_modsecurity_module.so /etc/nginx/modules</span><br></pre></td></tr></table></figure>
-
-<h3 id="RuleSetをダウンロードと配置"><a href="#RuleSetをダウンロードと配置" class="headerlink" title="RuleSetをダウンロードと配置"></a>RuleSetをダウンロードと配置</h3><p><a href="https://github.com/coreruleset/coreruleset">https://github.com/coreruleset/coreruleset</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v[latest version].tar.gz</span><br><span class="line">tar -xzvf v[latest version].tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/modsec/coreruleset</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/crs-setup.conf.example /etc/nginx/modsec/coreruleset/crs-setup.conf</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/rules /etc/nginx/modsec/coreruleset/</span><br></pre></td></tr></table></figure>
-
-<h3 id="必要なファイルのダウンロード"><a href="#必要なファイルのダウンロード" class="headerlink" title="必要なファイルのダウンロード"></a>必要なファイルのダウンロード</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended -O /etc/nginx/modsec/modsecurity.conf</span><br><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/unicode.mapping -O /etc/nginx/modsec/unicode.mapping</span><br></pre></td></tr></table></figure>
-
-<h3 id="Nginx設定ファイルを編集"><a href="#Nginx設定ファイルを編集" class="headerlink" title="Nginx設定ファイルを編集"></a>Nginx設定ファイルを編集</h3><p><code>/etc/nginx/nginx.conf</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Nginx</tag>
-        <tag>ModSecurity</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Github:glyzerレポジトリを立ち上げるまで</title>
     <url>/blog/posts/33934/</url>
     <content><![CDATA[<!--
@@ -137,6 +105,38 @@ See the LICENSE file in the source directory for details.
       <tags>
         <tag>python</tag>
         <tag>gemini</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NginxにModSecurityを適用</title>
+    <url>/blog/posts/39499/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h1 id="NginxにModSecurityを導入するまで"><a href="#NginxにModSecurityを導入するまで" class="headerlink" title="NginxにModSecurityを導入するまで"></a>NginxにModSecurityを導入するまで</h1><h2 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S libmodsecurity modsecurity-crs</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginxへの適用"><a href="#Nginxへの適用" class="headerlink" title="Nginxへの適用"></a>Nginxへの適用</h2><h3 id="ModSecurityと依存関係のインストール"><a href="#ModSecurityと依存関係のインストール" class="headerlink" title="ModSecurityと依存関係のインストール"></a>ModSecurityと依存関係のインストール</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br><span class="line"><span class="built_in">sudo</span> pacman -S git gcc pcre pcre2 zlib make</span><br></pre></td></tr></table></figure>
+
+<h3 id="ModSecurityのダウンロードとビルド"><a href="#ModSecurityのダウンロードとビルド" class="headerlink" title="ModSecurityのダウンロードとビルド"></a>ModSecurityのダウンロードとビルド</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 -b v3.0.13 https://github.com/SpiderLabs/ModSecurity</span><br><span class="line"><span class="built_in">cd</span> ModSecurity</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">./build.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="nginxのソースコードのダウンロードとビルド"><a href="#nginxのソースコードのダウンロードとビルド" class="headerlink" title="nginxのソースコードのダウンロードとビルド"></a>nginxのソースコードのダウンロードとビルド</h3><p><a href="http://nginx.org/download/">http://nginx.org/download/</a><br>ここより、最新のバージョンのnginxをダウンロードする<br>ここでもいいかも<br><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-[latest nginx version].tar.gz</span><br><span class="line">tar zxvf nginx-[latest nginx version].tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-[latest nginx version]</span><br><span class="line"></span><br><span class="line">./configure --with-compat --add-dynamic-module=../ModSecurity-nginx</span><br><span class="line">make modules</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> objs/ngx_http_modsecurity_module.so /etc/nginx/modules</span><br></pre></td></tr></table></figure>
+
+<h3 id="RuleSetをダウンロードと配置"><a href="#RuleSetをダウンロードと配置" class="headerlink" title="RuleSetをダウンロードと配置"></a>RuleSetをダウンロードと配置</h3><p><a href="https://github.com/coreruleset/coreruleset">https://github.com/coreruleset/coreruleset</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v[latest version].tar.gz</span><br><span class="line">tar -xzvf v[latest version].tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/nginx/modsec/coreruleset</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/crs-setup.conf.example /etc/nginx/modsec/coreruleset/crs-setup.conf</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -r coreruleset-[latest version]/rules /etc/nginx/modsec/coreruleset/</span><br></pre></td></tr></table></figure>
+
+<h3 id="必要なファイルのダウンロード"><a href="#必要なファイルのダウンロード" class="headerlink" title="必要なファイルのダウンロード"></a>必要なファイルのダウンロード</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended -O /etc/nginx/modsec/modsecurity.conf</span><br><span class="line">wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/unicode.mapping -O /etc/nginx/modsec/unicode.mapping</span><br></pre></td></tr></table></figure>
+
+<h3 id="Nginx設定ファイルを編集"><a href="#Nginx設定ファイルを編集" class="headerlink" title="Nginx設定ファイルを編集"></a>Nginx設定ファイルを編集</h3><p><code>/etc/nginx/nginx.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load_module modules/ngx_http_modsecurity_module.so;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    modsecurity on;</span><br><span class="line">    modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>ModSecurity</tag>
       </tags>
   </entry>
   <entry>
@@ -319,6 +319,26 @@ See the LICENSE file in the source directory for details.
       </tags>
   </entry>
   <entry>
+    <title>Website Terms and Policies</title>
+    <url>/blog/posts/41809/</url>
+    <content><![CDATA[<!--
+Copyright (c) 2025 verazza
+This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+See the LICENSE file in the source directory for details.
+(https://creativecommons.org/licenses/by-nc-sa/4.0/)
+-->
+
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>This post contains privacy policy and terms of service using at <a href="https://github.com/verazza/kishax-web">kishax-web</a>.</p>
+<h2 id="Privacy-Policy"><a href="#Privacy-Policy" class="headerlink" title="Privacy Policy"></a>Privacy Policy</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">This Privacy Policy describes how we collect, use, and protect your personal information when you use our application (&quot;the App&quot;). By using the App, you agree to the practices described in this policy.</span><br><span class="line"></span><br><span class="line">1. Information We Collect</span><br><span class="line">We may collect the following information:</span><br><span class="line"></span><br><span class="line">Your X or Google username and profile information.</span><br><span class="line">Your email address (if you grant permission).</span><br><span class="line">2. How We Use Your Information</span><br><span class="line">The information we collect is used to:</span><br><span class="line"></span><br><span class="line">Authenticate your login to the App.</span><br><span class="line">Provide personalized services within the App.</span><br><span class="line">Contact you regarding important updates or changes to the App.</span><br><span class="line">3. Data Protection</span><br><span class="line">We are committed to protecting your personal information and use appropriate security measures to safeguard it.</span><br><span class="line"></span><br><span class="line">4. Third-Party Sharing</span><br><span class="line">We do not share your information with third parties except as required by law or necessary for the operation of the App.</span><br><span class="line"></span><br><span class="line">5. Contact Us</span><br><span class="line">If you have any questions about this Privacy Policy, please contact us at [mc.kishax@gmail.com].</span><br></pre></td></tr></table></figure>
+
+<h2 id="Terms-Of-Service"><a href="#Terms-Of-Service" class="headerlink" title="Terms Of Service"></a>Terms Of Service</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">These Terms of Service (&quot;Terms&quot;) govern your use of our application (&quot;the App&quot;). By accessing or using the App, you agree to comply with these Terms.</span><br><span class="line"></span><br><span class="line">1. Acceptable Use</span><br><span class="line">You must use the App in compliance with all applicable laws and regulations.</span><br><span class="line">You are responsible for any content you create or upload to the App.</span><br><span class="line">2. Prohibited Actions</span><br><span class="line">You may not:</span><br><span class="line"></span><br><span class="line">Use the App for any unlawful activities.</span><br><span class="line">Attempt to reverse-engineer or interfere with the App&#x27;s functionality.</span><br><span class="line">3. Limitation of Liability</span><br><span class="line">We are not responsible for any damages or losses resulting from your use of the App.</span><br><span class="line"></span><br><span class="line">4. Termination</span><br><span class="line">We reserve the right to suspend or terminate your access to the App for violations of these Terms.</span><br><span class="line"></span><br><span class="line">5. Changes to the Terms</span><br><span class="line">We may update these Terms from time to time. Continued use of the App constitutes acceptance of the updated Terms.</span><br><span class="line"></span><br><span class="line">6. Contact Us</span><br><span class="line">If you have any questions about these Terms, please contact us at [mc.kishax@gmail.com].</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>google</tag>
+        <tag>x</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>WSLを使わない! Windows開発環境構築</title>
     <url>/blog/posts/47392/</url>
     <content><![CDATA[<!--
@@ -394,26 +414,6 @@ See the LICENSE file in the source directory for details.
         <tag>開発環境</tag>
         <tag>Neovim</tag>
         <tag>Windows</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Website Terms and Policies</title>
-    <url>/blog/posts/41809/</url>
-    <content><![CDATA[<!--
-Copyright (c) 2025 verazza
-This file is distributed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the LICENSE file in the source directory for details.
-(https://creativecommons.org/licenses/by-nc-sa/4.0/)
--->
-
-<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>This post contains privacy policy and terms of service using at <a href="https://github.com/verazza/kishax-web">kishax-web</a>.</p>
-<h2 id="Privacy-Policy"><a href="#Privacy-Policy" class="headerlink" title="Privacy Policy"></a>Privacy Policy</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">This Privacy Policy describes how we collect, use, and protect your personal information when you use our application (&quot;the App&quot;). By using the App, you agree to the practices described in this policy.</span><br><span class="line"></span><br><span class="line">1. Information We Collect</span><br><span class="line">We may collect the following information:</span><br><span class="line"></span><br><span class="line">Your X or Google username and profile information.</span><br><span class="line">Your email address (if you grant permission).</span><br><span class="line">2. How We Use Your Information</span><br><span class="line">The information we collect is used to:</span><br><span class="line"></span><br><span class="line">Authenticate your login to the App.</span><br><span class="line">Provide personalized services within the App.</span><br><span class="line">Contact you regarding important updates or changes to the App.</span><br><span class="line">3. Data Protection</span><br><span class="line">We are committed to protecting your personal information and use appropriate security measures to safeguard it.</span><br><span class="line"></span><br><span class="line">4. Third-Party Sharing</span><br><span class="line">We do not share your information with third parties except as required by law or necessary for the operation of the App.</span><br><span class="line"></span><br><span class="line">5. Contact Us</span><br><span class="line">If you have any questions about this Privacy Policy, please contact us at [mc.kishax@gmail.com].</span><br></pre></td></tr></table></figure>
-
-<h2 id="Terms-Of-Service"><a href="#Terms-Of-Service" class="headerlink" title="Terms Of Service"></a>Terms Of Service</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Last Updated: [2024/12/31]</span><br><span class="line"></span><br><span class="line">These Terms of Service (&quot;Terms&quot;) govern your use of our application (&quot;the App&quot;). By accessing or using the App, you agree to comply with these Terms.</span><br><span class="line"></span><br><span class="line">1. Acceptable Use</span><br><span class="line">You must use the App in compliance with all applicable laws and regulations.</span><br><span class="line">You are responsible for any content you create or upload to the App.</span><br><span class="line">2. Prohibited Actions</span><br><span class="line">You may not:</span><br><span class="line"></span><br><span class="line">Use the App for any unlawful activities.</span><br><span class="line">Attempt to reverse-engineer or interfere with the App&#x27;s functionality.</span><br><span class="line">3. Limitation of Liability</span><br><span class="line">We are not responsible for any damages or losses resulting from your use of the App.</span><br><span class="line"></span><br><span class="line">4. Termination</span><br><span class="line">We reserve the right to suspend or terminate your access to the App for violations of these Terms.</span><br><span class="line"></span><br><span class="line">5. Changes to the Terms</span><br><span class="line">We may update these Terms from time to time. Continued use of the App constitutes acceptance of the updated Terms.</span><br><span class="line"></span><br><span class="line">6. Contact Us</span><br><span class="line">If you have any questions about these Terms, please contact us at [mc.kishax@gmail.com].</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>google</tag>
-        <tag>x</tag>
       </tags>
   </entry>
   <entry>
@@ -641,7 +641,12 @@ See the LICENSE file in the source directory for details.
 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
 -->
 
-<h1 id="コマンドチートシート"><a href="#コマンドチートシート" class="headerlink" title="コマンドチートシート"></a>コマンドチートシート</h1><h2 id="シンボリックリンクを通す"><a href="#シンボリックリンクを通す" class="headerlink" title="シンボリックリンクを通す"></a>シンボリックリンクを通す</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /path/to/target /path/to/wanna/to/place</span><br></pre></td></tr></table></figure>
+<h1 id="コマンドチートシート"><a href="#コマンドチートシート" class="headerlink" title="コマンドチートシート"></a>コマンドチートシート</h1><h2 id="権限"><a href="#権限" class="headerlink" title="権限"></a>権限</h2><h3 id="再帰的にリセット"><a href="#再帰的にリセット" class="headerlink" title="再帰的にリセット"></a>再帰的にリセット</h3><p>以下は、カウントディレクトリ以下で、<code>.git</code>と<code>vendor</code>ディレクトリを除いたファイルやディレクトリに対して、権限をリセットするコマンド</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f \( ! -path <span class="string">&quot;./.git/*&quot;</span> ! -path <span class="string">&quot;./vendor/*&quot;</span> \) -<span class="built_in">exec</span> <span class="built_in">chmod</span> 644 &#123;&#125; +</span><br><span class="line">find . -<span class="built_in">type</span> d \( ! -path <span class="string">&quot;./.git/*&quot;</span> ! -path <span class="string">&quot;./vendor/*&quot;</span> \) -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; +</span><br></pre></td></tr></table></figure>
+<p>ただ、こういうfind関数を使う場合には、それの及ぼす範囲を先に見ておきたいものだ。<br>以下のコマンドで、対象のファイルが出力される。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f \( ! -path <span class="string">&quot;./.git/*&quot;</span> ! -path <span class="string">&quot;./vendor/*&quot;</span> \) -<span class="built_in">exec</span> <span class="built_in">ls</span> -l &#123;&#125; +</span><br></pre></td></tr></table></figure>
+
+<h2 id="シンボリックリンクを通す"><a href="#シンボリックリンクを通す" class="headerlink" title="シンボリックリンクを通す"></a>シンボリックリンクを通す</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /path/to/target /path/to/wanna/to/place</span><br></pre></td></tr></table></figure>
 
 <h2 id="特定の階層以下のファイルのパスと内容を表示"><a href="#特定の階層以下のファイルのパスと内容を表示" class="headerlink" title="特定の階層以下のファイルのパスと内容を表示"></a>特定の階層以下のファイルのパスと内容を表示</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find path/to/directory/ -<span class="built_in">type</span> f -<span class="built_in">exec</span> sh -c <span class="string">&#x27;echo &quot;==== &#123;&#125; ====&quot;; cat &#123;&#125;&#x27;</span> \;</span><br></pre></td></tr></table></figure>
 
